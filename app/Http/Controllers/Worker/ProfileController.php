@@ -11,9 +11,12 @@ class ProfileController extends Controller
 {
     public function index()
 {
+    // Role middleware should ensure auth, but keep it safe.
+    $userId = auth()->id();
+
     $profile = WorkerProfile::where(
         'user_id',
-        auth()->id()
+        $userId
     )->first();
 
     return view('worker.profile.index', [
