@@ -7,40 +7,42 @@
     
                 <div class="shrink-0 flex items-center">
 
-                    @if(auth()->user()->role === 'customer')
-                
-                        <a href="{{ route('customer.dashboard') }}">
-                
-                    @elseif(auth()->user()->role === 'worker')
-                
-                        <a href="{{ route('worker.dashboard') }}">
-                
-                    @elseif(auth()->user()->role === 'admin')
-                
-                        <a href="{{ route('admin.dashboard') }}">
-                
-                    @endif
-                
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                
-                    </a>
+                    @auth
+                        @if(auth()->user()->role === 'customer')
+                            <a href="{{ route('customer.dashboard') }}">
+                        @elseif(auth()->user()->role === 'worker')
+                            <a href="{{ route('worker.dashboard') }}">
+                        @elseif(auth()->user()->role === 'admin')
+                            <a href="{{ route('admin.dashboard') }}">
+                        @else
+                            <a href="{{ url('/') }}">
+                        @endif
+                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        </a>
+                    @else
+                        <a href="{{ url('/') }}">
+                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        </a>
+                    @endauth
                 
                 </div>
     
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @if(auth()->user()->role == 'customer')
-    <x-nav-link :href="route('customer.dashboard')">
-        Dashboard
-    </x-nav-link>
-@elseif(auth()->user()->role == 'worker')
-    <x-nav-link :href="route('worker.dashboard')">
-        Dashboard
-    </x-nav-link>
-@elseif(auth()->user()->role == 'admin')
-    <x-nav-link :href="route('admin.dashboard')">
-        Dashboard
-    </x-nav-link>
-@endif
+                    @auth
+                        @if(auth()->user()->role == 'customer')
+                            <x-nav-link :href="route('customer.dashboard')">
+                                Dashboard
+                            </x-nav-link>
+                        @elseif(auth()->user()->role == 'worker')
+                            <x-nav-link :href="route('worker.dashboard')">
+                                Dashboard
+                            </x-nav-link>
+                        @elseif(auth()->user()->role == 'admin')
+                            <x-nav-link :href="route('admin.dashboard')">
+                                Dashboard
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
     
             </div>
@@ -79,7 +81,14 @@
     
                         <x-slot name="content">
     
-                            <x-dropdown-link :href="route('profile.edit')">
+                            @php
+                                // No global "profile.edit" route in this app.
+                                $profileUrl = match (auth()->user()->role) {
+                                    'worker' => route('worker.profile.edit'),
+                                    default => url('/'),
+                                };
+                            @endphp
+                            <x-dropdown-link :href="$profileUrl">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
     
