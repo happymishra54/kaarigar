@@ -16,10 +16,9 @@ class ProfileController extends Controller
         auth()->id()
     )->first();
 
-    return view(
-        'worker.profile.index',
-        compact('profile')
-    );
+    return view('worker.profile.index', [
+        'profile' => $profile,
+    ]);
 }
 
 
