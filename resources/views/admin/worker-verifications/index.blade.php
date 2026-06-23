@@ -34,13 +34,13 @@
 
             <td>
 
-                {{ $worker->name }}
+{{ $worker->user?->name ?? 'N/A' }}
 
             </td>
 
             <td>
 
-                {{ $worker->mobile }}
+{{ $worker->user?->phone ?? 'N/A' }}
 
             </td>
 

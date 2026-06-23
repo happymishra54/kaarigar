@@ -10,219 +10,192 @@ use Illuminate\Support\Facades\Http;
 class ProfileController extends Controller
 {
     public function index()
-{
-    // Role middleware should ensure auth, but keep it safe.
-    $userId = auth()->id();
+    {
+        // Role middleware should ensure auth, but keep it safe.
+        $userId = auth()->id();
 
-    $profile = WorkerProfile::where(
-        'user_id',
-        $userId
-    )->first();
+        $profile = WorkerProfile::where(
+            'user_id',
+            $userId
+        )->first();
 
-    return view('worker.profile.index', [
-        'profile' => $profile,
-    ]);
-}
-
-
-
-public function store(Request $request)
-{
-
-    $image = null;
-
-    if ($request->hasFile('aadhaar_image')) {
-
-        $image = $request
-            ->file('aadhaar_image')
-            ->store(
-                'aadhaar',
-                'public'
-            );
+        return view('worker.profile.index', [
+            'profile' => $profile,
+        ]);
     }
 
+    public function store(Request $request)
+    {
+        $image = null;
 
-    $profileImage = null;
+        if ($request->hasFile('aadhaar_image')) {
+            $image = $request
+                ->file('aadhaar_image')
+                ->store('aadhaar', 'public');
+        }
 
-    if ($request->hasFile('profile_image')) {
+        $profileImage = null;
 
-        $profileImage = $request
-            ->file('profile_image')
-            ->store(
-                'profiles',
-                'public'
+        if ($request->hasFile('profile_image')) {
+            $profileImage = $request
+                ->file('profile_image')
+                ->store('profiles', 'public');
+        }
+
+        $location = $request->address . ', '
+            . $request->city . ', '
+            . $request->state;
+
+        $response = Http::withHeaders([
+            'User-Agent' => 'Kaarigar'
+        ])->get(
+            'https://nominatim.openstreetmap.org/search',
+            [
+                'q' => $location,
+                'format' => 'json',
+                'limit' => 1
+            ]
+        );
+
+        $data = $response->json();
+
+        $latitude = null;
+        $longitude = null;
+
+        if (is_array($data) && !empty($data)) {
+            // Nominatim returns strings. Cast to float so columns are filled correctly.
+            $latitude = isset($data[0]['lat']) ? (float) $data[0]['lat'] : null;
+            $longitude = isset($data[0]['lon']) ? (float) $data[0]['lon'] : null;
+        }
+
+        WorkerProfile::create([
+            'user_id' => auth()->id(),
+
+            'profile_image' => $profileImage,
+
+            'name' => $request->name,
+
+            'aadhaar_number' => $request->aadhaar_number,
+
+            'aadhaar_image' => $image,
+
+            'bio' => $request->bio,
+
+            'experience' => $request->experience,
+
+            'mobile' => $request->mobile,
+
+            'address' => $request->address,
+
+            'city' => $request->city,
+
+            'state' => $request->state,
+
+            'latitude' => $latitude,
+
+            'longitude' => $longitude,
+
+            'daily_wage' => $request->daily_wage
+        ]);
+
+        // keep users table in sync for location-based search
+        $user = auth()->user();
+        if ($user) {
+            $user->update([
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+            ]);
+        }
+
+        return redirect()
+            ->route('worker.profile')
+            ->with(
+                'success',
+                'Profile Created Successfully'
             );
-
     }
-
-
-
-$location = $request->address . ', '
-          . $request->city . ', '
-          . $request->state;
-
-$response = Http::withHeaders([
-    'User-Agent' => 'Kaarigar'
-])->get(
-    'https://nominatim.openstreetmap.org/search',
-    [
-        'q' => $location,
-        'format' => 'json',
-        'limit' => 1
-    ]
-);
-
-$data = $response->json();
-
-
-
-
-
-
-$latitude = null;
-$longitude = null;
-
-
-if (!empty($data)) {
-
-    $latitude = $data[0]['lat'];
-
-    $longitude = $data[0]['lon'];
-
-}
-
-
-
-
-    WorkerProfile::create([
-
-        'user_id' => auth()->id(),
-        
-        'profile_image' => $profileImage,
-
-        'name' => $request->name,
-        
-        'aadhaar_number' => $request->aadhaar_number,
-
-        'aadhaar_image' => $image,
-
-        'bio' => $request->bio,
-
-        'experience' => $request->experience,
-
-        'mobile' => $request->mobile,
-
-        'address' => $request->address,
-
-        'city' => $request->city,
-
-        'state' => $request->state,
-
-        'latitude' => $latitude,
-
-        'longitude' => $longitude,
-
-        'daily_wage' => $request->daily_wage
-
-    ]);
-
-    return redirect()
-        ->route('worker.profile')
-        ->with(
-            'success',
-            'Profile Created Successfully');
-}
-
-
-
-
 
     public function edit()
-{
-    $profile = WorkerProfile::where(
-        'user_id',
-        auth()->id()
-    )->first();
+    {
+        $profile = WorkerProfile::where(
+            'user_id',
+            auth()->id()
+        )->first();
 
-    return view(
-        'worker.profile.edit',
-        compact('profile')
-    );
-}
-
-
-public function update(Request $request)
-{
-    
-
-    $profile = WorkerProfile::where(
-        'user_id',
-        auth()->id()
-    )->first();
-
-    $location =
-        $request->address . ', ' .
-        $request->city . ', ' .
-        $request->state;
-
-    $response = Http::withHeaders([
-        'User-Agent' => 'Kaarigar'
-    ])->get(
-        'https://nominatim.openstreetmap.org/search',
-        [
-            'q' => $location,
-            'format' => 'json',
-            'limit' => 1
-        ]
-    );
-
-    $data = $response->json();
-
-    $latitude = null;
-    $longitude = null;
-
-    if (!empty($data)) {
-
-        $latitude = $data[0]['lat'];
-
-        $longitude = $data[0]['lon'];
-
+        return view(
+            'worker.profile.edit',
+            compact('profile')
+        );
     }
 
-    $profile->update([
+    public function update(Request $request)
+    {
+        $profile = WorkerProfile::where(
+            'user_id',
+            auth()->id()
+        )->first();
 
-        'name' => $request->name,
+        $location = $request->address . ', ' . $request->city . ', ' . $request->state;
 
-        'mobile' => $request->mobile,
-
-        'address' => $request->address,
-
-        'city' => $request->city,
-
-        'state' => $request->state,
-
-        'latitude' => $latitude,
-
-        'longitude' => $longitude,
-
-        'bio' => $request->bio,
-
-        'experience' => $request->experience,
-
-        'daily_wage' => $request->daily_wage
-
-    ]);
-
-    return redirect()
-        ->route('worker.profile')
-        ->with(
-            'success',
-            'Profile Updated Successfully'
+        $response = Http::withHeaders([
+            'User-Agent' => 'Kaarigar'
+        ])->get(
+            'https://nominatim.openstreetmap.org/search',
+            [
+                'q' => $location,
+                'format' => 'json',
+                'limit' => 1
+            ]
         );
-}
 
+        $data = $response->json();
 
+        $latitude = null;
+        $longitude = null;
 
+        if (is_array($data) && !empty($data)) {
+            $latitude = isset($data[0]['lat']) ? (float) $data[0]['lat'] : null;
+            $longitude = isset($data[0]['lon']) ? (float) $data[0]['lon'] : null;
+        }
+
+        $profile->update([
+            'name' => $request->name,
+
+            'mobile' => $request->mobile,
+
+            'address' => $request->address,
+
+            'city' => $request->city,
+
+            'state' => $request->state,
+
+            'latitude' => $latitude,
+
+            'longitude' => $longitude,
+
+            'bio' => $request->bio,
+
+            'experience' => $request->experience,
+
+            'daily_wage' => $request->daily_wage
+        ]);
+
+        // keep users table in sync for location-based search
+        $user = auth()->user();
+        if ($user) {
+            $user->update([
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+            ]);
+        }
+
+        return redirect()
+            ->route('worker.profile')
+            ->with(
+                'success',
+                'Profile Updated Successfully'
+            );
+    }
 
     public function destroy()
     {
@@ -232,9 +205,7 @@ public function update(Request $request)
         )->first();
 
         if ($profile) {
-
             $profile->delete();
-
         }
 
         return redirect()
@@ -244,6 +215,5 @@ public function update(Request $request)
                 'Profile Deleted Successfully'
             );
     }
-
-
 }
+
