@@ -64,7 +64,7 @@
                         <label>Mobile Number</label>
 
                         <input
-                            type="text"
+                            type="number"
                             name="mobile"
                             class="form-control"
                             required limit="10">
