@@ -36,12 +36,15 @@ $workers = WorkerProfile::with([
 
     $query->where(function ($q) use ($search) {
 
-        $q->where('name', 'like', "%{$search}%")
-          ->orWhere('bio', 'like', "%{$search}%")
+        $q->whereHas('user', function ($uq) use ($search) {
+            $uq->where('name', 'like', "%{$search}%");
+        })
+            ->orWhere('bio', 'like', "%{$search}%")
 
-          ->orWhereHas('user.services', function ($service) use ($search) {
+            ->orWhereHas('user.services', function ($service) use ($search) {
 
-              $service->where('title', 'like', "%{$search}%")
+                $service->where('title', 'like', "%{$search}%")
+
 
                       ->orWhereHas('category', function ($category) use ($search) {
 

@@ -46,7 +46,7 @@ Manage Workers
 
 <td>
 
-{{ $worker->workerProfile?->mobile ?? 'N/A' }}
+{{ $worker->phone ?? 'N/A' }}
 
 </td>
 

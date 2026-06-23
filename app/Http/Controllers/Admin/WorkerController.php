@@ -42,15 +42,15 @@ class WorkerController extends Controller
 
             'password' => Hash::make($request->password),
 
-            'role' => 'worker'
+            'role' => 'worker',
+
+            'phone' => $request->mobile
 
         ]);
 
         WorkerProfile::create([
 
             'user_id' => $user->id,
-
-            'name' => $request->name,
 
             'aadhaar_number' => $request->aadhaar_number,
 

@@ -148,7 +148,8 @@
                         <input
                             type="text"
                             name="aadhaar_number"
-                            class="form-control">
+                            class="form-control"
+                            required>
 
                     </div>
 
