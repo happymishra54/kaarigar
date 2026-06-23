@@ -102,8 +102,7 @@
                         <input
                             type="number"
                             name="experience"
-                            class="form-control"
-                            required>
+                            class="form-control">
 
                     </div>
 
@@ -114,8 +113,7 @@
                         <input
                             type="number"
                             name="daily_wage"
-                            class="form-control"
-                            required>
+                            class="form-control">
 
                     </div>
 
@@ -150,8 +148,7 @@
                         <input
                             type="text"
                             name="aadhaar_number"
-                            class="form-control"
-                            required>
+                            class="form-control">
 
                     </div>
 
