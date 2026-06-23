@@ -18,7 +18,8 @@ Manage Workers
 
 <th>ID</th>
 <th>Name</th>
-<th>Email</th>
+<th>Mobile</th>
+<th>City</th>
 <th>Action</th>
 
 </tr>
@@ -45,9 +46,15 @@ Manage Workers
 
 <td>
 
-{{ $worker->email }}
+{{ $worker->workerProfile?->mobile ?? 'N/A' }}
 
 </td>
+
+<td>
+
+    {{ $worker->workerProfile?->city ?? 'N/A' }}
+    
+    </td>
 
 <td>
 
