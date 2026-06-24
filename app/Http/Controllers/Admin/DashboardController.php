@@ -16,23 +16,23 @@ class DashboardController extends Controller
             'admin.dashboard',
             [
 
-                'users' => User::count(),
+                // Counts for stat cards
+                'usersCount' => User::whereIn('role', ['customer', 'admin'])->count(),
 
-                'workers' => User::where(
-                    'role',
-                    'worker'
-                )->count(),
+                'workersCount' => User::where('role', 'worker')->count(),
 
-                'customers' => User::where(
-                    'role',
-                    'customer'
-                )->count(),
+                'customers' => User::where('role', 'customer')->count(),
 
                 'categories' => Category::count(),
 
                 'services' => Service::count(),
 
-                'bookings' => Booking::count()
+                'bookings' => Booking::count(),
+
+                // Panel data
+                'users' => User::whereIn('role', ['customer', 'admin'])->latest()->paginate(20),
+
+                'workers' => User::where('role', 'worker')->latest()->paginate(20)
 
             ]
         );

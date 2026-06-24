@@ -18,7 +18,7 @@ Admin Dashboard
 
 <div class="card-body">
 
-<h3>{{ $users }}</h3>
+<h3>{{ $usersCount }}</h3>
 
 Users
 
@@ -34,7 +34,7 @@ Users
 
 <div class="card-body">
 
-<h3>{{ $workers }}</h3>
+<h3>{{ $workersCount }}</h3>
 
 Workers
 
@@ -113,69 +113,27 @@ Bookings
 <div class="row mt-4">
 
     <div class="col-md-3 mb-3">
-
-        <a href="{{ route('admin.users') }}"
-           class="btn btn-primary w-100">
-
-            Users
-
-        </a>
-
+        <a href="{{ route('admin.users') }}" class="btn btn-primary w-100">Users</a>
     </div>
 
     <div class="col-md-3 mb-3">
-
-        <a href="{{ route('categories.index') }}"
-           class="btn btn-success w-100">
-
-            Categories
-
-        </a>
-
+        <a href="{{ route('admin.workers.index') }}" class="btn btn-secondary w-100">Manage Workers</a>
     </div>
 
     <div class="col-md-3 mb-3">
-
-        <a href="{{ route('admin.bookings') }}"
-           class="btn btn-warning w-100">
-
-            Bookings
-
-        </a>
-
+        <a href="{{ route('categories.index') }}" class="btn btn-success w-100">Categories</a>
     </div>
 
     <div class="col-md-3 mb-3">
-
-        <a href="{{ route('admin.worker.verifications') }}"
-           class="btn btn-danger w-100">
-
-            Worker Verification
-
-        </a>
-
+        <a href="{{ route('admin.bookings') }}" class="btn btn-warning w-100">Bookings</a>
     </div>
 
     <div class="col-md-3 mb-3">
-
-        <a href="{{ route('admin.workers.create') }}"
-           class="btn btn-info w-100">
-    
-            Add Worker
-    
-        </a>
-    
+        <a href="{{ route('admin.worker.verifications') }}" class="btn btn-danger w-100">Worker Verification</a>
     </div>
 
     <div class="col-md-3 mb-3">
-
-        <a href="{{ route('admin.workers.index') }}"
-           class="btn btn-secondary w-100">
-    
-            Manage Workers
-    
-        </a>
-    
+        <a href="{{ route('admin.workers.create') }}" class="btn btn-info w-100">Add Worker</a>
     </div>
 
 </div>

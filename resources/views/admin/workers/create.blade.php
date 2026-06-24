@@ -63,11 +63,24 @@
 
                         <label>Mobile Number</label>
 
-                        <input
-                            type="number"
-                            name="mobile"
-                            class="form-control"
-                            required limit="10">
+                        <div class="input-group">
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="std_code"
+                                value="+91"
+                                required>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="mobile"
+                                required
+                                inputmode="numeric"
+                                pattern="[0-9]{10}">
+
+                        </div>
 
                     </div>
 
