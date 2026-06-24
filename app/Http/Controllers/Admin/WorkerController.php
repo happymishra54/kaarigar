@@ -44,7 +44,7 @@ class WorkerController extends Controller
 
             'role' => 'worker',
 
-            'phone' => $request->mobile
+            'phone' => trim($request->std_code . $request->mobile)
 
         ]);
 
@@ -62,7 +62,7 @@ class WorkerController extends Controller
 
             'experience' => $request->experience,
 
-            'mobile' => $request->mobile,
+            'mobile' => trim($request->std_code . $request->mobile),
 
             'address' => $request->address,
 
