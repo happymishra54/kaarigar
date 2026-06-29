@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Service;
+use App\Models\WorkerProfile;
+
+class HomeController extends Controller
+{
+    public function index()
+    {
+        $categories = Category::all();
+
+        $services = Service::latest()
+            ->take(6)
+            ->get();
+
+        $workers = WorkerProfile::with([
+                'user',
+                'user.services.category',
+                'user.reviewsReceived'
+            ])
+            ->where('is_verified', '>=', 0)
+            ->when(request('search'), function ($query) {
+                $search = trim(request('search'));
+                $searchLower = mb_strtolower($search);
+
+                $query->where(function ($q) use ($search, $searchLower) {
+                    $q->whereRaw('LOWER(bio) LIKE ?', ["%{$searchLower}%"])
+                        ->orWhereRaw('CAST(experience AS CHAR) LIKE ?', ["%{$search}%"])
+                        ->orWhereRaw('LOWER(city) LIKE ?', ["%{$searchLower}%"])
+                        ->orWhereRaw('LOWER(state) LIKE ?', ["%{$searchLower}%"])
+                        ->orWhereHas('user', function ($user) use ($searchLower) {
+                            $user->whereRaw('LOWER(name) LIKE ?', ["%{$searchLower}%"]);
+                        })
+                        ->orWhereHas('user.services', function ($service) use ($searchLower) {
+                            $service->whereRaw('LOWER(title) LIKE ?', ["%{$searchLower}%"])
+                                ->orWhereRaw('LOWER(description) LIKE ?', ["%{$searchLower}%"]);
+                        })
+                        ->orWhereHas('user.services.category', function ($category) use ($searchLower) {
+                            $category->whereRaw('LOWER(name) LIKE ?', ["%{$searchLower}%"]);
+                        });
+                });
+            })
+            ->when(request('city') ?: session('city'), function ($query, $city) {
+                $query->whereRaw('LOWER(city) LIKE ?', ['%'.mb_strtolower(trim($city)).'%']);
+            })
+            ->latest()
+            ->get();
+
+        if (request()->hasAny(['search', 'city'])) {
+            return view('search', compact('workers'));
+        }
+
+        return view('welcome', compact('categories', 'services', 'workers'));
+    }
+
+    public function workerProfile($worker)
+    {
+        $worker = WorkerProfile::with([
+            'user',
+            'user.services',
+            'user.reviewsReceived.customer'
+        ])->findOrFail($worker);
+
+        return view('worker.show', compact('worker'));
+    }
+}
+

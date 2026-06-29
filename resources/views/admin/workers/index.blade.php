@@ -19,6 +19,7 @@ Manage Workers
 <th>ID</th>
 <th>Name</th>
 <th>Mobile</th>
+<th>Bio</th>
 <th>City</th>
 <th>Action</th>
 
@@ -48,6 +49,10 @@ Manage Workers
 
 {{ $worker->phone ?? 'N/A' }}
 
+</td>
+
+<td>
+    {{ $worker->workerProfile->bio ?? 'N/A' }}
 </td>
 
 <td>

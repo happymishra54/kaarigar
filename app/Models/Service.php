@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     protected $fillable = [
+
         'worker_id',
         'category_id',
         'title',
@@ -15,6 +16,7 @@ class Service extends Model
         'price',
         'image',
         'status'
+
     ];
 
     public function worker()
@@ -29,6 +31,13 @@ class Service extends Model
     {
         return $this->belongsTo(
             Category::class
+        );
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(
+            Booking::class
         );
     }
 }

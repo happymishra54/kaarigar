@@ -19,69 +19,13 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-
-
-
-
-
-
-$workers = WorkerProfile::with([
-    'user',
-    'user.services.category',
-    'user.reviewsReceived'
-])
-->where('is_verified', 1)
-
-->when(request('search'), function ($query, $search) {
-
-    $query->where(function ($q) use ($search) {
-
-        $q->whereHas('user', function ($uq) use ($search) {
-            $uq->where('name', 'like', "%{$search}%");
-        })
-            ->orWhere('bio', 'like', "%{$search}%")
-
-            ->orWhereHas('user.services', function ($service) use ($search) {
-
-                $service->where('title', 'like', "%{$search}%")
-
-
-                      ->orWhereHas('category', function ($category) use ($search) {
-
-                          $category->where(
-                              'name',
-                              'like',
-                              "%{$search}%"
-                          );
-
-                      });
-
-          });
-
-    });
-
-})
-
-->when(request('city') ?: session('city'), function ($query, $city) {
-
-    $query->where(
-        'city',
-        'like',
-        "%{$city}%"
-    );
-
-})
-
-->latest()
-->get();
-
-
-
-
-
-
-                
-
+            $workers = WorkerProfile::with('user')
+            ->where('is_verified', 1)
+            ->when(request('search'), function ($query, $search) {
+                $query->where('bio', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->get();
         if(
             request('search') ||
             request('city')
@@ -102,11 +46,6 @@ $workers = WorkerProfile::with([
         );
     }
 
-
-
-
-
-
 public function workerProfile($worker)
 {
     $worker = WorkerProfile::with([
@@ -120,12 +59,5 @@ public function workerProfile($worker)
         compact('worker')
     );
 }
-
-
-
-
-
-
-
 }
 

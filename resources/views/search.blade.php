@@ -55,7 +55,7 @@
 
                 <h4>
 
-                    {{ $worker->name }}
+                    {{ $worker->user->name }}
 
                 </h4>
 

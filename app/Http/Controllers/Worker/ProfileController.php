@@ -11,17 +11,17 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        // Role middleware should ensure auth, but keep it safe.
-        $userId = auth()->id();
-
         $profile = WorkerProfile::where(
             'user_id',
-            $userId
+            auth()->id()
         )->first();
 
-        return view('worker.profile.index', [
-            'profile' => $profile,
-        ]);
+        $user = auth()->user();
+
+        return view(
+            'worker.profile.index',
+            compact('profile', 'user')
+        );
     }
 
     public function store(Request $request)
@@ -29,22 +29,18 @@ class ProfileController extends Controller
         $image = null;
 
         if ($request->hasFile('aadhaar_image')) {
-            $image = $request
-                ->file('aadhaar_image')
+            $image = $request->file('aadhaar_image')
                 ->store('aadhaar', 'public');
         }
 
         $profileImage = null;
 
         if ($request->hasFile('profile_image')) {
-            $profileImage = $request
-                ->file('profile_image')
+            $profileImage = $request->file('profile_image')
                 ->store('profiles', 'public');
         }
 
-        $location = $request->address . ', '
-            . $request->city . ', '
-            . $request->state;
+        $location = $request->address.', '.$request->city.', '.$request->state;
 
         $response = Http::withHeaders([
             'User-Agent' => 'Kaarigar'
@@ -63,17 +59,17 @@ class ProfileController extends Controller
         $longitude = null;
 
         if (is_array($data) && !empty($data)) {
-            // Nominatim returns strings. Cast to float so columns are filled correctly.
-            $latitude = isset($data[0]['lat']) ? (float) $data[0]['lat'] : null;
-            $longitude = isset($data[0]['lon']) ? (float) $data[0]['lon'] : null;
+
+            $latitude = (float)$data[0]['lat'];
+
+            $longitude = (float)$data[0]['lon'];
         }
 
         WorkerProfile::create([
+
             'user_id' => auth()->id(),
 
             'profile_image' => $profileImage,
-
-            'name' => $request->name,
 
             'aadhaar_number' => $request->aadhaar_number,
 
@@ -83,29 +79,31 @@ class ProfileController extends Controller
 
             'experience' => $request->experience,
 
-            'mobile' => $request->mobile,
-
             'address' => $request->address,
 
             'city' => $request->city,
 
             'state' => $request->state,
 
-            'latitude' => $latitude,
-
-            'longitude' => $longitude,
+            'latitude' => $request->latitude,
+            
+            'longitude' => $request->longitude,
 
             'daily_wage' => $request->daily_wage
+
         ]);
 
-        // keep users table in sync for location-based search
-        $user = auth()->user();
-        if ($user) {
-            $user->update([
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-            ]);
-        }
+        auth()->user()->update([
+
+            'name' => $request->name,
+
+            'phone' => $request->mobile,
+
+            'latitude' => $request->latitude,
+
+            'longitude' => $request->longitude
+
+        ]);
 
         return redirect()
             ->route('worker.profile')
@@ -122,9 +120,14 @@ class ProfileController extends Controller
             auth()->id()
         )->first();
 
+        $user = auth()->user();
+
         return view(
             'worker.profile.edit',
-            compact('profile')
+            compact(
+                'profile',
+                'user'
+            )
         );
     }
 
@@ -135,7 +138,7 @@ class ProfileController extends Controller
             auth()->id()
         )->first();
 
-        $location = $request->address . ', ' . $request->city . ', ' . $request->state;
+        $location = $request->address.', '.$request->city.', '.$request->state;
 
         $response = Http::withHeaders([
             'User-Agent' => 'Kaarigar'
@@ -154,14 +157,13 @@ class ProfileController extends Controller
         $longitude = null;
 
         if (is_array($data) && !empty($data)) {
-            $latitude = isset($data[0]['lat']) ? (float) $data[0]['lat'] : null;
-            $longitude = isset($data[0]['lon']) ? (float) $data[0]['lon'] : null;
+
+            $latitude = (float)$data[0]['lat'];
+
+            $longitude = (float)$data[0]['lon'];
         }
 
         $profile->update([
-            'name' => $request->name,
-
-            'mobile' => $request->mobile,
 
             'address' => $request->address,
 
@@ -178,16 +180,20 @@ class ProfileController extends Controller
             'experience' => $request->experience,
 
             'daily_wage' => $request->daily_wage
+
         ]);
 
-        // keep users table in sync for location-based search
-        $user = auth()->user();
-        if ($user) {
-            $user->update([
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-            ]);
-        }
+        auth()->user()->update([
+
+            'name' => $request->name,
+
+            'phone' => $request->mobile,
+
+            'latitude' => $latitude,
+
+            'longitude' => $longitude
+
+        ]);
 
         return redirect()
             ->route('worker.profile')
@@ -216,4 +222,3 @@ class ProfileController extends Controller
             );
     }
 }
-

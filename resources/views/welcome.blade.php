@@ -301,7 +301,8 @@ height="120">
 
 <h4>
 
-{{ $worker->name }}
+{{ $worker->user->name }} <br>
+
 @if($worker->is_verified)
 
 <span class="badge bg-success">

@@ -4,156 +4,211 @@
 
 <div class="container py-5">
 
+    <h2 class="mb-4">
+        My Bookings
+    </h2>
 
-<h2 class="mb-4">
+    <a
+            href="{{ url('/') }}"
+            class="btn btn-primary">
 
-    My Bookings
+            ➕ Book Now
 
-</h2>
+        </a>
 
-<table class="table table-bordered">
 
-    <thead>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <tr>
+    <table class="table table-bordered table-hover align-middle">
 
-        <th>Booking No</th>
-        <th>Service</th>
-        <th>Worker</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Action</th>
+        <thead class="table-dark">
 
-    </tr>
+            <tr>
 
-    </thead>
+                <th>Booking No</th>
+                <th>Service</th>
+                <th>Worker</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th width="200">Action</th>
 
-    <tbody>
+            </tr>
 
-    @foreach($bookings as $booking)
+        </thead>
 
-        <tr>
+        <tbody>
 
-            <td>
+        @forelse($bookings as $booking)
 
-                {{ $booking->booking_number }}
+            <tr>
 
-            </td>
+                <td>
+                    {{ $booking->booking_number }}
+                </td>
 
-            <td>
+                <td>
+                    {{ $booking->service->title }}
+                </td>
 
-                {{ $booking->service->title }}
+                <td>
+                    {{ $booking->worker->name }}
+                </td>
 
-            </td>
+                <td>
 
-            <td>
+                    @if($booking->worker->phone)
 
-                {{ $booking->worker->name }}
+                        <a
+                            href="tel:{{ $booking->worker->phone }}"
+                            class="btn btn-success btn-sm">
 
-            </td>
+                            📞 Call Worker
 
-            <td>
+                        </a>
 
-                {{ $booking->booking_date }}
+                        <br>
 
-            </td>
+                        <small class="text-muted">
+                            {{ $booking->worker->phone }}
+                        </small>
 
-            <td>
+                    @else
 
-                ₹{{ $booking->amount }}
+                        <span class="text-danger">
+                            No Number
+                        </span>
 
-            </td>
+                    @endif
 
-            <td>
+                </td>
 
-                @if($booking->status=='pending')
+                <td>
+                    {{ $booking->booking_date }}
+                </td>
 
-                    <span class="badge bg-warning">
+                <td>
+                    ₹{{ number_format($booking->amount, 2) }}
+                </td>
 
-                        Pending
+                <td>
 
-                    </span>
+                    @if($booking->status == 'pending')
 
-                @elseif($booking->status=='accepted')
+                        <span class="badge bg-warning text-dark">
+                            Pending
+                        </span>
 
-                    <span class="badge bg-success">
+                    @elseif($booking->status == 'accepted')
 
-                        Accepted
+                        <span class="badge bg-success">
+                            Accepted
+                        </span>
 
-                    </span>
+                    @elseif($booking->status == 'in_progress')
 
-                @elseif($booking->status=='completed')
+                        <span class="badge bg-info text-dark">
+                            In Progress
+                        </span>
 
-                    <span class="badge bg-primary">
+                    @elseif($booking->status == 'completed')
 
-                        Completed
+                        <span class="badge bg-primary">
+                            Completed
+                        </span>
 
-                    </span>
+                    @else
 
-                @else
+                        <span class="badge bg-danger">
+                            Cancelled
+                        </span>
 
-                    <span class="badge bg-danger">
+                    @endif
 
-                        Cancelled
+                </td>
 
-                    </span>
+                <td>
 
-                @endif
+                    @if($booking->status == 'pending')
 
-            </td>
+                        <form
+                            action="{{ route('booking.cancel', $booking->id) }}"
+                            method="POST">
 
-            <td>
+                            @csrf
+                            @method('PATCH')
 
-                @if($booking->status=='pending')
+                            <button class="btn btn-danger btn-sm">
 
-                    <form
-                    action="{{ route('booking.cancel',$booking->id) }}"
-                    method="POST">
+                                ❌ Cancel Booking
 
-                        @csrf
-                        @method('PATCH')
+                            </button>
 
-                        <button
-                        class="btn btn-danger btn-sm">
+                        </form>
 
-                            Cancel
+                    @elseif($booking->status == 'completed' && !$booking->review)
 
-                        </button>
+                        <a
+                            href="{{ route('review.create', $booking->id) }}"
+                            class="btn btn-primary btn-sm">
 
-                    </form>
+                            ⭐ Leave Review
 
-                @elseif(
-                    $booking->status=='completed'
-                    &&
-                    !$booking->review
-                )
+                        </a>
 
-                    <a
-                    href="{{ route('review.create',$booking->id) }}"
-                    class="btn btn-primary btn-sm">
+                    @elseif($booking->status == 'completed' && $booking->review)
 
-                        Leave Review
+                        <span class="text-success fw-bold">
 
-                    </a>
+                            ✔ Reviewed
 
-                @else
+                        </span>
 
-                    -
+                    @else
 
-                @endif
+                        <span class="text-muted">
 
-            </td>
+                            No Action
 
-        </tr>
+                        </span>
 
-    @endforeach
+                    @endif
 
-    </tbody>
+                </td>
 
-</table>
+            </tr>
+
+        @empty
+
+            <tr>
+
+                <td colspan="8" class="text-center py-4">
+
+                    <h5>No bookings found.</h5>
+
+                    <p class="text-muted mb-0">
+
+                        Book your first service to see it here.
+
+                    </p>
+
+                </td>
+
+            </tr>
+
+        @endforelse
+
+        </tbody>
+
+    </table>
 
 
 </div>
 
 @endsection
+

@@ -4,39 +4,46 @@
 
 <div class="container py-5">
 
-<h2 class="mb-4">
+    <h2 class="mb-4">
+        Customer Dashboard
+    </h2>
 
-Customer Dashboard
+    <div class="row">
 
-</h2>
+        <div class="col-md-4 mb-3">
 
-<div class="row">
+            <a href="/"
+               class="btn btn-primary w-100">
 
-<div class="col-md-4 mb-3">
+                🔍 Browse Services
 
-<a
-href="/"
-class="btn btn-primary w-100">
+            </a>
 
-Browse Services
+        </div>
 
-</a>
+        <div class="col-md-4 mb-3">
 
-</div>
+            <a href="{{ route('customer.bookings') }}"
+               class="btn btn-success w-100">
 
-<div class="col-md-4 mb-3">
+                📅 My Bookings
 
-<a
-href="{{ route('customer.bookings') }}"
-class="btn btn-success w-100">
+            </a>
 
-My Bookings
+        </div>
 
-</a>
+        <div class="col-md-4 mb-3">
 
-</div>
+            <a href="{{ route('customer.profile') }}"
+               class="btn btn-info w-100">
 
-</div>
+                👤 My Profile
+
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 

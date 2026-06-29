@@ -92,7 +92,7 @@
             @auth
 
                 <span class="text-white me-3">
-                    Welcome, {{ auth()->user()->phone }}
+                    Welcome, {{ auth()->user()->name }}
                 </span>
 
                 @if(auth()->user()->role === 'customer')
