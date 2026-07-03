@@ -77,8 +77,11 @@ class BookingController extends Controller
             'booking_time' =>
             $request->booking_time,
 
-            'address' =>
-            $request->address,
+            'address' => $request->address,
+
+            'latitude' => $request->latitude,
+
+            'longitude' => $request->longitude,
 
             'amount' =>
             $service->price,
@@ -94,6 +97,18 @@ class BookingController extends Controller
                 'success',
                 'Booking Created Successfully'
             );
+    }
+
+    public function show(Booking $booking)
+    {
+        if ($booking->customer_id != auth()->id()) {
+            abort(403);
+        }
+
+        return view(
+            'customer.bookings.show',
+            compact('booking')
+        );
     }
 
     public function cancel(Booking $booking)

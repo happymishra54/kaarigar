@@ -1,0 +1,221 @@
+.kk-navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    background:rgba(15,23,42,.92);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:var(--shadow);
+
+}
+
+.nav-wrapper{
+
+    height:80px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:white;
+
+}
+
+.logo i{
+
+    color:var(--secondary);
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:35px;
+
+}
+
+.nav-links a{
+
+    color:white;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:var(--secondary);
+
+}
+
+.nav-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.welcome{
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+/*====================================
+PREMIUM NAVBAR
+====================================*/
+
+.navbar{
+
+    position:fixed;
+    
+    top:0;
+    
+    left:0;
+    
+    width:100%;
+    
+    z-index:999;
+    
+    padding:18px 0;
+    
+    transition:.35s ease;
+    
+    background:transparent;
+    
+    }
+    
+    .navbar.scrolled{
+    
+    background:white;
+    
+    box-shadow:0 10px 40px rgba(15,23,42,.08);
+    
+    padding:12px 0;
+    
+    }
+
+    .logo{
+
+        font-size:34px;
+        
+        font-weight:800;
+        
+        color:white;
+        
+        transition:.3s;
+        
+        }
+        
+        .navbar.scrolled .logo{
+        
+        color:#2563EB;
+        
+        }
+
+        .navbar-nav .nav-link{
+
+            font-weight:600;
+            
+            font-size:16px;
+            
+            margin:0 12px;
+            
+            color:white;
+            
+            transition:.3s;
+            
+            }
+            
+            .navbar.scrolled .nav-link{
+            
+            color:#0F172A;
+            
+            }
+            
+            .navbar-nav .nav-link:hover{
+            
+            color:#FACC15;
+            
+            }
+
+            .btn-login{
+
+                background:#FACC15;
+                    
+                color:#0F172A;
+                    
+                padding:10px 22px;
+                    
+                border-radius:12px;
+                    
+                font-weight:700;
+                    
+                transition:.3s;
+                
+                }
+                
+                .btn-login:hover{
+                    
+                    transform:translateY(-3px);
+                    
+                    }
+
+                .navbar.scrolled .btn-login{
+                
+                border-color:#2563EB;
+                
+                color:#2563EB;
+                
+                }
+
+                .btn-register{
+
+                    background:#FACC15;
+                    
+                    color:#0F172A;
+                    
+                    padding:10px 22px;
+                    
+                    border-radius:12px;
+                    
+                    font-weight:700;
+                    
+                    transition:.3s;
+                    
+                    }
+                    
+                    .btn-register:hover{
+                    
+                    transform:translateY(-3px);
+                    
+                    }

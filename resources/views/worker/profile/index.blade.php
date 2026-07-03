@@ -17,16 +17,45 @@ enctype="multipart/form-data">
 
 <div class="mb-3">
 <label>Name</label>
-<input type="text"
+<input
+type="text"
 name="name"
-class="form-control">
+class="form-control"
+value="{{ old('name', $user->name) }}">
+</div>
+
+<div>
+    <input
+    type="hidden"
+    name="latitude"
+    id="latitude"
+    value="{{ optional($profile)->latitude }}">
+
+<input
+    type="hidden"
+    name="longitude"
+    id="longitude"
+    value="{{ optional($profile)->longitude }}">
 </div>
 
 <div class="mb-3">
 <label>Mobile</label>
-<input type="number"
+<input
+type="text"
 name="mobile"
-class="form-control">
+class="form-control"
+value="{{ old('mobile', $user->phone) }}">
+</div>
+
+<div class="mb-3">
+
+    <button type="button" class="btn btn-info w-100" onclick="getLocation()">
+
+        📍 Detect My Location
+
+    </button>
+    <div id="mapPreview" style="height: 250px; margin-top: 10px;"></div>
+
 </div>
 
 <div class="mb-3">
@@ -73,9 +102,7 @@ class="form-control">
 
 
 <div class="mb-3">
-
-
-
+<label>Profile Image</label>
 <input
 type="file"
 name="profile_image"
@@ -101,7 +128,7 @@ class="form-control">
         class="form-control">
 </div>
 
-<button class="btn btn-success">
+<button class="btn-success-custom">
 
 Save Profile
 
@@ -130,12 +157,12 @@ Save Profile
 
 <p>
 <b>Name:</b>
-{{ $profile->name }}
+{{ $user->name }}
 </p>
 
 <p>
 <b>Mobile:</b>
-{{ $profile->mobile }}
+{{ $user->phone }}
 </p>
 
 <p>
@@ -169,7 +196,7 @@ Years
 
 <a
 href="{{ route('worker.profile.edit') }}"
-class="btn btn-warning">
+class="btn-primary-custom">
 
 Edit Profile
 
@@ -185,7 +212,7 @@ class="d-inline">
     @method('DELETE')
 
     <button
-    class="btn btn-danger"
+    class="btn-danger-custom"
     onclick="return confirm('Are you sure you want to delete your profile?')">
 
         Delete Profile
@@ -203,5 +230,121 @@ class="d-inline">
 @endif
 
 </div>
+
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+let map;
+let marker;
+
+function fillAddress(data){
+
+    const address = data.address;
+
+    const city =
+        address.city ||
+        address.city_district ||
+        address.town ||
+        address.municipality ||
+        address.village ||
+        address.hamlet ||
+        "";
+
+    const road =
+        address.road ||
+        address.residential ||
+        address.neighbourhood ||
+        "";
+
+    const house =
+        address.house_number || "";
+
+    document.querySelector('textarea[name="address"]').value =
+        `${house} ${road}`.trim();
+
+    document.querySelector('input[name="city"]').value = city;
+
+    document.querySelector('input[name="state"]').value =
+        address.state || "";
+
+}
+
+function initMap(lat,lng){
+
+    if(map){
+        map.remove();
+    }
+
+    map = L.map('mapPreview').setView([lat,lng],15);
+
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            attribution:'© OpenStreetMap'
+        }
+    ).addTo(map);
+
+    marker = L.marker([lat,lng],{
+        draggable:true
+    }).addTo(map);
+
+    marker.on('dragend',async function(){
+
+        const pos = marker.getLatLng();
+
+        document.getElementById('latitude').value = pos.lat;
+        document.getElementById('longitude').value = pos.lng;
+
+        const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.lat}&lon=${pos.lng}`
+        );
+
+        const data = await res.json();
+
+        fillAddress(data);
+
+    });
+
+}
+
+async function getLocation(){
+
+    if(!navigator.geolocation){
+        alert("Geolocation not supported.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(async function(position){
+
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        document.getElementById('latitude').value = lat;
+        document.getElementById('longitude').value = lng;
+
+        const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+        );
+
+        const data = await res.json();
+
+        fillAddress(data);
+
+        initMap(lat,lng);
+
+    },function(){
+
+        alert("Unable to fetch location.");
+
+    });
+
+}
+
+</script>
 
 @endsection

@@ -16,7 +16,7 @@ Worker Dashboard
 
 <a
 href="{{ route('services.index') }}"
-class="btn btn-primary w-100">
+class="btn-primary-custom w-100">
 
 My Services
 
@@ -28,7 +28,7 @@ My Services
 
 <a
 href="{{ route('worker.bookings') }}"
-class="btn btn-success w-100">
+class="btn-success-custom w-100">
 
 My Bookings
 
@@ -40,7 +40,7 @@ My Bookings
 
 <a
 href="{{ route('worker.profile.create') }}"
-class="btn btn-warning w-100">
+class="btn-primary-custom w-100">
 
 Profile Verification
 

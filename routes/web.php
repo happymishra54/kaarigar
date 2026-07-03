@@ -15,6 +15,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\BookingController;
+use App\Http\Controllers\User\ProfileController as CustomerProfileController;
 
 // Worker Controllers
 use App\Http\Controllers\Worker\DashboardController as WorkerDashboardController;
@@ -33,13 +34,18 @@ use App\Http\Controllers\Admin\WorkerController;
 // Review Controller
 use App\Http\Controllers\User\ReviewController;
 
+// Notifications routes
+
+use App\Http\Controllers\NotificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get(
     '/services/{slug}',
@@ -73,6 +79,17 @@ Route::middleware([
 ])->prefix('customer')->group(function () {
 
 
+    Route::post(
+        '/favorite/{worker}',
+        [App\Http\Controllers\User\FavoriteController::class, 'toggle']
+    )->name('favorite.toggle');
+    
+    Route::get(
+        '/favorites',
+        [App\Http\Controllers\User\FavoriteController::class, 'index']
+    )->name('customer.favorites');
+
+
     Route::get(
         '/review/{booking}',
         [ReviewController::class, 'create']
@@ -85,9 +102,9 @@ Route::middleware([
 
 
 
-    Route::view(
+    Route::get(
         '/dashboard',
-        'customer.dashboard'
+        [App\Http\Controllers\User\CustomerDashboardController::class, 'index']
     )->name('customer.dashboard');
 
     Route::get(
@@ -105,10 +122,36 @@ Route::middleware([
         [BookingController::class, 'index']
     )->name('customer.bookings');
 
+    Route::get(
+        '/booking/{booking}',
+        [BookingController::class, 'show']
+    )->name('booking.show');
+
     Route::patch(
         '/booking/{booking}/cancel',
         [BookingController::class,'cancel']
     )->name('booking.cancel');
+
+    Route::get(
+        '/customer/profile',
+        [CustomerProfileController::class,'index']
+    )->name('customer.profile');
+    
+    Route::get(
+        '/customer/profile/edit',
+        [CustomerProfileController::class,'edit']
+    )->name('customer.profile.edit');
+    
+    
+    Route::put(
+        '/profile/update',
+        [App\Http\Controllers\User\ProfileController::class, 'update']
+    )->name('customer.profile.update');
+
+    Route::get(
+        '/nearby-workers',
+        [App\Http\Controllers\User\NearbyWorkerController::class, 'index']
+    )->name('nearby.workers');
 
 });
 
@@ -150,6 +193,11 @@ Route::middleware([
         [WorkerBookingController::class, 'accept']
     )->name('worker.booking.accept');
 
+    Route::get(
+        '/booking/{booking}',
+        [WorkerBookingController::class, 'show']
+    )->name('worker.booking.show');
+
     Route::patch(
         '/booking/{booking}/reject',
         [WorkerBookingController::class, 'reject']
@@ -159,6 +207,14 @@ Route::middleware([
         '/booking/{booking}/complete',
         [WorkerBookingController::class, 'complete']
     )->name('worker.booking.complete');
+
+
+    Route::patch(
+        '/worker/booking/{booking}/start',
+        [WorkerBookingController::class, 'start']
+    )->name('worker.booking.start');
+
+
 
 
     // Profile
@@ -312,13 +368,38 @@ Route::post(
 |--------------------------------------------------------------------------
 */
 
-Route::view('/login', 'auth.otp-login')
-->name('login');
+// Route::view('/login', 'auth.otp-login')
+// ->name('login');
+
+
 
 Route::post(
 '/firebase-login',
 [AuthenticatedSessionController::class, 'firebaseLogin']
 );
+
+
+// notification routes
+
+Route::middleware('auth')->group(function () {
+
+    Route::get(
+
+        '/notifications',
+
+        [NotificationController::class,'index']
+
+    )->name('notifications');
+
+    Route::patch(
+
+        '/notifications/{id}',
+
+        [NotificationController::class,'read']
+
+    )->name('notifications.read');
+
+});
 
 
 // role based login route
@@ -357,8 +438,8 @@ Route::middleware('auth')->group(function () {
 
 // otp login route
 
-Route::view('/login', 'auth.otp-login')
-    ->name('otp.login');
+// Route::view('/login', 'auth.otp-login')
+//     ->name('otp.login');
 
 
 Route::get(

@@ -18,4 +18,28 @@ class Category extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    public function getIconAttribute()
+{
+    $icons = [
+
+        'electrician' => 'electrician.png',
+
+        'plumber' => 'plumber.png',
+
+        'carpenter' => 'carpenter.png',
+
+        'painter' => 'painter.png',
+
+        'cleaner' => 'cleaner.png',
+
+        'mechanic' => 'mechanic.png',
+
+    ];
+
+    return asset(
+        'images/categories/' .
+        ($icons[strtolower($this->name)] ?? 'default.png')
+    );
+}
 }

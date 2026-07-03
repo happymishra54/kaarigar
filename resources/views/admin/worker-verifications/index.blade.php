@@ -101,7 +101,7 @@
                     @csrf
                     @method('PATCH')
 
-                    <button class="btn btn-success">
+                    <button class="btn-success-custom">
 
                         Approve
 

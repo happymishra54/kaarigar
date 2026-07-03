@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\Booking;
 
 
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +14,7 @@ use App\Models\WorkerProfile;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -22,6 +23,7 @@ class User extends Authenticatable
         'role',
         'phone',
         'city',
+        'state',
         'address',
         'latitude',
         'longitude',
@@ -99,6 +101,16 @@ class User extends Authenticatable
             'customer_id'
         );
     }
+
+    public function favorites()
+{
+    return $this->hasMany(Favorite::class,'customer_id');
+}
+
+public function favoritedBy()
+{
+    return $this->hasMany(Favorite::class,'worker_id');
+}
 
 
 }

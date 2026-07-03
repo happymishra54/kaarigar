@@ -124,7 +124,7 @@
                 
                 </div>
 
-                <button class="btn btn-primary">
+                <button class="btn-primary-custom">
 
                     Save Service
 

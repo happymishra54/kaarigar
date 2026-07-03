@@ -177,7 +177,7 @@ No reviews yet.
 
 <a
 href="{{ route('booking.create',$service->id) }}"
-class="btn btn-primary">
+class="btn-primary-custom">
 
 Book Service
 

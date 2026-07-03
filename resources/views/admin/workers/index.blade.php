@@ -19,6 +19,7 @@ Manage Workers
 <th>ID</th>
 <th>Name</th>
 <th>Mobile</th>
+<th>Bio</th>
 <th>City</th>
 <th>Action</th>
 
@@ -51,6 +52,10 @@ Manage Workers
 </td>
 
 <td>
+    {{ $worker->workerProfile->bio ?? 'N/A' }}
+</td>
+
+<td>
 
     {{ $worker->workerProfile?->city ?? 'N/A' }}
     
@@ -66,7 +71,7 @@ method="POST">
 @method('DELETE')
 
 <button
-class="btn btn-danger btn-sm"
+class="btn-danger-custom btn-sm"
 onclick="return confirm('Delete this worker?')">
 
 Delete

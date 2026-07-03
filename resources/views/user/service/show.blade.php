@@ -43,7 +43,7 @@
                         'booking.create',
                         $service->id
                     ) }}"
-                    class="btn btn-primary">
+                    class="btn-primary-custom">
 
                     Book Service
 
@@ -53,7 +53,7 @@
 
                 <a
                     href="/login"
-                    class="btn btn-warning">
+                    class="btn-primary-custom">
 
                     Login To Book
 

@@ -9,19 +9,29 @@ class WorkerProfile extends Model
     protected $fillable = [
 
         'user_id',
-        'name',
+
         'aadhaar_number',
+
         'aadhaar_image',
+
         'profile_image',
+
         'bio',
+
         'experience',
-        'mobile',
+
         'address',
+
         'city',
+
         'state',
+
         'latitude',
+
         'longitude',
+
         'daily_wage',
+
         'is_verified'
 
     ];
@@ -31,4 +41,3 @@ class WorkerProfile extends Model
         return $this->belongsTo(User::class);
     }
 }
-

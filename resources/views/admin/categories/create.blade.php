@@ -24,7 +24,7 @@ class="form-control">
 </div>
 
 <button
-class="btn btn-success">
+class="btn-success-custom">
 
 Save
 

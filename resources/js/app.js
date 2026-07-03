@@ -6,7 +6,7 @@
 
 // Alpine.start();
 
-
+import './location-selector';
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
@@ -25,3 +25,29 @@ const app = initializeApp(firebaseConfig);
 
 // 3. Initialize Firebase Authentication and export it for use in login forms
 export const auth = getAuth(app);
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const reveals = document.querySelectorAll(
+      ".reveal,.reveal-left,.reveal-right,.reveal-scale"
+  );
+
+  const observer = new IntersectionObserver(entries => {
+
+      entries.forEach(entry => {
+
+          if(entry.isIntersecting){
+
+              entry.target.classList.add("active");
+
+          }
+
+      });
+
+  },{
+      threshold:.15
+  });
+
+  reveals.forEach(el => observer.observe(el));
+
+});
