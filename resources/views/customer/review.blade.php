@@ -59,7 +59,7 @@ class="form-control">
 
 </div>
 
-<button class="btn btn-success">
+<button class="btn-success-custom">
 
 Submit Review
 

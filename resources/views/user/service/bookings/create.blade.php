@@ -121,7 +121,7 @@
                             <button
                                 type="button"
                                 onclick="getLocation()"
-                                class="btn btn-success">
+                                class="btn-success-custom">
 
                                 📍 Use My Current Location
 
@@ -140,7 +140,7 @@
                         <!-- Submit -->
 
                         <button
-                            class="btn btn-primary btn-lg w-100">
+                            class="btn-primary-custom btn-lg w-100">
 
                             ✅ Confirm Booking
 

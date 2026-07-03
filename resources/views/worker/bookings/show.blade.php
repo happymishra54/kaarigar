@@ -91,7 +91,7 @@
 
                             <a
                                 href="tel:{{ $booking->customer->phone }}"
-                                class="btn btn-success btn-lg">
+                                class="btn-success-custom btn-lg">
 
                                 📞 Call Customer
 
@@ -273,7 +273,7 @@
                             @csrf
                             @method('PATCH')
 
-                            <button class="btn btn-success btn-lg">
+                            <button class="btn-success-custom btn-lg">
 
                                 ✅ Accept Booking
 
@@ -286,7 +286,7 @@
                             @csrf
                             @method('PATCH')
 
-                            <button class="btn btn-danger btn-lg">
+                            <button class="btn-danger-custom btn-lg">
 
                                 ❌ Reject
 
@@ -301,7 +301,7 @@
                             @csrf
                             @method('PATCH')
 
-                            <button class="btn btn-warning btn-lg">
+                            <button class="btn-primary-custom btn-lg">
 
                                 ▶️ Start Work
 
@@ -316,7 +316,7 @@
                             @csrf
                             @method('PATCH')
 
-                            <button class="btn btn-primary btn-lg">
+                            <button class="btn-primary-custom btn-lg">
 
                                 ✔ Complete Job
 
@@ -326,7 +326,7 @@
 
                     @elseif($booking->status=='completed')
 
-                        <button class="btn btn-success btn-lg" disabled>
+                        <button class="btn-success-custom btn-lg" disabled>
 
                             🎉 Job Completed
 

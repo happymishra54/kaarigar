@@ -105,7 +105,7 @@
                         value="{{ old('state', auth()->user()->state) }}">
                 </div>
 
-                <button class="btn btn-primary">
+                <button class="btn-primary-custom">
                     💾 Update Profile
                 </button>
 

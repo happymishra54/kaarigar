@@ -102,5 +102,15 @@ class User extends Authenticatable
         );
     }
 
+    public function favorites()
+{
+    return $this->hasMany(Favorite::class,'customer_id');
+}
+
+public function favoritedBy()
+{
+    return $this->hasMany(Favorite::class,'worker_id');
+}
+
 
 }

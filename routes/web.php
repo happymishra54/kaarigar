@@ -44,7 +44,8 @@ use App\Http\Controllers\NotificationController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get(
     '/services/{slug}',
@@ -78,6 +79,17 @@ Route::middleware([
 ])->prefix('customer')->group(function () {
 
 
+    Route::post(
+        '/favorite/{worker}',
+        [App\Http\Controllers\User\FavoriteController::class, 'toggle']
+    )->name('favorite.toggle');
+    
+    Route::get(
+        '/favorites',
+        [App\Http\Controllers\User\FavoriteController::class, 'index']
+    )->name('customer.favorites');
+
+
     Route::get(
         '/review/{booking}',
         [ReviewController::class, 'create']
@@ -90,9 +102,9 @@ Route::middleware([
 
 
 
-    Route::view(
+    Route::get(
         '/dashboard',
-        'customer.dashboard'
+        [App\Http\Controllers\User\CustomerDashboardController::class, 'index']
     )->name('customer.dashboard');
 
     Route::get(
@@ -135,6 +147,11 @@ Route::middleware([
         '/profile/update',
         [App\Http\Controllers\User\ProfileController::class, 'update']
     )->name('customer.profile.update');
+
+    Route::get(
+        '/nearby-workers',
+        [App\Http\Controllers\User\NearbyWorkerController::class, 'index']
+    )->name('nearby.workers');
 
 });
 

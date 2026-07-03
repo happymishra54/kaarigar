@@ -8,7 +8,7 @@
 
 <a
 href="{{ route('categories.create') }}"
-class="btn btn-primary mb-3">
+class="btn-primary-custom mb-3">
 
 Add Category
 
@@ -44,7 +44,7 @@ Add Category
 
 <a
 href="{{ route('categories.edit',$category) }}"
-class="btn btn-warning btn-sm">
+class="btn-primary-custom btn-sm">
 
 Edit
 
@@ -59,7 +59,7 @@ style="display:inline">
 @method('DELETE')
 
 <button
-class="btn btn-danger btn-sm">
+class="btn-danger-custom btn-sm">
 
 Delete
 

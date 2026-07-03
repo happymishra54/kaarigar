@@ -1,3 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "./variables.css";
+@import "./reset.css";
+@import "./layout.css";
+@import "./typography.css";
+@import "./buttons.css";
+@import "./cards.css";
+@import "./forms.css";
+@import "./navbar.css";
+@import "./utilities.css";
+@import "./animations.css";
+@import "./responsive.css";
+@import "./hero.css";
+@import "./auth.css";
+@import "./customer-dashboard.css";

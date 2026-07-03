@@ -44,7 +44,7 @@
         <div class="col-md-4 mb-3">
 
             <a href="{{ route('services.index') }}"
-               class="btn btn-primary w-100">
+               class="btn-primary-custom w-100">
 
                 My Services
 
@@ -55,7 +55,7 @@
         <div class="col-md-4 mb-3">
 
             <a href="{{ route('worker.bookings') }}"
-               class="btn btn-success w-100">
+               class="btn-success-custom w-100">
 
                 My Bookings
 
@@ -66,7 +66,7 @@
         <div class="col-md-4 mb-3">
 
             <a href="{{ route('worker.profile') }}"
-               class="btn btn-warning w-100">
+               class="btn-primary-custom w-100">
 
                 My Profile
 

@@ -63,34 +63,34 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
-    public function firebaseLogin(Request $request)
-{
-    $request->validate([
-        'phone' => 'required'
-    ]);
+    // public function firebaseLogin(Request $request)
+    //     {
+    //         $request->validate([
+    //             'phone' => 'required'
+    //         ]);
 
-    $user = User::where('phone', $request->phone)->first();
+    //         $user = User::where('phone', $request->phone)->first();
 
-    if (!$user) {
+    //         if (!$user) {
 
-        $user = User::create([
-            'name' => 'User',
-            'phone' => $request->phone,
-            'email' => null,
-            'password' => null,
-            'role' => 'customer'
-        ]);
+    //             $user = User::create([
+    //                 'name' => 'User',
+    //                 'phone' => $request->phone,
+    //                 'email' => null,
+    //                 'password' => null,
+    //                 'role' => 'customer'
+    //             ]);
 
-    }
+    //         }
 
-    Auth::login($user);
+    //         Auth::login($user);
 
-    $request->session()->regenerate();
+    //         $request->session()->regenerate();
 
-    return response()->json([
-        'success' => true,
-        'redirect' => '/choose-mode'
-    ]);
-}
+    //         return response()->json([
+    //             'success' => true,
+    //             'redirect' => '/choose-mode'
+    //         ]);
+    // }
 
 }

@@ -106,7 +106,7 @@
 
                             <a
                                 href="tel:{{ $booking->worker->phone }}"
-                                class="btn btn-success btn-lg">
+                                class="btn-success-custom btn-lg">
 
                                 📞 Call Worker
 
@@ -303,7 +303,7 @@
                             @method('PATCH')
 
                             <button
-                                class="btn btn-danger btn-lg">
+                                class="btn-danger-custom btn-lg">
 
                                 ❌ Cancel Booking
 
@@ -315,7 +315,7 @@
 
                         <a
                             href="{{ route('review.create',$booking->id) }}"
-                            class="btn btn-primary btn-lg">
+                            class="btn-primary-custom btn-lg">
 
                             ⭐ Leave Review
 
@@ -324,7 +324,7 @@
                     @elseif($booking->status=='completed')
 
                         <button
-                            class="btn btn-success btn-lg"
+                            class="btn-success-custom btn-lg"
                             disabled>
 
                             ✔ Job Completed

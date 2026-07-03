@@ -39,7 +39,7 @@
     
     <li class="nav-item ms-2">
     
-    <a href="/login" class="btn btn-outline-light">
+    <a href="/login" class="btn-secondary-custom">
     Login
     </a>
     
@@ -47,7 +47,7 @@
     
     <li class="nav-item ms-2">
     
-    <a href="/register" class="btn btn-warning">
+    <a href="/register" class="btn-primary-custom">
     Register
     </a>
     

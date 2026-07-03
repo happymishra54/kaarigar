@@ -4,6 +4,15 @@
 
 <head>
 
+{{-- // fonts  --}}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -20,160 +29,113 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       rel="stylesheet">
 
-<style>
 
-    body{
-        background:#f8fafc;
-    }
-
-    .hero{
-        min-height:80vh;
-        display:flex;
-        align-items:center;
-        background:linear-gradient(
-            rgba(0,0,0,.6),
-            rgba(0,0,0,.6)
-        ),
-        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd');
-        background-size:cover;
-        background-position:center;
-    }
-
-    .search-box{
-        background:white;
-        padding:20px;
-        border-radius:15px;
-        box-shadow:0 10px 30px rgba(0,0,0,.15);
-    }
-
-    .category-card{
-        transition:.3s;
-    }
-
-    .category-card:hover{
-        transform:translateY(-8px);
-    }
-
-    .worker-card{
-    border-radius:20px;
-    transition:.3s;
-}
-
-    .worker-card:hover{
-        transform:translateY(-10px);
-        box-shadow:0 20px 40px rgba(0,0,0,.18);
-    }
-
-    .stats-box{
-        border-radius:15px;
-    }
-
-</style>
-
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="kk-navbar">
 
-
-    <div class="container">
-
-        <a class="navbar-brand fw-bold"
-        href="/">
-
-            Kaarigar
-
-        </a>
-
-        <div>
-
-            @auth
-
-                <span class="text-white me-3">
-                    Welcome, {{ auth()->user()->name }}
-                </span>
-
-                @if(auth()->user()->role === 'customer')
-
-    <a href="{{ route('customer.dashboard') }}"
-       class="btn btn-warning me-2">
-        Dashboard
-    </a>
-
-@elseif(auth()->user()->role === 'worker')
-
-    <a href="{{ route('worker.dashboard') }}"
-       class="btn btn-warning me-2">
-        Dashboard
-    </a>
-
-@elseif(auth()->user()->role === 'admin')
-
-    <a href="{{ route('admin.dashboard') }}"
-       class="btn btn-warning me-2">
-        Dashboard
-    </a>
-
-@endif
-
-                <form action="{{ route('logout') }}"
-                    method="POST"
-                    class="d-inline">
-
-                    @csrf
-
-                    <button type="submit"
-                            class="btn btn-danger">
-                        Logout
-                    </button>
-
-                </form>
-
-            @else
-
-                <a href="/login"
-                class="btn btn-outline-light me-2">
-
-                    Login
-
-                </a>
-
-                <a href="/register"
-                class="btn btn-warning">
-
-                    Register
-
-                </a>
-
-            @endauth
-
+        <div class="page-container nav-wrapper">
+    
+            <a href="/" class="logo">
+    
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+    
+                <span>Kaarigar</span>
+    
+            </a>
+    
+            <div class="nav-links">
+    
+                <a href="/">Home</a>
+    
+                <a href="#">Categories</a>
+    
+                <a href="#">Become Worker</a>
+    
+                <a href="#">About</a>
+    
+            </div>
+    
+            <div class="nav-actions">
+    
+                @auth
+    
+                    <span class="welcome">
+    
+                        Hi,
+    
+                        {{ auth()->user()->name }}
+    
+                    </span>
+    
+                    @if(auth()->user()->role === 'customer')
+    
+                        <a href="{{ route('customer.dashboard') }}"
+                           class="btn-primary-custom">
+    
+                            Dashboard
+    
+                        </a>
+    
+                    @elseif(auth()->user()->role === 'worker')
+    
+                        <a href="{{ route('worker.dashboard') }}"
+                           class="btn-primary-custom">
+    
+                            Dashboard
+    
+                        </a>
+    
+                    @elseif(auth()->user()->role === 'admin')
+    
+                        <a href="{{ route('admin.dashboard') }}"
+                           class="btn-primary-custom">
+    
+                            Dashboard
+    
+                        </a>
+    
+                    @endif
+    
+                    <form action="{{ route('logout') }}"
+                          method="POST">
+    
+                        @csrf
+    
+                        <button class="btn-primary-custom">
+    
+                            Logout
+    
+                        </button>
+    
+                    </form>
+    
+                @else
+    
+                    <a href="/login"
+                       class="btn-primary-custom">
+    
+                        Login
+    
+                    </a>
+    
+                    <a href="/register"
+                       class="btn-primary-custom">
+    
+                        Register
+    
+                    </a>
+    
+                @endauth
+    
+            </div>
+    
         </div>
-
-    </div>
-
-    <div class="d-flex align-items-center">
-
-
-        <span class="text-warning me-3">
-        
-            <i class="fa-solid fa-location-dot"></i>
-        
-            <span id="currentCity">
-        
-                {{ session('city','Detecting...') }}
-        
-            </span>
-        
-        </span>
-
-        
-        </div>
-        
-
-
-</nav>
+    
+    </nav>
 
 <main>
 
@@ -183,96 +145,149 @@
 
 </main>
 
-<footer class="bg-dark text-white pt-5 pb-4 mt-5">
+<footer class="premium-footer">
 
     <div class="container">
 
-        <div class="row">
+        <div class="row gy-5">
 
-            <div class="col-md-4">
+            <!-- Brand -->
 
-                <h4 class="fw-bold">
+            <div class="col-lg-4">
+
+                <h2 class="footer-logo">
+
                     Kaarigar
-                </h4>
 
-                <p>
-                    Find trusted workers near you for all home and professional services.
+                </h2>
+
+                <p class="footer-text">
+
+                    India's trusted platform for finding verified
+                    electricians, plumbers, carpenters,
+                    painters, cleaners and hundreds of
+                    skilled professionals near you.
+
                 </p>
+
+                <div class="footer-social">
+
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+                </div>
 
             </div>
 
-            <div class="col-md-2">
+            <!-- Links -->
+
+            <div class="col-lg-2">
 
                 <h5>
+
                     Company
+
                 </h5>
 
-                <ul class="list-unstyled">
+                <ul>
 
-                    <li>
-                        <a href="#" class="text-white text-decoration-none">
-                            About Us
-                        </a>
-                    </li>
+                    <li><a href="#">About</a></li>
 
-                    <li>
-                        <a href="#" class="text-white text-decoration-none">
-                            Contact
-                        </a>
-                    </li>
+                    <li><a href="#">Contact</a></li>
 
-                    <li>
-                        <a href="#" class="text-white text-decoration-none">
-                            Careers
-                        </a>
-                    </li>
+                    <li><a href="#">Careers</a></li>
+
+                    <li><a href="#">Privacy</a></li>
 
                 </ul>
 
             </div>
 
-            <div class="col-md-3">
+            <!-- Services -->
+
+            <div class="col-lg-3">
 
                 <h5>
-                    Services
+
+                    Popular Services
+
                 </h5>
 
-                <ul class="list-unstyled">
+                <ul>
 
                     <li>Electrician</li>
+
                     <li>Plumber</li>
+
+                    <li>Painter</li>
+
                     <li>Carpenter</li>
+
                     <li>Cleaner</li>
 
                 </ul>
 
             </div>
 
-            <div class="col-md-3">
+            <!-- Newsletter -->
+
+            <div class="col-lg-3">
 
                 <h5>
-                    Follow Us
+
+                    Stay Updated
+
                 </h5>
 
-                <div class="d-flex gap-3">
+                <p>
 
-                    <i class="fab fa-facebook fa-lg"></i>
-                    <i class="fab fa-instagram fa-lg"></i>
-                    <i class="fab fa-twitter fa-lg"></i>
-                    <i class="fab fa-linkedin fa-lg"></i>
+                    Subscribe to receive
+                    latest offers and updates.
 
-                </div>
+                </p>
+
+                <form>
+
+                    <input
+                        type="email"
+                        class="newsletter-input"
+                        placeholder="Your email">
+
+                    <button
+                    class="btn-primary-custom w-100">
+
+                        Subscribe
+
+                    </button>
+
+                </form>
 
             </div>
 
         </div>
 
-        <hr>
+        <hr class="footer-divider">
 
-        <div class="text-center">
+        <div class="footer-bottom">
 
-            © {{ date('Y') }} Kaarigar.
-            All Rights Reserved.
+            <span>
+
+                © {{ date('Y') }} Kaarigar.
+
+                All Rights Reserved.
+
+            </span>
+
+            <span>
+
+                Made with ❤️ in India
+
+            </span>
 
         </div>
 
@@ -288,75 +303,56 @@
 
 <script>
 
-if (!localStorage.getItem('city'))
-{
-    navigator.geolocation.getCurrentPosition(
+function updateCity(city) {
 
-        function(position)
-        {
-            let lat = position.coords.latitude;
-            let lon = position.coords.longitude;
+localStorage.setItem('city', city);
 
-            fetch(
-                "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="
-                + lat +
-                "&lon="
-                + lon
-            )
-
-            .then(response => response.json())
-
-            .then(data => {
-
-                let city =
-                    data.address.city ||
-                    data.address.town ||
-                    data.address.village ||
-                    '';
-
-                localStorage.setItem(
-                    'city',
-                    city
-                );
-
-                document.getElementById(
-                    'currentCity'
-                ).innerHTML = city;
-
-                let cityInput =
-                    document.getElementById('city');
-
-                if(cityInput)
-                {
-                    cityInput.value = city;
-                }
-
-            });
-
-        }
-
-    );
+const currentCity = document.getElementById('currentCity');
+if (currentCity) {
+    currentCity.innerHTML = city;
 }
 
-else
-{
-    document.getElementById(
-        "currentCity"
-    ).innerHTML =
-        localStorage.getItem(
-            "city"
-        );
+const cityInput = document.getElementById('city');
+if (cityInput) {
+    cityInput.value = city;
+}
+}
 
-    let cityInput =
-        document.getElementById('city');
+const savedCity = localStorage.getItem('city');
 
-    if(cityInput)
-    {
-        cityInput.value =
-            localStorage.getItem(
-                'city'
-            );
-    }
+if (savedCity) {
+
+updateCity(savedCity);
+
+} else {
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
+    )
+    .then(response => response.json())
+    .then(data => {
+
+console.log(data);
+
+console.log(data.address);
+
+let city =
+    data.address.city ||
+    data.address.town ||
+    data.address.village ||
+    '';
+
+...
+});
+
+
+});
+
 }
 
 </script>

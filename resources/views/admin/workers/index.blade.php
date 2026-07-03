@@ -71,7 +71,7 @@ method="POST">
 @method('DELETE')
 
 <button
-class="btn btn-danger btn-sm"
+class="btn-danger-custom btn-sm"
 onclick="return confirm('Delete this worker?')">
 
 Delete

@@ -1,0 +1,146 @@
+/*==========================
+SCROLL REVEAL
+==========================*/
+
+/*=============================
+SCROLL REVEAL
+==============================*/
+
+.reveal{
+
+    opacity:0;
+    
+    transform:translateY(60px);
+    
+    transition:all .8s ease;
+    
+    }
+    
+    .reveal.active{
+    
+    opacity:1;
+    
+    transform:translateY(0);
+    
+    }
+    
+    .reveal-left{
+    
+    opacity:0;
+    
+    transform:translateX(-70px);
+    
+    transition:.8s;
+    
+    }
+    
+    .reveal-left.active{
+    
+    opacity:1;
+    
+    transform:translateX(0);
+    
+    }
+    
+    .reveal-right{
+    
+    opacity:0;
+    
+    transform:translateX(70px);
+    
+    transition:.8s;
+    
+    }
+    
+    .reveal-right.active{
+    
+    opacity:1;
+    
+    transform:translateX(0);
+    
+    }
+    
+    .reveal-scale{
+    
+    opacity:0;
+    
+    transform:scale(.9);
+    
+    transition:.8s;
+    
+    }
+    
+    .reveal-scale.active{
+    
+    opacity:1;
+    
+    transform:scale(1);
+    
+    }
+
+    img{
+
+        transition:.4s;
+        
+        }
+        
+        .card:hover img{
+        
+        transform:scale(1.05);
+        
+        }
+        
+        button,
+        a{
+        
+        transition:.3s;
+        
+        }
+
+        /*==================================
+SCROLL ANIMATIONS
+==================================*/
+
+.fade-up{
+
+    opacity:0;
+    
+    transform:translateY(60px);
+    
+    transition:
+    
+    opacity .8s ease,
+    
+    transform .8s ease;
+    
+    }
+    
+    .fade-up.show{
+    
+    opacity:1;
+    
+    transform:translateY(0);
+    
+    }
+
+    .fade-up{
+
+        opacity:0;
+        
+        transform:translateY(40px);
+        
+        animation:fadeUp .8s forwards;
+        
+        }
+        
+        @keyframes fadeUp{
+        
+        to{
+        
+        opacity:1;
+        
+        transform:translateY(0);
+        
+        }
+        
+        }

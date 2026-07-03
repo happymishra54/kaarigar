@@ -74,7 +74,7 @@
 
 <a
 href="{{ route('customer.profile.edit') }}"
-class="btn btn-warning">
+class="btn-primary-custom">
 
 Edit Profile
 

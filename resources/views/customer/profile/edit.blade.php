@@ -103,7 +103,7 @@
                         value="{{ old('state',$user->state) }}">
                 </div>
 
-                <button class="btn btn-primary">
+                <button class="btn-primary-custom">
 
                     💾 Update Profile
 

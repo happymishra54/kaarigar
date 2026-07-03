@@ -128,7 +128,7 @@ class="form-control">
         class="form-control">
 </div>
 
-<button class="btn btn-success">
+<button class="btn-success-custom">
 
 Save Profile
 
@@ -196,7 +196,7 @@ Years
 
 <a
 href="{{ route('worker.profile.edit') }}"
-class="btn btn-warning">
+class="btn-primary-custom">
 
 Edit Profile
 
@@ -212,7 +212,7 @@ class="d-inline">
     @method('DELETE')
 
     <button
-    class="btn btn-danger"
+    class="btn-danger-custom"
     onclick="return confirm('Are you sure you want to delete your profile?')">
 
         Delete Profile

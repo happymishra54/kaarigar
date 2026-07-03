@@ -10,7 +10,7 @@
 
     <a
             href="{{ url('/') }}"
-            class="btn btn-primary">
+            class="btn-primary-custom">
 
             ➕ Book Now
 
@@ -66,7 +66,7 @@
 
                         <a
                             href="tel:{{ $booking->worker->phone }}"
-                            class="btn btn-success btn-sm">
+                            class="btn-success-custom btn-sm">
 
                             📞 Call Worker
 
@@ -143,7 +143,7 @@
                             @csrf
                             @method('PATCH')
 
-                            <button class="btn btn-danger btn-sm">
+                            <button class="btn-danger-custom btn-sm">
 
                                 ❌ Cancel Booking
 
@@ -155,7 +155,7 @@
 
                         <a
                             href="{{ route('review.create', $booking->id) }}"
-                            class="btn btn-primary btn-sm">
+                            class="btn-primary-custom btn-sm">
 
                             ⭐ Leave Review
 

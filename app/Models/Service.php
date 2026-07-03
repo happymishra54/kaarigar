@@ -40,4 +40,34 @@ class Service extends Model
             Booking::class
         );
     }
+
+    public function getImageAttribute()
+{
+    $images = [
+
+        'electrician' => 'electrician.jpg',
+
+        'plumber' => 'plumber.jpg',
+
+        'carpenter' => 'carpenter.jpg',
+
+        'painter' => 'painter.jpg',
+
+        'cleaner' => 'cleaning.jpg',
+
+    ];
+
+    foreach($images as $keyword => $image){
+
+        if(str_contains(strtolower($this->title), $keyword)){
+
+            return asset("images/services/".$image);
+
+        }
+
+    }
+
+    return asset("images/services/default.jpg");
+}
+
 }

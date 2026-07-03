@@ -26,7 +26,7 @@ class="form-control">
 </div>
 
 <button
-class="btn btn-primary">
+class="btn-primary-custom">
 
 Update
 

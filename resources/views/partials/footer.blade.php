@@ -8,9 +8,22 @@
     
     <h3>Kaarigar</h3>
     
-    <p>
-    Find trusted professionals near you.
-    </p>
+    <h1 class="hero-title">
+
+        Find Trusted
+        
+        <span>Professionals</span>
+        
+        Near You
+        
+        </h1>
+        
+        <p class="hero-subtitle">
+        
+        Book verified electricians, plumbers, carpenters,
+        painters and more within minutes.
+        
+        </p>
     
     </div>
     

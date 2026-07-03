@@ -130,7 +130,7 @@ value="{{ $profile->daily_wage }}">
 
 <button
     type="submit"
-    class="btn btn-primary">
+    class="btn-primary-custom">
     Update Profile
 </button>
 

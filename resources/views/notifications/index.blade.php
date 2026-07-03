@@ -48,7 +48,7 @@ action="{{ route('notifications.read',$notification->id) }}">
 
 @method('PATCH')
 
-<button class="btn btn-primary">
+<button class="btn-primary-custom">
 
 Mark as Read
 

@@ -24,7 +24,7 @@
 
         <a
             href="{{ route('services.create') }}"
-            class="btn btn-success">
+            class="btn-success-custom">
 
             Add Service
 
@@ -96,7 +96,7 @@
 
                     <a
                         href="{{ route('services.edit',$service->id) }}"
-                        class="btn btn-warning btn-sm">
+                        class="btn-primary-custom btn-sm">
 
                         Edit
 
@@ -113,7 +113,7 @@
                             @method('DELETE')
 
                             <button
-                                class="btn btn-danger btn-sm">
+                                class="btn-danger-custom btn-sm">
 
                                 Delete
 

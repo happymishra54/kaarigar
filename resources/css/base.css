@@ -1,0 +1,182 @@
+/*==========================
+GLOBAL
+==========================*/
+
+:root{
+
+    --primary:#2563EB;
+    --secondary:#7C3AED;
+    
+    --dark:#0F172A;
+    --text:#334155;
+    --muted:#64748B;
+    
+    --bg:#F8FAFC;
+    
+    --radius:24px;
+    
+    }
+    
+    *{
+    
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    
+    }
+    
+    html{
+    
+    scroll-behavior:smooth;
+    
+    }
+    
+    body{
+
+        background:#F8FAFC;
+    
+        color:#0F172A;
+    
+        overflow-x:hidden;
+    
+    }
+    
+    img{
+    
+    max-width:100%;
+    
+    display:block;
+    
+    }
+    
+    a{
+    
+    text-decoration:none;
+    
+    }
+    
+    section{
+
+        padding:110px 0;
+        
+        position:relative;
+        
+        overflow:hidden;
+        
+        }
+    
+    .container{
+    
+    max-width:1280px;
+    
+    }
+    
+    .section-tag{
+    
+    display:inline-block;
+    
+    padding:10px 20px;
+    
+    border-radius:50px;
+    
+    background:#DBEAFE;
+    
+    color:#2563EB;
+    
+    font-size:14px;
+    
+    font-weight:700;
+    
+    letter-spacing:1px;
+    
+    margin-bottom:18px;
+    
+    text-transform:uppercase;
+    
+    }
+    
+    .section-title{
+    
+    font-size:48px;
+    
+    font-weight:800;
+    
+    color:#0F172A;
+    
+    margin-bottom:18px;
+    
+    }
+    
+    .section-subtitle{
+    
+    font-size:19px;
+    
+    max-width:700px;
+    
+    margin:auto;
+    
+    color:#64748B;
+    
+    line-height:1.8;
+    
+    }
+
+    /*==================================
+SECTION HEADER
+==================================*/
+
+.section-header{
+
+    max-width:700px;
+    
+    margin:0 auto 70px;
+    
+    text-align:center;
+    
+    }
+    
+    .section-tag{
+    
+    display:inline-block;
+    
+    padding:8px 18px;
+    
+    background:#DBEAFE;
+    
+    color:#2563EB;
+    
+    font-size:13px;
+    
+    font-weight:700;
+    
+    letter-spacing:1px;
+    
+    border-radius:999px;
+    
+    text-transform:uppercase;
+    
+    margin-bottom:20px;
+    
+    }
+    
+    .section-header h2{
+    
+    font-size:46px;
+    
+    font-weight:800;
+    
+    margin-bottom:15px;
+    
+    color:#0F172A;
+    
+    }
+    
+    .section-header p{
+    
+    font-size:18px;
+    
+    color:#64748B;
+    
+    line-height:1.8;
+    
+    }

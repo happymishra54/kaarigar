@@ -82,7 +82,7 @@ method="POST">
 @method('PATCH')
 
 <button
-class="btn btn-danger btn-sm">
+class="btn-danger-custom btn-sm">
 
 Cancel
 

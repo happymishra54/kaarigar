@@ -28,8 +28,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string'],
+            'login' => ['required', 'string'],
             'password' => ['required', 'string'],
+            'role' => ['required', 'string'],
         ];
     }
 
@@ -44,7 +45,7 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
 
-$login = $this->email;
+        $login = $this->login;
 
 $field = filter_var($login, FILTER_VALIDATE_EMAIL)
     ? 'email'
@@ -62,7 +63,7 @@ $credentials = [
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'login' => trans('auth.failed'),
             ]);
         }
 
@@ -77,7 +78,7 @@ $credentials = [
             Auth::logout();
 
             throw ValidationException::withMessages([
-                'email' => 'Invalid role selected.',
+                'login' => 'Invalid role selected.',
             ]);
         }
 
@@ -96,7 +97,7 @@ $credentials = [
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'login' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -108,6 +109,8 @@ $credentials = [
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(
+            Str::lower($this->string('login')).'|'.$this->ip()
+        );
     }
 }

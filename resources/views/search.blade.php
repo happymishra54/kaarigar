@@ -122,7 +122,7 @@
 
                 <a
                 href="{{ route('worker.show',$worker->id) }}"
-                class="btn btn-warning w-100">
+                class="btn-primary-custom w-100">
 
                     View Profile
 
