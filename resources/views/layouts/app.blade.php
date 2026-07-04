@@ -347,7 +347,7 @@ let city =
     data.address.village ||
     '';
 
-...
+
 });
 
 

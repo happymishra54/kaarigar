@@ -645,3 +645,57 @@ DECORATIONS
             filter:blur(10px);
             
             }
+
+            /* ==========================================
+   SEARCH RESULTS PAGE
+========================================== */
+
+.search-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-bottom:45px;
+}
+
+.search-header .section-title{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.empty-search{
+    background:#fff;
+    border-radius:20px;
+    padding:70px 30px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.empty-search i{
+    font-size:70px;
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+.empty-search h2{
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.empty-search p{
+    color:#64748b;
+    max-width:500px;
+    margin:0 auto 30px;
+    line-height:1.7;
+}
+
+@media(max-width:768px){
+
+.search-header{
+    text-align:center;
+    justify-content:center;
+}
+
+}
