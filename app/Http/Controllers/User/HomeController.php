@@ -90,7 +90,7 @@ class HomeController extends Controller
         $workers->latest();
 
     }
-
+    $workers = $workers->get();
     $favorites = [];
 
 if (auth()->check() && auth()->user()->role == 'customer') {
