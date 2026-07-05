@@ -149,7 +149,7 @@
 
     <div class="row g-4">
 
-        <div class="col-lg-3 col-md-6">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
 
             <div class="feature-card reveal">
 
@@ -510,7 +510,7 @@ $icons = [
 
             @foreach($categories as $category)
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
 
                 <div class="premium-category-card">
 
@@ -664,100 +664,7 @@ $icons = [
 
 
 
-<section class="services-section fade-up">
 
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-tag">
-
-                POPULAR SERVICES
-
-            </span>
-
-            <h2 class="section-title">
-
-                Services You Can Trust
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                Book skilled professionals for all your home needs.
-
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            @foreach($services as $service)
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="premium-service-card reveal">
-
-                    <div class="service-image">
-
-                        <img
-                            src="{{ $service->image }}"
-                            alt="{{ $service->title }}"
-                            class="img-fluid">
-                    
-                        <span class="service-badge">
-                    
-                            Popular
-                    
-                        </span>
-                    
-                    </div>
-
-                    <div class="service-body">
-
-                        <h4>
-
-                            {{ $service->title }}
-
-                        </h4>
-
-                        <p>
-
-                            {{ Str::limit($service->description,90) }}
-
-                        </p>
-
-                        <div class="service-footer">
-
-                            <h5>
-
-                                ₹{{ $service->price }}
-
-                            </h5>
-
-                            <a href="#workers"
-
-                            class="btn-primary-custom">
-
-                                View
-
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</section>
 
 
 
@@ -765,79 +672,7 @@ $icons = [
 
 
 
-<section class="testimonials-section section-light fade-up">
-    <div class="container">
 
-    @if(
-        request('name') ||
-        request('city') ||
-        request('category')
-        )
-        
-        <h2 class="text-center mb-5">
-        Search Results
-        </h2>
-        
-        @else
-        
-        <div class="section-header">
-
-            <span class="section-tag">
-        
-                Workers
-        
-            </span>
-        
-            <h2>
-        
-                Meet Our Top Rated Professionals
-        
-            </h2>
-        
-            <p>
-        
-                Skilled, verified and trusted workers near your location.
-        
-            </p>
-        
-        </div>
-        
-        @endif
-
-<div class="row">
-
-    @forelse($workers as $worker)
-
-    <div class="col-lg-3 col-md-6">
-    
-        @include('partials.worker-card',['worker'=>$worker])
-        
-    
-    </div>
-    
-    @empty
-
-
-<div class="col-12">
-
-<div class="alert alert-warning text-center">
-
-<h4>No workers found</h4>
-
-<p>
-Try another name, city or category.
-</p>
-
-</div>
-
-</div>
-
-@endforelse
-
-</div>
-</div>
-
-</section>
 
 
 
@@ -874,17 +709,6 @@ Try another name, city or category.
             
             </div>
 
-            <h2 class="section-title">
-
-                Book a Worker in 3 Easy Steps
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                Finding trusted professionals has never been easier.
-
-            </p>
 
         </div>
 
@@ -999,7 +823,7 @@ Try another name, city or category.
 
 <x-wave-divider />
 
-
+{{-- // testimonials section --}}
 <section class="testimonials-section section-light fade-up">
 
     <div class="container">
@@ -1028,17 +852,7 @@ Try another name, city or category.
             
             </div>
 
-            <h2 class="section-title">
-
-                Loved by Thousands
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                Here's what our happy customers say.
-
-            </p>
+            
 
         </div>
 

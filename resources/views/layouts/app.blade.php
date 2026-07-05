@@ -35,101 +35,102 @@
 
 <body>
 
-    <nav class="kk-navbar">
+    <nav class="navbar navbar-expand-lg kaarigar-navbar sticky-top">
 
-        <div class="page-container nav-wrapper">
+        <div class="container">
     
-            <a href="/" class="logo">
+            <a class="navbar-brand fw-bold" href="/">
     
-                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>
     
-                <span>Kaarigar</span>
+                Kaarigar
     
             </a>
     
-            <div class="nav-links">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
     
-                <a href="/">Home</a>
+                <span class="navbar-toggler-icon"></span>
     
-                <a href="#">Categories</a>
+            </button>
     
-                <a href="#">Become Worker</a>
+            <div class="collapse navbar-collapse" id="mainNavbar">
     
-                <a href="#">About</a>
+                <ul class="navbar-nav mx-auto">
     
-            </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
     
-            <div class="nav-actions">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
     
-                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Become Worker</a>
+                    </li>
     
-                    <span class="welcome">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
     
-                        Hi,
+                </ul>
     
-                        {{ auth()->user()->name }}
+                <div class="d-flex align-items-center gap-2">
     
-                    </span>
+                    @auth
     
-                    @if(auth()->user()->role === 'customer')
+                        @if(auth()->user()->role === 'customer')
+                            <a href="{{ route('customer.dashboard') }}" class="btn-primary-custom">
+                                Dashboard
+                            </a>
     
-                        <a href="{{ route('customer.dashboard') }}"
-                           class="btn-primary-custom">
+                        @elseif(auth()->user()->role === 'worker')
+                            <a href="{{ route('worker.dashboard') }}" class="btn-primary-custom">
+                                Dashboard
+                            </a>
     
-                            Dashboard
+                        @elseif(auth()->user()->role === 'admin')
+                            <a href="{{ route('admin.dashboard') }}" class="btn-primary-custom">
+                                Dashboard
+                            </a>
+                        @endif
+    
+                        <form method="POST"
+                              action="{{ route('logout') }}">
+    
+                            @csrf
+    
+                            <button class="btn-secondary-custom">
+    
+                                Logout
+    
+                            </button>
+    
+                        </form>
+    
+                    @else
+    
+                        <a href="/login" class="btn-primary-custom">
+    
+                            Login
     
                         </a>
     
-                    @elseif(auth()->user()->role === 'worker')
+                        <a href="/register" class="btn-primary-custom">
     
-                        <a href="{{ route('worker.dashboard') }}"
-                           class="btn-primary-custom">
-    
-                            Dashboard
+                            Register
     
                         </a>
     
-                    @elseif(auth()->user()->role === 'admin')
+                    @endauth
     
-                        <a href="{{ route('admin.dashboard') }}"
-                           class="btn-primary-custom">
-    
-                            Dashboard
-    
-                        </a>
-    
-                    @endif
-    
-                    <form action="{{ route('logout') }}"
-                          method="POST">
-    
-                        @csrf
-    
-                        <button class="btn-primary-custom">
-    
-                            Logout
-    
-                        </button>
-    
-                    </form>
-    
-                @else
-    
-                    <a href="/login"
-                       class="btn-primary-custom">
-    
-                        Login
-    
-                    </a>
-    
-                    <a href="/register"
-                       class="btn-primary-custom">
-    
-                        Register
-    
-                    </a>
-    
-                @endauth
+                </div>
     
             </div>
     

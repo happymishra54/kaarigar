@@ -1,0 +1,357 @@
+/* ==========================================
+   WORKER CARD
+========================================== */
+
+.worker-premium-card{
+
+    height:100%;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+
+    transition:.35s ease;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.worker-premium-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 60px rgba(37,99,235,.15);
+
+}
+
+.worker-image{
+
+    position:relative;
+
+    height:260px;
+
+    overflow:hidden;
+
+}
+
+.worker-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.4s;
+
+}
+
+.worker-premium-card:hover .worker-image img{
+
+    transform:scale(1.05);
+
+}
+
+.verified-badge{
+
+    position:absolute;
+
+    top:15px;
+
+    left:15px;
+
+    background:#10b981;
+
+    color:#fff;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.favorite-btn{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#ef4444;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:.3s;
+
+}
+
+.favorite-btn.active{
+
+    background:#ef4444;
+
+    color:#fff;
+
+}
+
+.worker-content{
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+}
+
+.worker-rating{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.rating-chip{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+.review-count{
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+.worker-content h4{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    color:#0f172a;
+
+}
+
+.worker-profession{
+
+    color:#2563eb;
+
+    font-weight:600;
+
+    margin-bottom:18px;
+
+}
+
+.worker-meta{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    color:#64748b;
+
+    font-size:15px;
+
+    margin-bottom:15px;
+
+}
+
+.worker-distance{
+
+    margin-bottom:18px;
+
+    color:#10b981;
+
+    font-weight:600;
+
+}
+
+.worker-footer{
+
+    margin-top:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.worker-price{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#2563eb;
+
+}
+
+.worker-price small{
+
+    font-size:14px;
+
+    color:#64748b;
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width:991.98px){
+
+    .worker-image{
+
+        height:230px;
+
+    }
+
+    .worker-content{
+
+        padding:22px;
+
+    }
+
+    .worker-content h4{
+
+        font-size:22px;
+
+    }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:767.98px){
+
+    .worker-image{
+
+        height:220px;
+
+    }
+
+    .worker-content{
+
+        padding:20px;
+
+    }
+
+    .worker-rating{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:8px;
+
+    }
+
+    .worker-footer{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .worker-price{
+
+        text-align:center;
+
+    }
+
+    .worker-footer .btn-primary-custom{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+}
+
+/* ==========================================
+   SMALL PHONES
+========================================== */
+
+@media (max-width:575.98px){
+
+    .worker-image{
+
+        height:210px;
+
+    }
+
+    .worker-content h4{
+
+        font-size:20px;
+
+    }
+
+    .worker-price{
+
+        font-size:24px;
+
+    }
+
+}

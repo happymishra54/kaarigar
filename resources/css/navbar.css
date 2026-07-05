@@ -1,221 +1,133 @@
-.kk-navbar{
+/* ==========================================
+KAARIGAR NAVBAR
+========================================== */
 
-    position:sticky;
+.kaarigar-navbar{
 
-    top:0;
+    background:#0F172A;
 
-    z-index:1000;
+    padding:14px 0;
 
-    background:rgba(15,23,42,.92);
-
-    backdrop-filter:blur(12px);
-
-    box-shadow:var(--shadow);
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
 
 }
 
-.nav-wrapper{
+.kaarigar-navbar .navbar-brand{
 
-    height:80px;
+    color:#fff;
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-.logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    font-size:28px;
+    font-size:34px;
 
     font-weight:800;
 
-    color:white;
+}
+
+.kaarigar-navbar .navbar-brand i{
+
+    color:#FACC15;
 
 }
 
-.logo i{
+.kaarigar-navbar .nav-link{
 
-    color:var(--secondary);
+    color:#fff;
 
-}
+    font-weight:600;
 
-.nav-links{
-
-    display:flex;
-
-    gap:35px;
-
-}
-
-.nav-links a{
-
-    color:white;
-
-    font-weight:500;
+    margin:0 12px;
 
     transition:.3s;
 
 }
 
-.nav-links a:hover{
+.kaarigar-navbar .nav-link:hover{
 
-    color:var(--secondary);
-
-}
-
-.nav-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
+    color:#FACC15;
 
 }
 
-.welcome{
+.kaarigar-navbar .navbar-toggler{
 
-    color:white;
+    border:none;
 
-    font-weight:600;
+    box-shadow:none;
 
 }
 
-/*====================================
-PREMIUM NAVBAR
-====================================*/
+.kaarigar-navbar .navbar-toggler:focus{
 
-.navbar{
+    box-shadow:none;
 
-    position:fixed;
-    
-    top:0;
-    
-    left:0;
-    
-    width:100%;
-    
-    z-index:999;
-    
-    padding:18px 0;
-    
-    transition:.35s ease;
-    
-    background:transparent;
-    
-    }
-    
-    .navbar.scrolled{
-    
-    background:white;
-    
-    box-shadow:0 10px 40px rgba(15,23,42,.08);
-    
-    padding:12px 0;
-    
+}
+
+.kaarigar-navbar .navbar-toggler-icon{
+
+    filter:invert(1);
+
+}
+
+@media (max-width:991px){
+
+    .kaarigar-navbar .navbar-collapse{
+
+        margin-top:20px;
+
+        padding:25px;
+
+        border-radius:18px;
+
+        background:#16213d;
+
     }
 
-    .logo{
+    .kaarigar-navbar .navbar-nav{
 
-        font-size:34px;
-        
-        font-weight:800;
-        
-        color:white;
-        
-        transition:.3s;
-        
-        }
-        
-        .navbar.scrolled .logo{
-        
-        color:#2563EB;
-        
-        }
+        text-align:center;
 
-        .navbar-nav .nav-link{
+        margin-bottom:20px;
 
-            font-weight:600;
-            
-            font-size:16px;
-            
-            margin:0 12px;
-            
-            color:white;
-            
-            transition:.3s;
-            
-            }
-            
-            .navbar.scrolled .nav-link{
-            
-            color:#0F172A;
-            
-            }
-            
-            .navbar-nav .nav-link:hover{
-            
-            color:#FACC15;
-            
-            }
+    }
 
-            .btn-login{
+    .kaarigar-navbar .nav-item{
 
-                background:#FACC15;
-                    
-                color:#0F172A;
-                    
-                padding:10px 22px;
-                    
-                border-radius:12px;
-                    
-                font-weight:700;
-                    
-                transition:.3s;
-                
-                }
-                
-                .btn-login:hover{
-                    
-                    transform:translateY(-3px);
-                    
-                    }
+        margin:12px 0;
 
-                .navbar.scrolled .btn-login{
-                
-                border-color:#2563EB;
-                
-                color:#2563EB;
-                
-                }
+    }
 
-                .btn-register{
+    .kaarigar-navbar .nav-link{
 
-                    background:#FACC15;
-                    
-                    color:#0F172A;
-                    
-                    padding:10px 22px;
-                    
-                    border-radius:12px;
-                    
-                    font-weight:700;
-                    
-                    transition:.3s;
-                    
-                    }
-                    
-                    .btn-register:hover{
-                    
-                    transform:translateY(-3px);
-                    
-                    }
+        font-size:18px;
+
+        margin:0;
+
+    }
+
+    .kaarigar-navbar .d-flex{
+
+        flex-direction:column;
+
+        width:100%;
+
+    }
+
+    .kaarigar-navbar .btn-primary-custom,
+
+    .kaarigar-navbar .btn-secondary-custom{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .kaarigar-navbar .navbar-brand{
+
+        font-size:28px;
+
+    }
+
+}

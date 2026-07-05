@@ -51,3 +51,45 @@ document.addEventListener("DOMContentLoaded", () => {
   reveals.forEach(el => observer.observe(el));
 
 });
+
+/* ===========================
+Mobile Side Menu
+=========================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const hamburger=document.getElementById("hamburger");
+
+    const close=document.getElementById("closeMenu");
+
+    const menu=document.getElementById("sideMenu");
+
+    const overlay=document.getElementById("overlay");
+
+    function openMenu(){
+
+        menu.classList.add("active");
+
+        overlay.classList.add("active");
+
+        document.body.style.overflow="hidden";
+
+    }
+
+    function closeMenu(){
+
+        menu.classList.remove("active");
+
+        overlay.classList.remove("active");
+
+        document.body.style.overflow="";
+
+    }
+
+    hamburger?.addEventListener("click",openMenu);
+
+    close?.addEventListener("click",closeMenu);
+
+    overlay?.addEventListener("click",closeMenu);
+
+});

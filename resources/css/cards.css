@@ -459,67 +459,11 @@ SERVICES
     
     }
     
-    .premium-service-card{
-
-        background:#fff;
-        
-        border-radius:var(--radius);
-        
-        overflow:hidden;
-        
-        border:none;
-        
-        transition:var(--transition);
-        
-        box-shadow:
-        0 15px 35px rgba(15,23,42,.08);
-        
-        height:100%;
-        
-        }
-        
-        .premium-service-card:hover{
-        
-        transform:translateY(-8px);
-        
-        box-shadow:
-        0 25px 60px rgba(15,23,42,.14);
-        
-        }
     
-    .premium-service-card:hover{
     
-    transform:translateY(-12px);
     
-    box-shadow:0 35px 70px rgba(37,99,235,.18);
     
-    }
     
-    .service-image{
-    
-    position:relative;
-    
-    overflow:hidden;
-    
-    }
-    
-    .service-image img{
-    
-    width:100%;
-    
-    height:240px;
-    
-    object-fit:cover;
-    
-    transition:.4s;
-    
-    }
-    
-    .premium-service-card:hover img{
-    
-    transform:scale(1.08);
-    
-    }
     
     .service-badge{
     
@@ -543,39 +487,8 @@ SERVICES
     
     }
     
-    .service-body{
-    
-    padding:30px;
-    
-    }
-    
-    .service-body h4{
-    
-    font-size:24px;
-    
-    font-weight:700;
-    
-    margin-bottom:14px;
-    
-    }
-    
-    .service-body p{
-    
-    color:#64748B;
-    
-    margin-bottom:25px;
-    
-    }
-    
-    .service-footer{
-    
-    display:flex;
-    
-    justify-content:space-between;
-    
-    align-items:center;
-    
-    }
+   
+   
     
     .service-footer h5{
     
@@ -927,111 +840,71 @@ HOW IT WORKS
     
     }
 
-    /*==========================
-TESTIMONIALS
-==========================*/
+    /* =====================================
+HOW IT WORKS - RESPONSIVE
+===================================== */
 
-.testimonials-section{
+.how-it-works{
+    overflow:hidden;
+}
 
-    padding:100px 0;
-    
-    background:white;
-    
-    }
-    
-    .testimonial-card{
-    
-    background:#fff;
-    
-    padding:35px;
-    
-    border-radius:var(--radius);
-    
-    box-shadow:var(--shadow-md);
-    
-    transition:var(--transition);
-    
-    height:100%;
-    
-    }
-    
-    .testimonial-card:hover{
-    
-    transform:translateY(-10px);
-    
-    box-shadow:var(--shadow-lg);
-    
-    }
-    
-    .testimonial-top{
-    
-    display:flex;
-    
-    align-items:center;
-    
-    gap:18px;
-    
-    margin-bottom:20px;
-    
-    }
-    
-    .testimonial-top img{
-    
-    width:70px;
-    
-    height:70px;
-    
-    border-radius:50%;
-    
-    }
-    
-    .testimonial-top h5{
-    
-    margin:0;
-    
-    font-weight:700;
-    
-    }
-    
-    .testimonial-top small{
-    
-    color:#64748B;
-    
-    }
-    
-    .stars{
-    
-    font-size:20px;
-    
-    color:#FBBF24;
-    
-    margin-bottom:20px;
-    
-    }
-    
-    .testimonial-card p{
-    
-    font-size:17px;
-    
-    line-height:1.8;
-    
-    color:#64748B;
-    
-    margin:0;
-    
-    font-style:italic;
-    
+@media (max-width:991px){
+
+    .how-it-works{
+        padding:80px 0;
     }
 
-    .service-price{
+    .step-card{
+        padding:35px 25px;
+    }
 
+    .step-icon{
+        width:75px;
+        height:75px;
         font-size:30px;
-        
-        font-weight:800;
-        
-        color:#2563EB;
-        
-        }
+    }
+
+    .step-card h3{
+        font-size:22px;
+    }
+
+}
+
+@media (max-width:767px){
+
+    .how-it-works{
+        padding:60px 0;
+    }
+
+    .step-card{
+        padding:30px 20px;
+    }
+
+    .step-number{
+        width:36px;
+        height:36px;
+        top:15px;
+        right:15px;
+    }
+
+    .step-icon{
+        width:65px;
+        height:65px;
+        font-size:26px;
+    }
+
+    .step-card h3{
+        font-size:20px;
+    }
+
+    .step-card p{
+        font-size:15px;
+        line-height:1.6;
+    }
+
+}
+
+ 
 
    /*==============================
 WHY CHOOSE US
@@ -1134,6 +1007,99 @@ WHY CHOOSE US
         background:linear-gradient(135deg,#3B82F6,#2563EB);
         
         }
+
+/* ==========================================
+   WHY CHOOSE US - RESPONSIVE
+========================================== */
+
+/* Large Tablets */
+@media (max-width:991.98px){
+
+    .feature-card{
+
+        padding:30px 24px;
+
+        text-align:center;
+
+    }
+
+    .feature-icon{
+
+        margin:0 auto 22px;
+
+    }
+
+    .feature-content h4{
+
+        font-size:22px;
+
+    }
+
+}
+
+/* Mobile */
+@media (max-width:767.98px){
+
+    .feature-card{
+
+        padding:28px 22px;
+
+    }
+
+    .feature-icon{
+
+        width:64px;
+
+        height:64px;
+
+        font-size:24px;
+
+    }
+
+    .feature-content h4{
+
+        font-size:20px;
+
+    }
+
+    .feature-content p{
+
+        font-size:15px;
+
+        line-height:1.7;
+
+    }
+
+}
+
+/* Small Phones */
+@media (max-width:575.98px){
+
+    .stats-section{
+
+        padding:60px 0;
+
+    }
+
+    .feature-card{
+
+        padding:24px 20px;
+
+        border-radius:22px;
+
+    }
+
+    .feature-icon{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:22px;
+
+    }
+
+}
 
         /*==================================
 UNIFIED SHADOW SYSTEM
@@ -1302,37 +1268,9 @@ box-shadow:
     
     }
 
-    /*==============================
-SERVICE CARD
-==============================*/
 
-.service-image{
-
-    position:relative;
     
-    height:220px;
-    
-    overflow:hidden;
-    
-    }
-    
-    .service-image img{
-    
-    width:100%;
-    
-    height:100%;
-    
-    object-fit:cover;
-    
-    transition:.4s;
-    
-    }
-    
-    .premium-service-card:hover img{
-    
-    transform:scale(1.08);
-    
-    }
+   
     
     .service-badge{
     
@@ -1381,16 +1319,7 @@ SERVICE CARD
     margin-bottom:25px;
     
     }
-    
-    .service-footer{
-    
-    display:flex;
-    
-    justify-content:space-between;
-    
-    align-items:center;
-    
-    }
+   
 
     /*==================================
 CATEGORY CARD
@@ -1722,61 +1651,11 @@ PREMIUM WORKER CARD
     
     }
 
-    /*========================================
-PREMIUM SERVICE CARD
-========================================*/
 
-.premium-service-card{
-
-    background:#fff;
     
-    border-radius:28px;
+   
     
-    overflow:hidden;
-    
-    box-shadow:var(--shadow-md);
-    
-    transition:var(--transition);
-    
-    height:100%;
-    
-    }
-    
-    .premium-service-card:hover{
-    
-    transform:translateY(-12px);
-    
-    box-shadow:var(--shadow-lg);
-    
-    }
-    
-    .service-image{
-    
-    position:relative;
-    
-    height:230px;
-    
-    overflow:hidden;
-    
-    }
-    
-    .service-image img{
-    
-    width:100%;
-    
-    height:100%;
-    
-    object-fit:cover;
-    
-    transition:.4s;
-    
-    }
-    
-    .premium-service-card:hover img{
-    
-    transform:scale(1.08);
-    
-    }
+   
     
     .service-tag{
     
@@ -1826,15 +1705,7 @@ PREMIUM SERVICE CARD
     
     }
     
-    .service-footer{
-    
-    display:flex;
-    
-    justify-content:space-between;
-    
-    align-items:center;
-    
-    }
+   
     
     .service-price{
     

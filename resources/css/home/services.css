@@ -1,0 +1,140 @@
+/*========================================
+SERVICES SECTION
+========================================*/
+
+.services-section{
+    padding:90px 0;
+}
+
+/*========================================
+PREMIUM SERVICE CARD
+========================================*/
+
+.premium-service-card{
+    background:#fff;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:var(--shadow-md);
+    transition:var(--transition);
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+.premium-service-card:hover{
+    transform:translateY(-12px);
+    box-shadow:var(--shadow-lg);
+}
+
+.premium-service-card:hover .service-image img{
+    transform:scale(1.05);
+}
+
+/*========================================
+SERVICE IMAGE
+========================================*/
+
+.service-image{
+    position:relative;
+    height:230px;
+    overflow:hidden;
+}
+
+.service-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+/*========================================
+SERVICE BODY
+========================================*/
+
+.service-body{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    padding:30px;
+}
+
+.service-body h4{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:14px;
+}
+
+.service-body p{
+    color:#64748B;
+    line-height:1.7;
+    margin-bottom:25px;
+    flex:1;
+}
+
+/*========================================
+SERVICE FOOTER
+========================================*/
+
+.service-footer{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.service-footer h5{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+}
+
+/*========================================
+TABLET
+========================================*/
+
+@media (max-width:991px){
+
+    .services-section{
+        padding:80px 0;
+    }
+
+    .service-image{
+        height:220px;
+    }
+
+}
+
+/*========================================
+MOBILE
+========================================*/
+
+@media (max-width:767px){
+
+    .services-section{
+        padding:70px 0;
+    }
+
+    .service-image{
+        height:200px;
+    }
+
+    .service-body{
+        padding:20px;
+    }
+
+    .service-body h4{
+        font-size:22px;
+    }
+
+    .service-footer{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .service-footer .btn-primary-custom{
+        width:100%;
+        text-align:center;
+    }
+
+}

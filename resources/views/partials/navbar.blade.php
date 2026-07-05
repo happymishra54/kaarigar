@@ -1,61 +1,93 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+{{-- <nav class="kk-navbar">
 
-    <div class="container">
+    <div class="container nav-container">
     
-    <a class="navbar-brand fw-bold fs-3" href="/">
-    Kaarigar
-    </a>
+        <a href="/" class="logo">
     
-    <button
-    class="navbar-toggler"
-    data-bs-toggle="collapse"
-    data-bs-target="#nav">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
     
-    <span class="navbar-toggler-icon"></span>
+            <span>Kaarigar</span>
     
-    </button>
+        </a>
     
-    <div class="collapse navbar-collapse" id="nav">
+        <button class="hamburger" id="hamburger">
     
-    <ul class="navbar-nav ms-auto">
+            <i class="fa-solid fa-bars"></i>
     
-    <li class="nav-item">
-    <a class="nav-link" href="#">
-    Services
-    </a>
-    </li>
+        </button>
     
-    <li class="nav-item">
-    <a class="nav-link" href="#">
-    Workers
-    </a>
-    </li>
+        <div class="mobile-overlay" id="overlay"></div>
     
-    <li class="nav-item">
-    <a class="nav-link" href="#">
-    Become Worker
-    </a>
-    </li>
+        <div class="side-menu" id="sideMenu">
     
-    <li class="nav-item ms-2">
+            <button class="close-menu" id="closeMenu">
     
-    <a href="/login" class="btn-secondary-custom">
-    Login
-    </a>
+                <i class="fa-solid fa-xmark"></i>
     
-    </li>
+            </button>
     
-    <li class="nav-item ms-2">
+            <div class="menu-links">
     
-    <a href="/register" class="btn-primary-custom">
-    Register
-    </a>
+                <a href="/">Home</a>
     
-    </li>
+                <a href="#">Categories</a>
     
-    </ul>
+                <a href="#">Become Worker</a>
+    
+                <a href="#">About</a>
+    
+            </div>
+    
+            <div class="menu-actions">
+    
+                @auth
+    
+                    <span class="welcome">
+    
+                        Hi, {{ auth()->user()->name }}
+    
+                    </span>
+    
+                    @if(auth()->user()->role === 'customer')
+                        <a href="{{ route('customer.dashboard') }}" class="btn-primary-custom">Dashboard</a>
+                    @elseif(auth()->user()->role === 'worker')
+                        <a href="{{ route('worker.dashboard') }}" class="btn-primary-custom">Dashboard</a>
+                    @elseif(auth()->user()->role === 'admin')
+                        <a href="{{ route('admin.dashboard') }}" class="btn-primary-custom">Dashboard</a>
+                    @endif
+    
+                    <form method="POST" action="{{ route('logout') }}">
+    
+                        @csrf
+    
+                        <button class="btn-primary-custom">
+    
+                            Logout
+    
+                        </button>
+    
+                    </form>
+    
+                @else
+    
+                    <a href="/login" class="btn-primary-custom">
+    
+                        Login
+    
+                    </a>
+    
+                    <a href="/register" class="btn-primary-custom">
+    
+                        Register
+    
+                    </a>
+    
+                @endauth
+    
+            </div>
+    
+        </div>
     
     </div>
     
-    </div>
-    </nav>
+    </nav> --}}
