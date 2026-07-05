@@ -134,6 +134,8 @@
         @include('customer.components.recommended-workers')
     
         @include('customer.components.recent-bookings')
+
+        @include('components.home.services')
     
     </main>
 

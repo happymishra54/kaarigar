@@ -12,3 +12,5 @@
 @import "./hero.css";
 @import "./auth.css";
 @import "./customer-dashboard.css";
+@import "./home/services.css";
+@import './home/testimonials.css';
