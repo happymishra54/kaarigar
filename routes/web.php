@@ -411,6 +411,11 @@ Route::middleware('auth')->get(
     }
 );
 
+// role based register route 
+
+Route::view('/register-role', 'auth.register-role')
+    ->name('register.role');
+
 // choose role route
 
 Route::middleware('auth')->get(

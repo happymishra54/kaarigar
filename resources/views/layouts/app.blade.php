@@ -122,10 +122,8 @@
     
                         </a>
     
-                        <a href="/register" class="btn-primary-custom">
-    
+                        <a href="{{ route('register.role') }}" class="btn-primary-custom">
                             Register
-    
                         </a>
     
                     @endauth
