@@ -131,9 +131,9 @@ Login
 
 Don't have an account?
 
-<a href="{{ route('register') }}">
-
-Create Account
+<a href="{{ route('register.role') }}">
+    Create Account
+</a>
 
 </a>
 

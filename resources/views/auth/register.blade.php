@@ -62,6 +62,11 @@ class="form-control"
 placeholder="Confirm Password"
 required>
 
+<input
+    type="hidden"
+    name="role"
+    value="{{ request('role', 'customer') }}">
+
 <button class="auth-btn">
 
 Create Account
