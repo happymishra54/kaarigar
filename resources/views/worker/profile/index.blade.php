@@ -128,7 +128,7 @@ class="form-control">
         class="form-control">
 </div>
 
-<button class="btn-success-custom">
+<button class="btn-primary-custom">
 
 Save Profile
 
@@ -142,88 +142,84 @@ Save Profile
 
 <div class="card shadow">
 
-    <div class="card-body text-center">
+    <div class="card-body">
 
         @if($profile->profile_image)
-        
-        <img
-            src="{{ asset('storage/'.$profile->profile_image) }}"
-            class="rounded-circle mb-4 shadow"
-            width="150"
-            height="150"
-            style="object-fit:cover;">
-        
+            <img
+                src="{{ asset('storage/'.$profile->profile_image) }}"
+                class="rounded-circle shadow d-block mx-auto mb-3"
+                width="150"
+                height="150"
+                style="object-fit: cover;">
         @endif
-
-<p>
-<b>Name:</b>
-{{ $user->name }}
-</p>
-
-<p>
-<b>Mobile:</b>
-{{ $user->phone }}
-</p>
-
-<p>
-<b>City:</b>
-{{ $profile->city }}
-</p>
-
-<p>
-<b>State:</b>
-{{ $profile->state }}
-</p>
-
-<p>
-<b>Experience:</b>
-{{ $profile->experience }}
-Years
-</p>
-
-<p>
-<b>Daily Wage:</b>
-₹{{ $profile->daily_wage }} per day
-</p>
-
-<p>
-<b>Bio:</b>
-{{ $profile->bio }}
-</p>
-
-
-
-
-<a
-href="{{ route('worker.profile.edit') }}"
-class="btn-primary-custom">
-
-Edit Profile
-
-</a>
-
-<form
-action="{{ route('worker.profile.delete') }}"
-method="POST"
-class="d-inline">
-
-    @csrf
-
-    @method('DELETE')
-
-    <button
-    class="btn-danger-custom"
-    onclick="return confirm('Are you sure you want to delete your profile?')">
-
-        Delete Profile
-
-    </button>
-
-</form>
-
-
-
-</div>
+    
+        <h3 class="text-center fw-bold mb-4">
+            {{ $user->name }}
+        </h3>
+    
+        <div class="text-start">
+    
+            <p>
+                <strong>📞 Mobile:</strong>
+                {{ $user->phone }}
+            </p>
+    
+            <p>
+                <strong>📍 City:</strong>
+                {{ $profile->city }}
+            </p>
+    
+            <p>
+                <strong>🏙️ State:</strong>
+                {{ $profile->state }}
+            </p>
+    
+            <p>
+                <strong>💼 Experience:</strong>
+                {{ $profile->experience }} Years
+            </p>
+    
+            <p>
+                <strong>💰 Daily Wage:</strong>
+                ₹{{ $profile->daily_wage }} per day
+            </p>
+    
+            <p>
+                <strong>📝 Bio:</strong>
+                {{ $profile->bio }}
+            </p>
+    
+        </div>
+    
+        <div class="text-center mt-4">
+    
+            <a
+                href="{{ route('worker.profile.edit') }}"
+                class="btn-primary-custom">
+                Edit Profile
+            </a>
+    
+            <form
+                action="{{ route('worker.profile.delete') }}"
+                method="POST"
+                class="d-inline">
+    
+                @csrf
+                @method('DELETE')
+    
+                <button
+                    type="submit"
+                    class="btn-primary-custom"
+                    style="background:linear-gradient(135deg,#DC2626,#B91C1C); border:none;"
+                    onclick="return confirm('Are you sure you want to delete your profile?')">
+                    Delete Profile
+                </button>
+    
+            </form>
+    
+        </div>
+    
+    </div>
 
 </div>
 

@@ -46,6 +46,12 @@ KAARIGAR NAVBAR
 
 }
 
+.kaarigar-navbar .nav-link.active{
+
+    color:#FACC15;
+
+}
+
 .kaarigar-navbar .navbar-toggler{
 
     border:none;
@@ -130,4 +136,16 @@ KAARIGAR NAVBAR
 
     }
 
+}
+
+.kaarigar-navbar .nav-link.active{
+    color:#fff !important;
+}
+
+.kaarigar-navbar .nav-link:hover{
+    color:#FACC15;
+}
+
+.kaarigar-navbar .nav-link.active:hover{
+    color:#FACC15 !important;
 }

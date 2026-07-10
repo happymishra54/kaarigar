@@ -466,25 +466,15 @@ SERVICES
     
     
     .service-badge{
-    
-    position:absolute;
-    
-    top:18px;
-    
-    left:18px;
-    
-    padding:8px 16px;
-    
-    background:#2563EB;
-    
-    color:white;
-    
-    border-radius:50px;
-    
-    font-size:13px;
-    
-    font-weight:600;
-    
+        position:absolute;
+        top:18px;
+        left:18px;
+        background:#2563EB;
+        color:#fff;
+        padding:8px 16px;
+        border-radius:30px;
+        font-size:13px;
+        font-weight:600;
     }
     
    
@@ -1788,3 +1778,46 @@ PREMIUM WORKER CARD
             color:white;
             
             }
+
+            .card{
+                transition:all .3s ease;
+            }
+            
+            .card:hover{
+                transform:translateY(-8px);
+                box-shadow:0 18px 45px rgba(0,0,0,.12)!important;
+            }
+
+            .card{
+                transition:.35s ease;
+            }
+            
+            .card:hover{
+            
+                transform:translateY(-10px);
+            
+                box-shadow:0 22px 45px rgba(0,0,0,.12)!important;
+            
+            }
+            
+            .btn-outline-primary{
+            
+                pointer-events:none;
+            
+            }
+
+            .booking-card{
+
+    transition:.35s ease;
+
+}
+
+
+
+.booking-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.12)!important;
+
+}

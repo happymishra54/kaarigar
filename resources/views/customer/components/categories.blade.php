@@ -1,60 +1,89 @@
 {{-- POPULAR CATEGORIES --}}
 
-<section class="dashboard-section py-5">
+<section class="py-5 bg-light">
 
     <div class="container">
 
-        <div class="section-heading text-center mb-5">
+        <div class="text-center mb-5">
 
-            <span class="section-tag">
+            <span class="badge bg-primary rounded-pill px-4 py-2 mb-3">
 
-                SERVICES
+                <i class="fas fa-layer-group me-2"></i>
+
+                POPULAR SERVICES
 
             </span>
 
-            <h2 class="section-title">
+            <h2 class="fw-bold display-6">
 
-                Popular Categories
+                Explore Categories
 
             </h2>
 
-            <p class="section-subtitle">
+            <p class="text-muted fs-5">
 
-                Choose the service you need
+                Find trusted professionals for every home service.
 
             </p>
 
         </div>
 
-        <div class="categories-grid">
+        <div class="row g-4">
 
             @foreach($categories as $category)
 
-            <a
-                href="{{ route('home',['search'=>$category->name]) }}"
-                class="category-card">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
 
-                <div class="category-icon">
+                <a
+                    href="{{ route('home',['search'=>$category->name]) }}"
+                    class="text-decoration-none">
 
-                    @if($category->icon)
+                    <div class="card border-0 shadow-sm rounded-4 h-100 text-center">
 
-                        <i class="{{ $category->icon }}"></i>
+                        <div class="card-body p-4">
 
-                    @else
+                            <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                 style="width:90px;height:90px;">
 
-                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                @if($category->icon)
 
-                    @endif
+                                    <i class="{{ $category->icon }} fa-2x text-primary"></i>
 
-                </div>
+                                @else
 
-                <h4>
+                                    <i class="fas fa-screwdriver-wrench fa-2x text-primary"></i>
 
-                    {{ $category->name }}
+                                @endif
 
-                </h4>
+                            </div>
 
-            </a>
+                            <h5 class="fw-bold text-dark mb-2">
+
+                                {{ $category->name }}
+
+                            </h5>
+
+                            <p class="text-muted small mb-4">
+
+                                Verified professionals available near you.
+
+                            </p>
+
+                            <span class="btn btn-outline-primary rounded-pill">
+
+                                Explore
+
+                                <i class="fas fa-arrow-right ms-2"></i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
 
             @endforeach
 

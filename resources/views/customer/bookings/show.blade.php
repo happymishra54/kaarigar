@@ -6,62 +6,105 @@
 
     <div class="row justify-content-center">
 
-        <div class="col-lg-9">
+        <div class="col-xl-9">
 
-            {{-- Header --}}
-            <div class="card border-0 shadow-lg rounded-4 mb-4">
+
+            {{-- BOOKING HEADER --}}
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4">
 
                 <div class="card-body p-4">
 
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
 
                         <div>
 
-                            <h3 class="fw-bold mb-1">
-                                Booking #{{ $booking->booking_number }}
-                            </h3>
+                            <span class="text-muted small">
+                                Booking ID
+                            </span>
+
+                            <h2 class="fw-bold mb-1">
+
+                                #{{ $booking->booking_number }}
+
+                            </h2>
 
                             <p class="text-muted mb-0">
+
+                                <i class="fa-regular fa-clock me-1"></i>
+
                                 {{ $booking->created_at->format('d M Y, h:i A') }}
+
                             </p>
 
                         </div>
 
+
+
                         <div>
 
-                            @if($booking->status=='pending')
+                            @switch($booking->status)
 
-                                <span class="badge bg-warning fs-6 px-3 py-2">
-                                    Pending
-                                </span>
+                                @case('pending')
 
-                            @elseif($booking->status=='accepted')
+                                    <span class="badge bg-warning text-dark rounded-pill px-4 py-2 fs-6">
 
-                                <span class="badge bg-success fs-6 px-3 py-2">
-                                    Accepted
-                                </span>
+                                        <i class="fa-solid fa-hourglass-half me-1"></i>
+                                        Pending
 
-                            @elseif($booking->status=='in_progress')
+                                    </span>
 
-                                <span class="badge bg-info fs-6 px-3 py-2">
-                                    In Progress
-                                </span>
+                                @break
 
-                            @elseif($booking->status=='completed')
 
-                                <span class="badge bg-primary fs-6 px-3 py-2">
-                                    Completed
-                                </span>
+                                @case('accepted')
 
-                            @else
+                                    <span class="badge bg-success rounded-pill px-4 py-2 fs-6">
 
-                                <span class="badge bg-danger fs-6 px-3 py-2">
-                                    Cancelled
-                                </span>
+                                        <i class="fa-solid fa-check me-1"></i>
+                                        Accepted
 
-                            @endif
+                                    </span>
+
+                                @break
+
+
+                                @case('in_progress')
+
+                                    <span class="badge bg-info text-dark rounded-pill px-4 py-2 fs-6">
+
+                                        <i class="fa-solid fa-screwdriver-wrench me-1"></i>
+                                        Work Started
+
+                                    </span>
+
+                                @break
+
+
+                                @case('completed')
+
+                                    <span class="badge bg-primary rounded-pill px-4 py-2 fs-6">
+
+                                        <i class="fa-solid fa-circle-check me-1"></i>
+                                        Completed
+
+                                    </span>
+
+                                @break
+
+
+                                @default
+
+                                    <span class="badge bg-danger rounded-pill px-4 py-2 fs-6">
+
+                                        Cancelled
+
+                                    </span>
+
+                            @endswitch
 
                         </div>
+
 
                     </div>
 
@@ -69,283 +112,437 @@
 
             </div>
 
-            {{-- Worker Card --}}
+
+
+
+            {{-- WORKER DETAILS --}}
+
             <div class="card border-0 shadow rounded-4 mb-4">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
-                    <h5 class="fw-bold mb-4">
-                        👷 Worker Details
-                    </h5>
+
+                    <h4 class="fw-bold mb-4">
+
+                        <i class="fa-solid fa-user-gear text-primary me-2"></i>
+
+                        Worker Details
+
+                    </h4>
+
+
 
                     <div class="row align-items-center">
 
-                        <div class="col-md-8">
 
-                            <h4 class="mb-2">
-                                {{ $booking->worker->name }}
-                            </h4>
+                        <div class="col-md-8 d-flex align-items-center gap-3">
 
-                            <p class="text-muted mb-2">
 
-                                Service Professional
+                            <div>
 
-                            </p>
+                                @if($booking->worker->profile_image)
 
-                            <p class="mb-0">
+                                    <img
+                                    src="{{ asset('storage/'.$booking->worker->profile_image) }}"
+                                    width="85"
+                                    height="85"
+                                    class="rounded-circle object-fit-cover">
 
-                                <strong>Phone:</strong>
+                                @else
 
-                                {{ $booking->worker->phone }}
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                    style="width:85px;height:85px;font-size:35px">
 
-                            </p>
+                                        <i class="fa-solid fa-user"></i>
+
+                                    </div>
+
+                                @endif
+
+
+                            </div>
+
+
+
+                            <div>
+
+                                <h4 class="mb-1">
+
+                                    {{ $booking->worker->name }}
+
+                                </h4>
+
+
+                                <p class="text-muted mb-1">
+
+                                    <i class="fa-solid fa-briefcase me-1"></i>
+
+                                    Service Professional
+
+                                </p>
+
+
+                                <p class="mb-0">
+
+                                    <i class="fa-solid fa-phone text-success me-1"></i>
+
+                                    {{ $booking->worker->phone ?? 'No number available' }}
+
+                                </p>
+
+
+                            </div>
+
 
                         </div>
+
+
 
                         <div class="col-md-4 text-md-end mt-3 mt-md-0">
 
-                            <a
-                                href="tel:{{ $booking->worker->phone }}"
-                                class="btn-success-custom btn-lg">
 
-                                📞 Call Worker
+                            @if($booking->worker->phone)
+
+                            <a
+                            href="tel:{{ $booking->worker->phone }}"
+                            class="btn btn-success rounded-pill px-4">
+
+                                <i class="fa-solid fa-phone me-2"></i>
+
+                                Call Worker
 
                             </a>
 
+                            @endif
+
+
                         </div>
+
 
                     </div>
 
+
                 </div>
 
             </div>
 
-            {{-- Booking Information --}}
+
+
+
+
+
+            {{-- BOOKING DETAILS --}}
+
             <div class="card border-0 shadow rounded-4 mb-4">
 
-                <div class="card-body">
 
-                    <h5 class="fw-bold mb-4">
-                        📋 Booking Details
-                    </h5>
+                <div class="card-body p-4">
 
-                    <table class="table">
 
-                        <tr>
+                    <h4 class="fw-bold mb-4">
 
-                            <th width="220">
+                        <i class="fa-solid fa-file-lines text-primary me-2"></i>
 
-                                Service
+                        Booking Details
 
-                            </th>
+                    </h4>
 
-                            <td>
 
-                                {{ $booking->service->title }}
 
-                            </td>
+                    <div class="row g-3">
 
-                        </tr>
 
-                        <tr>
+                        <div class="col-md-6">
 
-                            <th>
+                            <div class="p-3 rounded-4 bg-light">
 
-                                Booking Date
+                                <small class="text-muted">
+                                    Service
+                                </small>
 
-                            </th>
+                                <h5 class="mb-0 fw-bold">
 
-                            <td>
+                                    {{ $booking->service->title }}
 
-                                {{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}
+                                </h5>
 
-                            </td>
+                            </div>
 
-                        </tr>
+                        </div>
 
-                        <tr>
 
-                            <th>
 
-                                Booking Time
+                        <div class="col-md-6">
 
-                            </th>
+                            <div class="p-3 rounded-4 bg-light">
 
-                            <td>
+                                <small class="text-muted">
+                                    Booking Date
+                                </small>
 
-                                {{ \Carbon\Carbon::parse($booking->booking_time)->format('h:i A') }}
+                                <h5 class="mb-0 fw-bold">
 
-                            </td>
+                                    {{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}
 
-                        </tr>
+                                </h5>
 
-                        <tr>
+                            </div>
 
-                            <th>
+                        </div>
 
-                                Address
 
-                            </th>
 
-                            <td>
+                        <div class="col-md-6">
 
-                                {{ $booking->address }}
+                            <div class="p-3 rounded-4 bg-light">
 
-                            </td>
+                                <small class="text-muted">
+                                    Time
+                                </small>
 
-                        </tr>
+                                <h5 class="mb-0 fw-bold">
 
-                        <tr>
+                                    {{ \Carbon\Carbon::parse($booking->booking_time)->format('h:i A') }}
 
-                            <th>
+                                </h5>
 
-                                Amount
+                            </div>
 
-                            </th>
+                        </div>
 
-                            <td>
 
-                                <span class="fw-bold fs-4 text-success">
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 rounded-4 bg-light">
+
+                                <small class="text-muted">
+                                    Amount
+                                </small>
+
+                                <h4 class="mb-0 text-success fw-bold">
 
                                     ₹{{ number_format($booking->amount,2) }}
 
-                                </span>
+                                </h4>
 
-                            </td>
+                            </div>
 
-                        </tr>
+                        </div>
 
-                    </table>
+
+
+                        <div class="col-12">
+
+                            <div class="p-3 rounded-4 bg-light">
+
+                                <small class="text-muted">
+                                    Address
+                                </small>
+
+                                <p class="mb-0 fw-semibold">
+
+                                    <i class="fa-solid fa-location-dot text-danger me-2"></i>
+
+                                    {{ $booking->address }}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
+
             </div>
 
-            {{-- Timeline --}}
+
+
+
+
+
+            {{-- TIMELINE --}}
+
             <div class="card border-0 shadow rounded-4 mb-4">
 
-                <div class="card-body">
 
-                    <h5 class="fw-bold mb-4">
-                        📍 Booking Progress
-                    </h5>
+                <div class="card-body p-4">
 
-                    <ul class="list-group list-group-flush">
 
-                        <li class="list-group-item">
-                            ✅ Booking Created
-                        </li>
+                    <h4 class="fw-bold mb-4">
 
-                        <li class="list-group-item">
+                        <i class="fa-solid fa-route text-primary me-2"></i>
 
-                            @if(in_array($booking->status,['accepted','in_progress','completed']))
+                        Booking Progress
 
-                                ✅ Worker Accepted
+                    </h4>
 
-                            @else
 
-                                ⏳ Waiting for Worker
 
-                            @endif
+                    <div class="timeline">
 
-                        </li>
 
-                        <li class="list-group-item">
+                        <div class="timeline-item active">
 
-                            @if(in_array($booking->status,['in_progress','completed']))
+                            <i class="fa-solid fa-check"></i>
 
-                                ✅ Work Started
+                            <div>
 
-                            @else
+                                <h6>
+                                    Booking Created
+                                </h6>
 
-                                ⏳ Work Not Started
+                                <p>
+                                    Your request has been submitted.
+                                </p>
 
-                            @endif
+                            </div>
 
-                        </li>
+                        </div>
 
-                        <li class="list-group-item">
 
-                            @if($booking->status=='completed')
 
-                                ✅ Job Completed
+                        <div class="timeline-item 
+                        {{ in_array($booking->status,['accepted','in_progress','completed']) ? 'active':'' }}">
 
-                            @elseif($booking->status=='cancelled')
+                            <i class="fa-solid fa-user-check"></i>
 
-                                ❌ Booking Cancelled
+                            <div>
 
-                            @else
+                                <h6>
+                                    Worker Accepted
+                                </h6>
 
-                                ⏳ Awaiting Completion
+                                <p>
+                                    Worker confirmed your booking.
+                                </p>
 
-                            @endif
+                            </div>
 
-                        </li>
+                        </div>
 
-                    </ul>
 
-                </div>
 
-            </div>
+                        <div class="timeline-item 
+                        {{ in_array($booking->status,['in_progress','completed']) ? 'active':'' }}">
 
-            {{-- Action Buttons --}}
-            <div class="card border-0 shadow rounded-4">
+                            <i class="fa-solid fa-toolbox"></i>
 
-                <div class="card-body text-center">
+                            <div>
 
-                    @if($booking->status=='pending')
+                                <h6>
+                                    Work Started
+                                </h6>
 
-                        <form
-                            action="{{ route('booking.cancel',$booking->id) }}"
-                            method="POST">
+                                <p>
+                                    Service is in progress.
+                                </p>
 
-                            @csrf
-                            @method('PATCH')
+                            </div>
 
-                            <button
-                                class="btn-danger-custom btn-lg">
+                        </div>
 
-                                ❌ Cancel Booking
 
-                            </button>
 
-                        </form>
+                        <div class="timeline-item 
+                        {{ $booking->status=='completed' ? 'active':'' }}">
 
-                    @elseif($booking->status=='completed' && !$booking->review)
+                            <i class="fa-solid fa-circle-check"></i>
 
-                        <a
-                            href="{{ route('review.create',$booking->id) }}"
-                            class="btn-primary-custom btn-lg">
+                            <div>
 
-                            ⭐ Leave Review
+                                <h6>
+                                    Completed
+                                </h6>
 
-                        </a>
+                                <p>
+                                    Job finished successfully.
+                                </p>
 
-                    @elseif($booking->status=='completed')
+                            </div>
 
-                        <button
-                            class="btn-success-custom btn-lg"
-                            disabled>
+                        </div>
 
-                            ✔ Job Completed
 
-                        </button>
+                    </div>
 
-                    @else
-
-                        <button
-                            class="btn btn-secondary btn-lg"
-                            disabled>
-
-                            No Action Available
-
-                        </button>
-
-                    @endif
 
                 </div>
 
             </div>
+
+
+
+
+
+
+            {{-- ACTIONS --}}
+
+            <div class="text-center">
+
+
+                @if($booking->status=='pending')
+
+
+                    <form
+                    action="{{ route('booking.cancel',$booking->id) }}"
+                    method="POST">
+
+                        @csrf
+                        @method('PATCH')
+
+
+                        <button
+                        class="btn btn-danger rounded-pill px-5 py-3">
+
+                            <i class="fa-solid fa-xmark me-2"></i>
+
+                            Cancel Booking
+
+                        </button>
+
+
+                    </form>
+
+
+
+                @elseif($booking->status=='completed' && !$booking->review)
+
+
+                    <a
+                    href="{{ route('review.create',$booking->id) }}"
+                    class="btn btn-primary rounded-pill px-5 py-3">
+
+
+                        ⭐ Leave Review
+
+
+                    </a>
+
+
+
+                @else
+
+
+                    <button
+                    class="btn btn-secondary rounded-pill px-5 py-3"
+                    disabled>
+
+                        No Action Available
+
+                    </button>
+
+
+                @endif
+
+
+            </div>
+
 
         </div>
 
@@ -353,5 +550,5 @@
 
 </div>
 
-@endsection
 
+@endsection

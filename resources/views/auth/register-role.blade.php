@@ -4,26 +4,77 @@
 
 <div class="container py-5">
 
-    <div class="row justify-content-center">
+    <div class="text-center mb-5">
 
-        <div class="col-md-6">
+        <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">
+            Welcome to Kaarigar
+        </span>
 
-            <h2 class="text-center mb-4">
-                Choose Account Type
-            </h2>
+        <h1 class="fw-bold display-5">
+            Choose Your Account Type
+        </h1>
 
-            <div class="card shadow mb-4">
+        <p class="text-muted fs-5">
+            Join India's trusted platform for skilled professionals and customers.
+        </p>
 
-                <div class="card-body text-center">
+    </div>
 
-                    <div style="font-size:60px;">👷</div>
+    <div class="row justify-content-center g-4">
 
-                    <h4 class="mt-3">Register as Worker</h4>
+        <!-- Worker -->
+
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow-lg rounded-4 h-100">
+
+                <div class="card-body text-center p-5">
+
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex justify-content-center align-items-center mb-4"
+                         style="width:100px;height:100px;">
+
+                        <i class="fas fa-user-hard-hat text-primary fa-3x"></i>
+
+                    </div>
+
+                    <h3 class="fw-bold">
+
+                        Register as Worker
+
+                    </h3>
+
+                    <p class="text-muted my-3">
+
+                        Offer your professional services, receive bookings,
+                        grow your business and connect with customers near you.
+
+                    </p>
+
+                    <ul class="list-group list-group-flush text-start mb-4">
+
+                        <li class="list-group-item border-0">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Get verified
+                        </li>
+
+                        <li class="list-group-item border-0">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Receive booking requests
+                        </li>
+
+                        <li class="list-group-item border-0">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Earn more every day
+                        </li>
+
+                    </ul>
 
                     <a href="{{ route('register', ['role' => 'worker']) }}"
-                       class="btn btn-primary w-100 mt-3">
+                       class="btn btn-primary btn-lg rounded-pill w-100">
 
-                        Continue
+                        <i class="fas fa-arrow-right me-2"></i>
+
+                        Continue as Worker
 
                     </a>
 
@@ -31,18 +82,61 @@
 
             </div>
 
-            <div class="card shadow">
+        </div>
 
-                <div class="card-body text-center">
+        <!-- Customer -->
 
-                    <div style="font-size:60px;">👤</div>
+        <div class="col-lg-5">
 
-                    <h4 class="mt-3">Register as Customer</h4>
+            <div class="card border-0 shadow-lg rounded-4 h-100">
+
+                <div class="card-body text-center p-5">
+
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex justify-content-center align-items-center mb-4"
+                         style="width:100px;height:100px;">
+
+                        <i class="fas fa-user text-success fa-3x"></i>
+
+                    </div>
+
+                    <h3 class="fw-bold">
+
+                        Register as Customer
+
+                    </h3>
+
+                    <p class="text-muted my-3">
+
+                        Find trusted professionals, compare workers,
+                        book services and manage everything in one place.
+
+                    </p>
+
+                    <ul class="list-group list-group-flush text-start mb-4">
+
+                        <li class="list-group-item border-0">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Book verified workers
+                        </li>
+
+                        <li class="list-group-item border-0">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Secure service requests
+                        </li>
+
+                        <li class="list-group-item border-0">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Rate & review workers
+                        </li>
+
+                    </ul>
 
                     <a href="{{ route('register', ['role' => 'customer']) }}"
-                       class="btn btn-success w-100 mt-3">
+                       class="btn btn-success btn-lg rounded-pill w-100">
 
-                        Continue
+                        <i class="fas fa-arrow-right me-2"></i>
+
+                        Continue as Customer
 
                     </a>
 

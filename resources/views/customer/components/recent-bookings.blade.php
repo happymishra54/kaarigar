@@ -1,112 +1,163 @@
 {{-- RECENT BOOKINGS --}}
 
-<section class="dashboard-section py-5">
+<section class="py-5 bg-light">
 
     <div class="container">
 
-        <div class="section-heading text-center mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-5">
 
-            <span class="section-tag">
+            <div>
 
-                HISTORY
+                <span class="badge bg-primary rounded-pill px-4 py-2 mb-3">
 
-            </span>
+                    <i class="fas fa-clock-rotate-left me-2"></i>
 
-            <h2 class="section-title">
+                    BOOKING HISTORY
 
-                Recent Bookings
+                </span>
 
-            </h2>
+                <h2 class="fw-bold mb-2">
 
-            <p class="section-subtitle">
+                    Recent Bookings
 
-                Track your latest service requests
+                </h2>
 
-            </p>
+                <p class="text-muted mb-0">
+
+                    Track your latest service requests and their current status.
+
+                </p>
+
+            </div>
+
+            <a
+                href="{{ route('customer.bookings') }}"
+                class="btn btn-outline-primary rounded-pill px-4">
+
+                View All
+
+                <i class="fas fa-arrow-right ms-2"></i>
+
+            </a>
 
         </div>
 
-        <div class="booking-list">
+        @forelse($recentBookings as $booking)
 
-            @forelse($recentBookings as $booking)
+        <div class="card border-0 shadow-sm rounded-4 mb-4 booking-card">
 
-            <div class="booking-premium-card">
+            <div class="card-body p-4">
 
-                <div class="booking-left">
+                <div class="row align-items-center">
 
-                    <div class="booking-icon">
+                    <!-- Left -->
 
-                        <i class="fa-solid fa-calendar-check"></i>
+                    <div class="col-lg-6">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center me-4"
+                                 style="width:70px;height:70px;">
+
+                                <i class="fas fa-tools fa-2x text-primary"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h5 class="fw-bold mb-2">
+
+                                    {{ $booking->service->title }}
+
+                                </h5>
+
+                                <p class="text-muted mb-1">
+
+                                    <i class="fas fa-user me-2"></i>
+
+                                    {{ $booking->worker->name }}
+
+                                </p>
+
+                                <small class="text-secondary">
+
+                                    <i class="fas fa-calendar me-2"></i>
+
+                                    {{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}
+
+                                </small>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div>
+                    <!-- Middle -->
 
-                        <h4>
+                    <div class="col-lg-3 text-center mt-4 mt-lg-0">
 
-                            {{ $booking->service->title }}
+                        @if($booking->status=='completed')
 
-                        </h4>
+                            <span class="badge bg-success rounded-pill px-4 py-2">
 
-                        <p>
+                                <i class="fas fa-circle-check me-2"></i>
 
-                            <i class="fa-solid fa-user"></i>
+                                Completed
 
-                            {{ $booking->worker->name }}
+                            </span>
 
-                        </p>
+                        @elseif($booking->status=='accepted')
 
-                        <small>
+                            <span class="badge bg-primary rounded-pill px-4 py-2">
 
-                            {{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}
+                                <i class="fas fa-handshake me-2"></i>
 
-                        </small>
+                                Accepted
+
+                            </span>
+
+                        @elseif($booking->status=='pending')
+
+                            <span class="badge bg-warning text-dark rounded-pill px-4 py-2">
+
+                                <i class="fas fa-clock me-2"></i>
+
+                                Pending
+
+                            </span>
+
+                        @elseif($booking->status=='cancelled')
+
+                            <span class="badge bg-danger rounded-pill px-4 py-2">
+
+                                <i class="fas fa-xmark me-2"></i>
+
+                                Cancelled
+
+                            </span>
+
+                        @else
+
+                            <span class="badge bg-secondary rounded-pill px-4 py-2">
+
+                                {{ ucfirst($booking->status) }}
+
+                            </span>
+
+                        @endif
 
                     </div>
 
-                </div>
+                    <!-- Right -->
 
-                <div class="booking-right">
-
-                    @if($booking->status=='completed')
-
-                        <span class="status completed">
-
-                            Completed
-
-                        </span>
-
-                    @elseif($booking->status=='accepted')
-
-                        <span class="status accepted">
-
-                            Accepted
-
-                        </span>
-
-                    @elseif($booking->status=='pending')
-
-                        <span class="status pending">
-
-                            Pending
-
-                        </span>
-
-                    @else
-
-                        <span class="status cancelled">
-
-                            {{ ucfirst($booking->status) }}
-
-                        </span>
-
-                    @endif
-
-                    <div class="mt-3">
+                    <div class="col-lg-3 text-lg-end text-center mt-4 mt-lg-0">
 
                         <a
                             href="{{ route('booking.show',$booking->id) }}"
-                            class="btn-primary-custom">
+                            class="btn btn-primary rounded-pill px-4">
+
+                            <i class="fas fa-eye me-2"></i>
 
                             View Details
 
@@ -118,27 +169,31 @@
 
             </div>
 
-            @empty
+        </div>
 
-            <div class="empty-booking">
+        @empty
 
-                <i class="fa-regular fa-calendar-xmark"></i>
+        <div class="card border-0 shadow rounded-4">
 
-                <h3>
+            <div class="card-body text-center py-5">
 
-                    No bookings yet
+                <i class="far fa-calendar-xmark fa-5x text-secondary mb-4"></i>
+
+                <h3 class="fw-bold">
+
+                    No Bookings Yet
 
                 </h3>
 
-                <p>
+                <p class="text-muted mb-4">
 
-                    Book your first service to see it here.
+                    Start by booking a trusted professional near you.
 
                 </p>
 
                 <a
                     href="{{ route('home') }}"
-                    class="btn-primary-custom">
+                    class="btn btn-primary rounded-pill px-5">
 
                     Browse Services
 
@@ -146,9 +201,9 @@
 
             </div>
 
-            @endforelse
-
         </div>
+
+        @endforelse
 
     </div>
 
