@@ -1,51 +1,96 @@
 {{-- RECOMMENDED WORKERS --}}
 
-<section class="dashboard-section py-5">
+<section class="py-5 bg-white">
 
     <div class="container">
 
-        <div class="section-heading text-center mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-5">
 
-            <span class="section-tag">
+            <div>
 
-                PROFESSIONALS
+                <span class="badge bg-success rounded-pill px-4 py-2 mb-3">
 
-            </span>
+                    <i class="fas fa-user-check me-2"></i>
 
-            <h2 class="section-title">
+                    VERIFIED PROFESSIONALS
 
-                Recommended Workers
+                </span>
 
-            </h2>
+                <h2 class="fw-bold mb-2">
 
-        </div>
+                    Recommended Workers
 
-        <div class="row g-4">
+                </h2>
 
-            @forelse($recommendedWorkers as $worker)
+                <p class="text-muted mb-0">
 
-            <div class="col-lg-3 col-md-6">
+                    Skilled professionals selected based on your location and preferences.
 
-
-                @include('partials.worker-card',['worker'=>$worker])
+                </p>
 
             </div>
 
-            @empty
+            <a
+                href="{{ route('home') }}"
+                class="btn btn-outline-primary rounded-pill px-4">
 
-            <div class="col-12">
+                View All
 
-                <div class="alert alert-info">
+                <i class="fas fa-arrow-right ms-2"></i>
 
-                    No recommended workers available.
+            </a>
+
+        </div>
+
+        @if($recommendedWorkers->count())
+
+            <div class="row g-4">
+
+                @foreach($recommendedWorkers as $worker)
+
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+
+                        @include('partials.worker-card',['worker'=>$worker])
+
+                    </div>
+
+                @endforeach
+
+            </div>
+
+        @else
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body text-center py-5">
+
+                    <i class="fas fa-user-slash fa-4x text-secondary mb-4"></i>
+
+                    <h4 class="fw-bold">
+
+                        No Workers Found
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        We couldn't find any verified workers in your area yet.
+
+                    </p>
+
+                    <a
+                        href="{{ route('home') }}"
+                        class="btn btn-primary rounded-pill px-4">
+
+                        Browse All Workers
+
+                    </a>
 
                 </div>
 
             </div>
 
-            @endforelse
-
-        </div>
+        @endif
 
     </div>
 

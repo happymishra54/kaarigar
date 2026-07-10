@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\WorkerProfile;
+use App\Models\Service;
 
 class CustomerDashboardController extends Controller
 {
@@ -38,14 +39,19 @@ class CustomerDashboardController extends Controller
             ->pluck('worker_id')
             ->toArray();
 
-        return view('customer.dashboard', compact(
-            'activeBookings',
-            'completedBookings',
-            'recentBookings',
-            'recommendedWorkers',
-            'categories',
-            'favorites'
-        ));
+            $services = Service::latest()
+            ->take(6)
+            ->get();
+
+            return view('customer.dashboard', compact(
+                'activeBookings',
+                'completedBookings',
+                'recentBookings',
+                'recommendedWorkers',
+                'categories',
+                'favorites',
+                'services'
+            ));
     }
 }
 

@@ -4,91 +4,126 @@
 
 <div class="container py-5">
 
-<h2 class="mb-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-Manage Workers
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="fas fa-user-hard-hat text-primary me-2"></i>
+                Manage Workers
+            </h2>
 
-</h2>
+            <p class="text-muted mb-0">
+                View and manage all registered workers.
+            </p>
+        </div>
 
-<table class="table table-bordered">
+        <a href="{{ route('admin.workers.create') }}"
+           class="btn btn-primary rounded-pill px-4">
+            <i class="fas fa-user-plus me-2"></i>
+            Add Worker
+        </a>
 
-<thead>
+    </div>
 
-<tr>
+    <!-- Card -->
+    <div class="card border-0 shadow-lg rounded-4">
 
-<th>ID</th>
-<th>Name</th>
-<th>Mobile</th>
-<th>Bio</th>
-<th>City</th>
-<th>Action</th>
+        <div class="card-body">
 
-</tr>
+            <div class="table-responsive">
 
-</thead>
+                <table class="table table-hover align-middle">
 
-<tbody>
+                    <thead class="table-dark">
 
-@foreach($workers as $worker)
+                        <tr>
+                            <th>ID</th>
+                            <th><i class="fas fa-user me-2"></i>Name</th>
+                            <th><i class="fas fa-phone me-2"></i>Mobile</th>
+                            <th><i class="fas fa-file-lines me-2"></i>Bio</th>
+                            <th><i class="fas fa-location-dot me-2"></i>City</th>
+                            <th class="text-center">
+                                <i class="fas fa-gears me-2"></i>Actions
+                            </th>
+                        </tr>
 
-<tr>
+                    </thead>
 
-<td>
+                    <tbody>
 
-{{ $worker->id }}
+                        @forelse($workers as $worker)
 
-</td>
+                        <tr>
 
-<td>
+                            <td>
+                                <span class="badge bg-secondary">
+                                    #{{ $worker->id }}
+                                </span>
+                            </td>
 
-{{ $worker->name }}
+                            <td class="fw-semibold">
+                                {{ $worker->name }}
+                            </td>
 
-</td>
+                            <td>
+                                {{ $worker->phone ?? 'N/A' }}
+                            </td>
 
-<td>
+                            <td>
+                                {{ Str::limit($worker->workerProfile->bio ?? 'N/A', 40) }}
+                            </td>
 
-{{ $worker->phone ?? 'N/A' }}
+                            <td>
+                                {{ $worker->workerProfile?->city ?? 'N/A' }}
+                            </td>
 
-</td>
+                            <td class="text-center">
 
-<td>
-    {{ $worker->workerProfile->bio ?? 'N/A' }}
-</td>
+                                <form
+                                    action="{{ route('admin.workers.destroy',$worker->id) }}"
+                                    method="POST"
+                                    class="d-inline">
 
-<td>
+                                    @csrf
+                                    @method('DELETE')
 
-    {{ $worker->workerProfile?->city ?? 'N/A' }}
-    
-    </td>
+                                    <button
+                                        type="submit"
+                                        class="btn btn-outline-danger btn-sm rounded-pill"
+                                        onclick="return confirm('Delete this worker?')">
 
-<td>
+                                        <i class="fas fa-trash me-1"></i>
+                                        Delete
 
-<form
-action="{{ route('admin.workers.destroy',$worker->id) }}"
-method="POST">
+                                    </button>
 
-@csrf
-@method('DELETE')
+                                </form>
 
-<button
-class="btn-danger-custom btn-sm"
-onclick="return confirm('Delete this worker?')">
+                            </td>
 
-Delete
+                        </tr>
 
-</button>
+                        @empty
 
-</form>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                <i class="fas fa-user-slash fa-2x mb-3 d-block"></i>
+                                No workers found.
+                            </td>
+                        </tr>
 
-</td>
+                        @endforelse
 
-</tr>
+                    </tbody>
 
-@endforeach
+                </table>
 
-</tbody>
+            </div>
 
-</table>
+        </div>
+
+    </div>
 
 </div>
 

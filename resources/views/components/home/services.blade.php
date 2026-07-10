@@ -1,94 +1,167 @@
-<section class="services-section fade-up">
+<section class="services-section fade-up py-5">
 
     <div class="container">
 
-        <div class="text-center mb-5">
+        <div class="section-heading text-center mb-5">
 
             <span class="section-tag">
-
                 POPULAR SERVICES
-
             </span>
 
             <h2 class="section-title">
-
                 Services You Can Trust
-
             </h2>
 
             <p class="section-subtitle">
-
-                Book skilled professionals for all your home needs.
-
+                Book verified professionals for all your home needs.
             </p>
 
         </div>
 
+
         <div class="row g-4">
 
-            @foreach($services as $service)
+
+            @forelse($services as $service)
 
             <div class="col-lg-4 col-md-6">
 
-                <div class="premium-service-card reveal">
+                <div class="premium-service-card h-100">
 
-                    <div class="service-image">
+
+                    <div class="service-image position-relative">
+
 
                         <img
                             src="{{ $service->image }}"
                             alt="{{ $service->title }}"
                             class="img-fluid">
-                    
+
+
                         <span class="service-badge">
-                    
+
+                            <i class="fa-solid fa-star"></i>
+
                             Popular
-                    
+
                         </span>
-                    
+
+
                     </div>
 
-                    <div class="service-body">
 
-                        <h4>
 
-                            {{ $service->title }}
+                    <div class="service-body d-flex flex-column">
 
-                        </h4>
 
-                        <p>
+                        <div class="service-content">
 
-                            {{ Str::limit($service->description,90) }}
 
-                        </p>
+                            <h4 class="fw-bold">
 
-                        <div class="service-footer">
+                                {{ $service->title }}
 
-                            <h5>
+                            </h4>
 
-                                ₹{{ $service->price }}
 
-                            </h5>
 
-                            <a href="#workers"
+                            <p>
 
-                            class="btn-primary-custom">
+                                {{ Str::limit($service->description,100) }}
 
-                                View
+                            </p>
 
-                            </a>
 
                         </div>
 
+
+
+                        <div class="service-footer mt-auto d-flex justify-content-between align-items-center">
+
+
+                            <div class="service-price">
+
+                                <span class="text-muted small">
+                                    Starting from
+                                </span>
+
+                                <h5 class="mb-0">
+
+                                    ₹{{ number_format($service->price) }}
+
+                                </h5>
+
+                            </div>
+
+
+
+                            <a
+                                href="#workers"
+                                class="btn-primary-custom">
+
+
+                                <i class="fa-solid fa-arrow-right me-1"></i>
+
+                                View
+
+
+                            </a>
+
+
+                        </div>
+
+
+
                     </div>
+
+
 
                 </div>
 
+
             </div>
 
-            @endforeach
+
+            @empty
+
+
+            <div class="col-12">
+
+
+                <div class="text-center p-5 shadow rounded-4">
+
+
+                    <i class="fa-solid fa-screwdriver-wrench fa-3x text-primary mb-3"></i>
+
+
+                    <h4>
+
+                        No services available
+
+                    </h4>
+
+
+                    <p class="text-muted">
+
+                        Services will appear here soon.
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+            @endforelse
+
+
 
         </div>
 
+
     </div>
+
 
 </section>

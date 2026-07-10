@@ -4,33 +4,83 @@
 
 <div class="container py-5">
 
-<h2>Add Category</h2>
+    <div class="row justify-content-center">
 
-<form
-action="{{ route('categories.store') }}"
-method="POST">
+        <div class="col-lg-6">
 
-@csrf
+            <div class="card border-0 shadow-lg rounded-4">
 
-<div class="mb-3">
+                <div class="card-body p-5">
 
-<label>Name</label>
+                    <div class="text-center mb-4">
 
-<input
-type="text"
-name="name"
-class="form-control">
+                        <i class="fas fa-folder-plus fa-3x text-success mb-3"></i>
 
-</div>
+                        <h2 class="fw-bold">
+                            Add Category
+                        </h2>
 
-<button
-class="btn-success-custom">
+                        <p class="text-muted">
+                            Create a new service category for your platform.
+                        </p>
 
-Save
+                    </div>
 
-</button>
+                    <form
+                        action="{{ route('categories.store') }}"
+                        method="POST">
 
-</form>
+                        @csrf
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Category Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                value="{{ old('name') }}"
+                                class="form-control form-control-lg"
+                                placeholder="Enter category name"
+                                required>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a
+                                href="{{ route('categories.index') }}"
+                                class="btn btn-outline-secondary rounded-pill px-4">
+
+                                <i class="fas fa-arrow-left me-2"></i>
+
+                                Back
+
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-success rounded-pill px-4">
+
+                                <i class="fas fa-floppy-disk me-2"></i>
+
+                                Save Category
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

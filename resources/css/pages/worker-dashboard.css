@@ -1,0 +1,66 @@
+.dashboard-card{
+
+    color:#fff;
+    border-radius:22px;
+    padding:35px 25px;
+    text-align:center;
+    transition:.35s;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+    overflow:hidden;
+    position:relative;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-10px) scale(1.03);
+
+}
+
+.dashboard-icon{
+
+    width:70px;
+    height:70px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:rgba(255,255,255,.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+
+}
+
+.dashboard-card h2{
+
+    font-size:42px;
+    font-weight:800;
+    margin-bottom:10px;
+
+}
+
+.dashboard-card p{
+
+    font-size:18px;
+    margin:0;
+    opacity:.95;
+
+}
+
+.bg-primary-gradient{
+
+    background:linear-gradient(135deg,#2563EB,#1D4ED8);
+
+}
+
+.bg-warning-gradient{
+
+    background:linear-gradient(135deg,#F59E0B,#D97706);
+
+}
+
+.bg-success-gradient{
+
+    background:linear-gradient(135deg,#10B981,#059669);
+
+}

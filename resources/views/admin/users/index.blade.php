@@ -4,131 +4,146 @@
 
 <div class="container py-5">
 
-<h2 class="mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">
+                <i class="fas fa-users text-primary me-2"></i>
+                Users
+            </h2>
+            <p class="text-muted mb-0">
+                Manage all registered users.
+            </p>
+        </div>
+    </div>
 
-Users
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show shadow-sm">
+            <i class="fas fa-circle-check me-2"></i>
+            {{ session('success') }}
 
-</h2>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+            </button>
+        </div>
+    @endif
 
-@if(session('success'))
+    <div class="card border-0 shadow-lg rounded-4">
 
-<div class="alert alert-success">
+        <div class="card-body">
 
-{{ session('success') }}
+            <div class="table-responsive">
 
-</div>
+                <table class="table table-hover align-middle mb-0">
 
-@endif
+                    <thead class="table-dark">
 
-<table class="table table-bordered">
+                        <tr>
+                            <th><i class="fas fa-user me-2"></i>Name</th>
+                            <th><i class="fas fa-phone me-2"></i>Mobile</th>
+                            <th><i class="fas fa-user-tag me-2"></i>Role</th>
+                            <th><i class="fas fa-circle-info me-2"></i>Status</th>
+                            <th class="text-center">
+                                <i class="fas fa-gears me-2"></i>Actions
+                            </th>
+                        </tr>
 
-<thead>
+                    </thead>
 
-<tr>
+                    <tbody>
 
-<th>Name</th>
-<th>Mobile</th>
-<th>Role</th>
-<th>Status</th>
-<th>Action</th>
+                        @foreach($users as $user)
 
-</tr>
+                        <tr>
 
-</thead>
+                            <td class="fw-semibold">
+                                {{ $user->name }}
+                            </td>
 
-<tbody>
+                            <td>
+                                {{ $user->phone }}
+                            </td>
 
-@foreach($users as $user)
+                            <td>
+                                <span class="badge bg-primary">
+                                    {{ ucfirst($user->role) }}
+                                </span>
+                            </td>
 
-<tr>
+                            <td>
 
-<td>
+                                @if($user->status)
 
-{{ $user->name }}
+                                    <span class="badge bg-success">
+                                        Active
+                                    </span>
 
-</td>
+                                @else
 
-<td>
+                                    <span class="badge bg-danger">
+                                        Inactive
+                                    </span>
 
-{{ $user->phone }}
+                                @endif
 
-</td>
+                            </td>
 
-<td>
+                            <td class="text-center">
 
-{{ ucfirst($user->role) }}
+                                <form
+                                    action="{{ route('admin.users.status',$user) }}"
+                                    method="POST"
+                                    class="d-inline">
 
-</td>
+                                    @csrf
+                                    @method('PATCH')
 
-<td>
+                                    <button
+                                        class="btn btn-warning btn-sm rounded-pill">
+                                        <i class="fas fa-repeat me-1"></i>
+                                        Toggle
+                                    </button>
 
-@if($user->status)
+                                </form>
 
-<span class="badge bg-success">
+                                <form
+                                    action="{{ route('admin.users.destroy',$user) }}"
+                                    method="POST"
+                                    class="d-inline">
 
-Active
+                                    @csrf
+                                    @method('DELETE')
 
-</span>
+                                    <button
+                                        type="submit"
+                                        class="btn btn-danger btn-sm rounded-pill"
+                                        onclick="return confirm('Are you sure you want to delete this user?')">
+                                        <i class="fas fa-trash me-1"></i>
+                                        Delete
+                                    </button>
 
-@else
+                                </form>
 
-<span class="badge bg-danger">
+                            </td>
 
-Inactive
+                        </tr>
 
-</span>
+                        @endforeach
 
-@endif
+                    </tbody>
 
-</td>
+                </table>
 
-<td>
+            </div>
 
-<form
-action="{{ route('admin.users.status',$user) }}"
-method="POST"
-style="display:inline">
+        </div>
 
-@csrf
-@method('PATCH')
+    </div>
 
-<button
-class="btn-primary-custom btn-sm">
-
-Toggle Status
-
-</button>
-
-</form>
-
-<form
-action="{{ route('admin.users.destroy',$user) }}"
-method="POST"
-style="display:inline">
-
-@csrf
-@method('DELETE')
-
-<button
-class="btn-danger-custom btn-sm">
-
-Delete
-
-</button>
-
-</form>
-
-</td>
-
-</tr>
-
-@endforeach
-
-</tbody>
-
-</table>
-
-{{ $users->links() }}
+    <div class="mt-4 d-flex justify-content-center">
+        {{ $users->links() }}
+    </div>
 
 </div>
 

@@ -102,7 +102,20 @@ if (auth()->check() && auth()->user()->role == 'customer') {
 
 }
 
-    
+$verifiedWorkers = WorkerProfile::where('is_verified', 1)->count();
+
+$totalBookings = \App\Models\Booking::count();
+
+$totalCities = WorkerProfile::whereNotNull('city')
+    ->distinct()
+    ->count('city');
+
+$averageRating = round(
+    \App\Models\Review::avg('rating') ?? 0,
+    1
+);    
+
+
     if (
         request()->filled('search') ||
         request()->filled('state') ||
@@ -117,7 +130,11 @@ if (auth()->check() && auth()->user()->role == 'customer') {
             'categories',
             'services',
             'workers',
-            'favorites'
+            'favorites',
+            'verifiedWorkers',
+            'totalBookings',
+            'totalCities',
+            'averageRating'
         )
     );
 }

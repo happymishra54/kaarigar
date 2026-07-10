@@ -4,105 +4,178 @@
 
 <div class="container py-5">
 
-<h2 class="mb-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-All Bookings
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="fas fa-calendar-check text-primary me-2"></i>
+                All Bookings
+            </h2>
 
-</h2>
+            <p class="text-muted mb-0">
+                View and manage all customer bookings.
+            </p>
+        </div>
 
-<table class="table table-bordered">
+    </div>
 
-<thead>
+    <!-- Card -->
+    <div class="card border-0 shadow-lg rounded-4">
 
-<tr>
+        <div class="card-body">
 
-<th>Booking No</th>
-<th>Customer</th>
-<th>Worker</th>
-<th>Service</th>
-<th>Amount</th>
-<th>Status</th>
-<th>Action</th>
+            <div class="table-responsive">
 
-</tr>
+                <table class="table table-hover align-middle mb-0">
 
-</thead>
+                    <thead class="table-dark">
 
-<tbody>
+                        <tr>
+                            <th>Booking No.</th>
+                            <th><i class="fas fa-user me-2"></i>Customer</th>
+                            <th><i class="fas fa-user-hard-hat me-2"></i>Worker</th>
+                            <th><i class="fas fa-tools me-2"></i>Service</th>
+                            <th><i class="fas fa-indian-rupee-sign me-2"></i>Amount</th>
+                            <th><i class="fas fa-circle-info me-2"></i>Status</th>
+                            <th class="text-center">
+                                <i class="fas fa-gears me-2"></i>Action
+                            </th>
+                        </tr>
 
-@foreach($bookings as $booking)
+                    </thead>
 
-<tr>
+                    <tbody>
 
-<td>
+                        @forelse($bookings as $booking)
 
-{{ $booking->booking_number }}
+                        <tr>
 
-</td>
+                            <td>
+                                <span class="badge bg-secondary">
+                                    {{ $booking->booking_number }}
+                                </span>
+                            </td>
 
-<td>
+                            <td class="fw-semibold">
+                                {{ $booking->customer->name }}
+                            </td>
 
-{{ $booking->customer->name }}
+                            <td>
+                                {{ $booking->worker->name }}
+                            </td>
 
-</td>
+                            <td>
+                                {{ $booking->service->title }}
+                            </td>
 
-<td>
+                            <td class="fw-bold text-success">
+                                ₹{{ number_format($booking->amount,2) }}
+                            </td>
 
-{{ $booking->worker->name }}
+                            <td>
 
-</td>
+                                @if($booking->status == 'pending')
 
-<td>
+                                    <span class="badge bg-warning text-dark">
+                                        Pending
+                                    </span>
 
-{{ $booking->service->title }}
+                                @elseif($booking->status == 'accepted')
 
-</td>
+                                    <span class="badge bg-primary">
+                                        Accepted
+                                    </span>
 
-<td>
+                                @elseif($booking->status == 'completed')
 
-₹{{ $booking->amount }}
+                                    <span class="badge bg-success">
+                                        Completed
+                                    </span>
 
-</td>
+                                @elseif($booking->status == 'cancelled')
 
-<td>
+                                    <span class="badge bg-danger">
+                                        Cancelled
+                                    </span>
 
-{{ ucfirst($booking->status) }}
+                                @else
 
-</td>
+                                    <span class="badge bg-secondary">
+                                        {{ ucfirst($booking->status) }}
+                                    </span>
 
-<td>
+                                @endif
 
-@if($booking->status != 'completed')
+                            </td>
 
-<form
-action="{{ route('admin.booking.cancel',$booking) }}"
-method="POST">
+                            <td class="text-center">
 
-@csrf
-@method('PATCH')
+                                @if($booking->status != 'completed' && $booking->status != 'cancelled')
 
-<button
-class="btn-danger-custom btn-sm">
+                                    <form
+                                        action="{{ route('admin.booking.cancel',$booking) }}"
+                                        method="POST"
+                                        class="d-inline">
 
-Cancel
+                                        @csrf
+                                        @method('PATCH')
 
-</button>
+                                        <button
+                                            type="submit"
+                                            class="btn btn-outline-danger btn-sm rounded-pill"
+                                            onclick="return confirm('Are you sure you want to cancel this booking?')">
 
-</form>
+                                            <i class="fas fa-ban me-1"></i>
+                                            Cancel
 
-@endif
+                                        </button>
 
-</td>
+                                    </form>
 
-</tr>
+                                @else
 
-@endforeach
+                                    <span class="text-muted">
+                                        —
+                                    </span>
 
-</tbody>
+                                @endif
 
-</table>
+                            </td>
 
-{{ $bookings->links() }}
+                        </tr>
+
+                        @empty
+
+                        <tr>
+
+                            <td colspan="7" class="text-center py-5 text-muted">
+
+                                <i class="fas fa-calendar-xmark fa-3x mb-3 d-block"></i>
+
+                                No bookings found.
+
+                            </td>
+
+                        </tr>
+
+                        @endforelse
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center">
+
+        {{ $bookings->links() }}
+
+    </div>
 
 </div>
 
