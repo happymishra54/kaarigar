@@ -32,10 +32,21 @@
                     <div class="service-image position-relative">
 
 
-                        <img
-                            src="{{ $service->image }}"
-                            alt="{{ $service->title }}"
-                            class="img-fluid">
+                        @if($service->image)
+
+    <img
+        src="{{ asset('storage/' . $service->image) }}"
+        alt="{{ $service->title }}"
+        class="img-fluid">
+
+@else
+
+    <img
+        src="{{ asset('images/default-service.jpg') }}"
+        alt="{{ $service->title }}"
+        class="img-fluid">
+
+@endif
 
 
                         <span class="service-badge">
@@ -96,16 +107,14 @@
 
 
                             <a
-                                href="#workers"
-                                class="btn-primary-custom">
+    href="{{ route('home', ['search' => $service->title]) }}"
+    class="btn-primary-custom">
 
+    <i class="fa-solid fa-arrow-right me-1"></i>
 
-                                <i class="fa-solid fa-arrow-right me-1"></i>
+    View
 
-                                View
-
-
-                            </a>
+</a>
 
 
                         </div>

@@ -5,128 +5,157 @@
 <div class="container py-5">
 
     <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <div>
-            <h2 class="fw-bold mb-1">
-                <i class="fas fa-calendar-check text-primary me-2"></i>
-                All Bookings
-            </h2>
+    <div class="text-center mb-5">
 
-            <p class="text-muted mb-0">
-                View and manage all customer bookings.
-            </p>
-        </div>
+        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">
+            BOOKINGS
+        </span>
+
+        <h2 class="display-6 fw-bold mt-3">
+
+            <i class="fas fa-calendar-check text-primary me-2"></i>
+
+            Manage Bookings
+
+        </h2>
+
+        <p class="text-muted">
+
+            View all customer bookings and manage their status.
+
+        </p>
 
     </div>
 
-    <!-- Card -->
-    <div class="card border-0 shadow-lg rounded-4">
+    <!-- Table Card -->
 
-        <div class="card-body">
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-0">
 
             <div class="table-responsive">
 
                 <table class="table table-hover align-middle mb-0">
 
-                    <thead class="table-dark">
+                    <thead class="table-light">
 
                         <tr>
-                            <th>Booking No.</th>
-                            <th><i class="fas fa-user me-2"></i>Customer</th>
-                            <th><i class="fas fa-user-hard-hat me-2"></i>Worker</th>
-                            <th><i class="fas fa-tools me-2"></i>Service</th>
-                            <th><i class="fas fa-indian-rupee-sign me-2"></i>Amount</th>
-                            <th><i class="fas fa-circle-info me-2"></i>Status</th>
+
+                            <th>#</th>
+
+                            <th>Customer</th>
+
+                            <th>Worker</th>
+
+                            <th>Service</th>
+
+                            <th>Amount</th>
+
+                            <th>Status</th>
+
                             <th class="text-center">
-                                <i class="fas fa-gears me-2"></i>Action
+                                Action
                             </th>
+
                         </tr>
 
                     </thead>
 
                     <tbody>
 
-                        @forelse($bookings as $booking)
+                    @forelse($bookings as $booking)
 
                         <tr>
 
                             <td>
+
                                 <span class="badge bg-secondary">
+
                                     {{ $booking->booking_number }}
+
                                 </span>
+
                             </td>
 
                             <td class="fw-semibold">
+
                                 {{ $booking->customer->name }}
+
                             </td>
 
                             <td>
+
                                 {{ $booking->worker->name }}
+
                             </td>
 
                             <td>
+
                                 {{ $booking->service->title }}
+
                             </td>
 
                             <td class="fw-bold text-success">
+
                                 ₹{{ number_format($booking->amount,2) }}
+
                             </td>
 
                             <td>
 
-                                @if($booking->status == 'pending')
+                                @switch($booking->status)
 
-                                    <span class="badge bg-warning text-dark">
-                                        Pending
-                                    </span>
+                                    @case('pending')
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+                                        @break
 
-                                @elseif($booking->status == 'accepted')
+                                    @case('accepted')
+                                        <span class="badge bg-primary">
+                                            Accepted
+                                        </span>
+                                        @break
 
-                                    <span class="badge bg-primary">
-                                        Accepted
-                                    </span>
+                                    @case('completed')
+                                        <span class="badge bg-success">
+                                            Completed
+                                        </span>
+                                        @break
 
-                                @elseif($booking->status == 'completed')
+                                    @case('cancelled')
+                                        <span class="badge bg-danger">
+                                            Cancelled
+                                        </span>
+                                        @break
 
-                                    <span class="badge bg-success">
-                                        Completed
-                                    </span>
+                                    @default
+                                        <span class="badge bg-secondary">
+                                            {{ ucfirst($booking->status) }}
+                                        </span>
 
-                                @elseif($booking->status == 'cancelled')
-
-                                    <span class="badge bg-danger">
-                                        Cancelled
-                                    </span>
-
-                                @else
-
-                                    <span class="badge bg-secondary">
-                                        {{ ucfirst($booking->status) }}
-                                    </span>
-
-                                @endif
+                                @endswitch
 
                             </td>
 
                             <td class="text-center">
 
-                                @if($booking->status != 'completed' && $booking->status != 'cancelled')
+                                @if(!in_array($booking->status,['completed','cancelled']))
 
                                     <form
                                         action="{{ route('admin.booking.cancel',$booking) }}"
-                                        method="POST"
-                                        class="d-inline">
+                                        method="POST">
 
                                         @csrf
                                         @method('PATCH')
 
                                         <button
-                                            type="submit"
-                                            class="btn btn-outline-danger btn-sm rounded-pill"
-                                            onclick="return confirm('Are you sure you want to cancel this booking?')">
+                                            class="btn btn-outline-danger btn-sm"
+                                            onclick="return confirm('Cancel this booking?')">
 
                                             <i class="fas fa-ban me-1"></i>
+
                                             Cancel
 
                                         </button>
@@ -136,7 +165,9 @@
                                 @else
 
                                     <span class="text-muted">
+
                                         —
+
                                     </span>
 
                                 @endif
@@ -145,21 +176,31 @@
 
                         </tr>
 
-                        @empty
+                    @empty
 
                         <tr>
 
-                            <td colspan="7" class="text-center py-5 text-muted">
+                            <td colspan="7" class="text-center py-5">
 
-                                <i class="fas fa-calendar-xmark fa-3x mb-3 d-block"></i>
+                                <i class="fas fa-calendar-xmark fa-4x text-secondary mb-3"></i>
 
-                                No bookings found.
+                                <h5 class="fw-bold">
+
+                                    No Bookings Found
+
+                                </h5>
+
+                                <p class="text-muted mb-0">
+
+                                    Customer bookings will appear here.
+
+                                </p>
 
                             </td>
 
                         </tr>
 
-                        @endforelse
+                    @endforelse
 
                     </tbody>
 
@@ -171,11 +212,15 @@
 
     </div>
 
-    <div class="mt-4 d-flex justify-content-center">
+    @if($bookings->hasPages())
 
-        {{ $bookings->links() }}
+        <div class="mt-4">
 
-    </div>
+            {{ $bookings->links() }}
+
+        </div>
+
+    @endif
 
 </div>
 

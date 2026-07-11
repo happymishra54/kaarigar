@@ -4,144 +4,294 @@
 
 <div class="container py-5">
 
-    <div class="card shadow">
+    <div class="row justify-content-center">
 
-        <div class="card-header">
+        <div class="col-lg-8">
 
-            <h3>Add Service</h3>
 
-        </div>
+            <div class="card shadow-lg border-0 rounded-4">
 
-        <div class="card-body">
 
-            @if ($errors->any())
+                <div class="card-header bg-primary text-white rounded-top-4">
 
-<div class="alert alert-danger">
+                    <h3 class="mb-0">
 
-    <ul class="mb-0">
+                        <i class="fa-solid fa-plus-circle me-2"></i>
 
-        @foreach ($errors->all() as $error)
+                        Add Service
 
-            <li>{{ $error }}</li>
+                    </h3>
 
-        @endforeach
+                </div>
 
-    </ul>
 
-</div>
 
-@endif
+                <div class="card-body p-4">
 
-            <form
-                action="{{ route('services.store') }}"
-                method="POST"
-                enctype="multipart/form-data">
 
-                @csrf
 
-                <div class="mb-3">
+                    @if ($errors->any())
 
-                    <label class="form-label">
-                        Category
-                    </label>
+                    <div class="alert alert-danger rounded-3">
 
-                    <select
+                        <ul class="mb-0">
+
+                            @foreach($errors->all() as $error)
+
+                                <li>
+                                    {{ $error }}
+                                </li>
+
+                            @endforeach
+
+                        </ul>
+
+                    </div>
+
+                    @endif
+
+
+
+
+
+                    <form
+                    action="{{ route('services.store') }}"
+                    method="POST"
+                    enctype="multipart/form-data">
+
+                    @csrf
+
+
+
+
+                    {{-- Category --}}
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            Category
+
+                        </label>
+
+
+                        <select
                         name="category_id"
-                        class="form-control">
+                        class="form-control"
+                        required>
 
-                        @foreach($categories as $category)
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+
+
+                            @foreach($categories as $category)
 
                             <option
-                                value="{{ $category->id }}">
+                            value="{{ $category->id }}"
+                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
 
                                 {{ $category->name }}
 
                             </option>
 
-                        @endforeach
 
-                    </select>
+                            @endforeach
 
-                </div>
 
-                <div class="mb-3">
+                        </select>
 
-                    <label class="form-label">
 
-                        Service Title
+                    </div>
 
-                    </label>
 
-                    <input
+
+
+
+
+                    {{-- Title --}}
+
+                    <div class="mb-4">
+
+
+                        <label class="form-label fw-bold">
+
+                            Service Title
+
+                        </label>
+
+
+                        <input
                         type="text"
                         name="title"
-                        class="form-control">
+                        class="form-control"
+                        value="{{ old('title') }}"
+                        required>
 
-                </div>
 
-                <div class="mb-3">
+                    </div>
 
-                    <label class="form-label">
 
-                        Description
 
-                    </label>
 
-                    <textarea
+
+
+
+                    {{-- Description --}}
+
+                    <div class="mb-4">
+
+
+                        <label class="form-label fw-bold">
+
+                            Description
+
+                        </label>
+
+
+                        <textarea
                         name="description"
                         rows="5"
-                        class="form-control"></textarea>
+                        class="form-control"
+                        required>{{ old('description') }}</textarea>
 
-                </div>
 
-                <div class="mb-3">
+                    </div>
 
-                    <label class="form-label">
 
-                        Price
 
-                    </label>
 
-                    <input
+
+
+
+
+                    {{-- Price --}}
+
+                    <div class="mb-4">
+
+
+                        <label class="form-label fw-bold">
+
+                            Price
+
+                        </label>
+
+
+                        <input
                         type="number"
                         name="price"
-                        class="form-control">
+                        class="form-control"
+                        value="{{ old('price') }}"
+                        required>
 
-                </div>
 
-                <div class="mb-3">
+                    </div>
 
-                    <label class="form-label">
-                
-                        Service Image
-                
-                    </label>
-                
-                    <input
+
+
+
+
+
+
+
+                    {{-- Image --}}
+
+                    <div class="mb-4">
+
+
+                        <label class="form-label fw-bold">
+
+                            Service Image
+
+                        </label>
+
+
+                        <input
                         type="file"
                         name="image"
-                        class="form-control">
-                
+                        id="image"
+                        class="form-control"
+                        accept="image/*">
+
+
+
+                        <img
+                        id="preview"
+                        class="mt-3 rounded-3 shadow"
+                        width="150"
+                        style="display:none;">
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <button
+                    class="btn-primary-custom w-100">
+
+
+                        <i class="fa-solid fa-save me-2"></i>
+
+                        Save Service
+
+
+                    </button>
+
+
+
+
+
+                    </form>
+
+
+
                 </div>
 
-                <button class="btn-primary-custom">
 
-                    Save Service
+            </div>
 
-                </button>
-
-
-
-
-
-
-            </form>
 
         </div>
 
+
     </div>
+
 
 </div>
 
-@endsection
 
+
+
+
+
+<script>
+
+
+document.getElementById('image').onchange = function(event){
+
+
+    let preview = document.getElementById('preview');
+
+
+    preview.src =
+    URL.createObjectURL(event.target.files[0]);
+
+
+    preview.style.display="block";
+
+
+}
+
+
+</script>
+
+
+@endsection

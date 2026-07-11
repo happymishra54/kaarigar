@@ -9,7 +9,16 @@
     ========================== --}}
 
     <meta charset="UTF-8">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content="Kaarigar">
+    <meta property="og:description" content="India's trusted platform for hiring verified home service professionals.">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kaarigar">
+    <meta name="twitter:description" content="Book trusted electricians, plumbers, carpenters and more.">
+    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
@@ -94,22 +103,21 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg kaarigar-navbar sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
 
         <div class="container">
     
             {{-- Brand --}}
-            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <i class="fa-solid fa-screwdriver-wrench me-2"></i>
-                <span>Kaarigar</span>
+            <a class="navbar-brand fw-bold" href="{{ route('home') }}">
+                <i class="fas fa-screwdriver-wrench text-warning me-2"></i>
+                Kaarigar
             </a>
     
             {{-- Mobile Toggle --}}
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#mainNavbar">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar">
     
                 <span class="navbar-toggler-icon"></span>
     
@@ -117,34 +125,37 @@
     
             <div class="collapse navbar-collapse" id="mainNavbar">
     
-                {{-- Navigation --}}
-                <ul class="navbar-nav mx-auto align-items-lg-center">
+                {{-- Left Menu --}}
+                <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
     
                     <li class="nav-item">
-                        <a class="nav-link"
-                           href="/">
-                            <i class="fas fa-house me-2"></i>
+                        <a class="nav-link {{ request()->is('/') ? 'active fw-semibold' : '' }}"
+                           href="{{ route('home') }}">
+                            <i class="fas fa-house me-1"></i>
                             Home
                         </a>
                     </li>
     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/#categories') }}">
-                            <i class="fas fa-layer-group me-2"></i>
+                        <a class="nav-link"
+                           href="{{ url('/#categories') }}">
+                            <i class="fas fa-layer-group me-1"></i>
                             Categories
                         </a>
                     </li>
     
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-user-hard-hat me-2"></i>
-                            Become a Worker
+                        <a class="nav-link"
+                           href="{{ url('/#services') }}">
+                            <i class="fas fa-tools me-1"></i>
+                            Services
                         </a>
                     </li>
     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/#about') }}">
-                            <i class="fas fa-circle-info me-2"></i>
+                        <a class="nav-link"
+                           href="{{ url('/#about') }}">
+                            <i class="fas fa-circle-info me-1"></i>
                             About
                         </a>
                     </li>
@@ -152,39 +163,38 @@
                 </ul>
     
                 {{-- Right Side --}}
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 ms-lg-4">
     
                     @auth
     
-                        {{-- Dashboard --}}
-                        @if(auth()->user()->role === 'customer')
+                        @if(auth()->user()->role=='customer')
     
                             <a href="{{ route('customer.dashboard') }}"
-                               class="btn btn-primary rounded-pill px-4">
+                               class="btn btn-primary">
     
-                                <i class="fas fa-gauge-high me-2"></i>
+                                <i class="fas fa-gauge-high me-1"></i>
     
                                 Dashboard
     
                             </a>
     
-                        @elseif(auth()->user()->role === 'worker')
+                        @elseif(auth()->user()->role=='worker')
     
                             <a href="{{ route('worker.dashboard') }}"
-                               class="btn btn-primary rounded-pill px-4">
+                               class="btn btn-primary">
     
-                                <i class="fas fa-gauge-high me-2"></i>
+                                <i class="fas fa-gauge-high me-1"></i>
     
                                 Dashboard
     
                             </a>
     
-                        @elseif(auth()->user()->role === 'admin')
+                        @elseif(auth()->user()->role=='admin')
     
                             <a href="{{ route('admin.dashboard') }}"
-                               class="btn btn-dark rounded-pill px-4">
+                               class="btn btn-warning">
     
-                                <i class="fas fa-user-shield me-2"></i>
+                                <i class="fas fa-user-shield me-1"></i>
     
                                 Admin
     
@@ -192,22 +202,20 @@
     
                         @endif
     
-                        {{-- User Dropdown --}}
                         <div class="dropdown">
     
-                            <button
-                                class="btn btn-light rounded-pill dropdown-toggle px-3"
-                                data-bs-toggle="dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle"
+                                    data-bs-toggle="dropdown">
     
-                                <i class="fas fa-circle-user me-2"></i>
+                                <i class="fas fa-user-circle me-1"></i>
     
                                 {{ Str::limit(auth()->user()->name,15) }}
     
                             </button>
     
-                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4">
+                            <ul class="dropdown-menu dropdown-menu-end">
     
-                                <li class="dropdown-header fw-bold">
+                                <li class="dropdown-header">
     
                                     {{ auth()->user()->email }}
     
@@ -224,9 +232,7 @@
     
                                         @csrf
     
-                                        <button
-                                            type="submit"
-                                            class="dropdown-item text-danger">
+                                        <button class="dropdown-item text-danger">
     
                                             <i class="fas fa-right-from-bracket me-2"></i>
     
@@ -245,18 +251,14 @@
                     @else
     
                         <a href="{{ route('login') }}"
-                           class="btn btn-outline-light rounded-pill px-4">
-    
-                            <i class="fas fa-right-to-bracket me-2"></i>
+                           class="btn btn-outline-light">
     
                             Login
     
                         </a>
     
                         <a href="{{ route('register.role') }}"
-                           class="btn btn-warning rounded-pill px-4 fw-semibold">
-    
-                            <i class="fas fa-user-plus me-2"></i>
+                           class="btn btn-warning">
     
                             Register
     
@@ -280,243 +282,316 @@
 
     </main>
 
-    <footer class="premium-footer">
+    <footer class="bg-dark text-light pt-5 pb-3 mt-5">
 
         <div class="container">
-
-            <div class="row gy-5">
-
-                <!-- Brand -->
+    
+            <div class="row gy-4">
+    
+                {{-- Brand --}}
                 <div class="col-lg-4">
-
-                    <h2 class="footer-logo">
-                        🛠️ Kaarigar
-                    </h2>
-
-                    <p class="footer-text">
-                        India's trusted platform for finding verified electricians,
-                        plumbers, carpenters, painters, cleaners and skilled
-                        professionals near you.
+    
+                    <h3 class="fw-bold mb-3">
+                        <i class="fas fa-screwdriver-wrench text-warning me-2"></i>
+                        Kaarigar
+                    </h3>
+    
+                    <p class="text-light-emphasis">
+    
+                        India's trusted platform for connecting customers with
+                        verified electricians, plumbers, carpenters, painters,
+                        cleaners and other skilled professionals.
+    
                     </p>
-
-                    <div class="footer-social mt-4">
-
-                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-
-                        <a href="#" title="X"><i class="fab fa-x-twitter"></i></a>
-
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-
+    
+                    <div class="d-flex gap-3 mt-4">
+    
+                        <a href="#" class="text-light fs-5">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+    
+                        <a href="#" class="text-light fs-5">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+    
+                        <a href="#" class="text-light fs-5">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+    
+                        <a href="#" class="text-light fs-5">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+    
                     </div>
-
+    
                 </div>
-
-                <!-- Company -->
-                <div class="col-lg-2">
-
-                    <h5>Company</h5>
-
-                    <ul class="list-unstyled">
-
-                        <li><a href="#"><i class="fas fa-angle-right"></i> About Us</a></li>
-
-                        <li><a href="#"><i class="fas fa-angle-right"></i> Contact</a></li>
-
-                        <li><a href="#"><i class="fas fa-angle-right"></i> Terms & Conditions</a></li>
-
-                        <li><a href="#"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
-
+    
+                {{-- Quick Links --}}
+                <div class="col-lg-2 col-md-6">
+    
+                    <h5 class="fw-semibold mb-3">
+    
+                        Company
+    
+                    </h5>
+    
+                    <ul class="nav flex-column">
+    
+                        <li class="nav-item mb-2">
+    
+                            <a href="#about"
+                               class="nav-link p-0 text-light-emphasis">
+    
+                                About Us
+    
+                            </a>
+    
+                        </li>
+    
+                        <li class="nav-item mb-2">
+    
+                            <a href="#contact"
+                               class="nav-link p-0 text-light-emphasis">
+    
+                                Contact
+    
+                            </a>
+    
+                        </li>
+    
+                        <li class="nav-item mb-2">
+    
+                            <a href="#"
+                               class="nav-link p-0 text-light-emphasis">
+    
+                                Privacy Policy
+    
+                            </a>
+    
+                        </li>
+    
+                        <li class="nav-item">
+    
+                            <a href="#"
+                               class="nav-link p-0 text-light-emphasis">
+    
+                                Terms & Conditions
+    
+                            </a>
+    
+                        </li>
+    
                     </ul>
-
+    
                 </div>
-
-                <!-- Popular Services -->
-                <div class="col-lg-3">
-
-                    <h5>Popular Services</h5>
-
+    
+                {{-- Popular Services --}}
+                <div class="col-lg-3 col-md-6">
+    
+                    <h5 class="fw-semibold mb-3">
+    
+                        Popular Services
+    
+                    </h5>
+    
                     <ul class="list-unstyled">
-
-                        <li><i class="fas fa-bolt text-warning"></i> Electrician</li>
-
-                        <li><i class="fas fa-faucet text-primary"></i> Plumber</li>
-
-                        <li><i class="fas fa-paint-roller text-danger"></i> Painter</li>
-
-                        <li><i class="fas fa-hammer text-success"></i> Carpenter</li>
-
-                        <li><i class="fas fa-broom text-info"></i> Cleaner</li>
-
+    
+                        <li class="mb-2">
+    
+                            <i class="fas fa-bolt text-warning me-2"></i>
+    
+                            Electrician
+    
+                        </li>
+    
+                        <li class="mb-2">
+    
+                            <i class="fas fa-faucet text-info me-2"></i>
+    
+                            Plumber
+    
+                        </li>
+    
+                        <li class="mb-2">
+    
+                            <i class="fas fa-hammer text-success me-2"></i>
+    
+                            Carpenter
+    
+                        </li>
+    
+                        <li class="mb-2">
+    
+                            <i class="fas fa-paint-roller text-danger me-2"></i>
+    
+                            Painter
+    
+                        </li>
+    
+                        <li>
+    
+                            <i class="fas fa-broom text-primary me-2"></i>
+    
+                            Cleaner
+    
+                        </li>
+    
                     </ul>
-
+    
                 </div>
-
-                <!-- Newsletter -->
+    
+                {{-- Newsletter --}}
                 <div class="col-lg-3">
-
-                    <h5>Stay Updated</h5>
-
-                    <p>
-                        Get the latest offers, updates and new services directly in your inbox.
+    
+                    <h5 class="fw-semibold mb-3">
+    
+                        Newsletter
+    
+                    </h5>
+    
+                    <p class="text-light-emphasis">
+    
+                        Subscribe to receive updates and special offers.
+    
                     </p>
-
+    
                     <form>
-
-                        <div class="input-group mb-3">
-
-                            <span class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-
+    
+                        <div class="input-group">
+    
                             <input
                                 type="email"
                                 class="form-control"
                                 placeholder="Enter your email">
-
+    
+                            <button
+                                class="btn btn-warning"
+                                type="submit">
+    
+                                Subscribe
+    
+                            </button>
+    
                         </div>
-
-                        <button class="btn-primary-custom w-100">
-                            Subscribe
-                        </button>
-
+    
                     </form>
-
+    
                 </div>
-
+    
             </div>
-
-            <hr class="footer-divider">
-
-            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
-
-                <span>
-                    © {{ date('Y') }} <strong>Kaarigar</strong>. All Rights Reserved.
-                </span>
-
-                <span class="mt-2 mt-md-0">
-                    🇮🇳 Made with ❤️ in India | Version 1.0
-                </span>
-
+    
+            <hr class="border-secondary my-4">
+    
+            <div class="row">
+    
+                <div class="col-md-6 text-center text-md-start">
+    
+                    © {{ date('Y') }}
+    
+                    <strong>Kaarigar</strong>
+    
+                    • All Rights Reserved.
+    
+                </div>
+    
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+    
+                    Made with ❤️ in India
+    
+                </div>
+    
             </div>
-
+    
         </div>
-
+    
     </footer>
 
     <script>
 
-function updateCity(city){
-
-if(!city) return;
-
-localStorage.setItem('city', city);
-
-const currentCity = document.getElementById('currentCity');
-
-if(currentCity){
-    currentCity.textContent = city;
-}
-
-document.querySelectorAll('input[name="city"]').forEach(function(input){
-    input.value = city;
-});
-
-}
+        function updateCity(city) {
         
-        const savedCity = localStorage.getItem('city');
+            if (!city) return;
         
-        if(savedCity){
+            localStorage.setItem("city", city);
+        
+            const currentCity = document.getElementById("currentCity");
+        
+            if (currentCity) {
+                currentCity.textContent = city;
+            }
+        
+            document.querySelectorAll('input[name="city"]').forEach(input => {
+                input.value = city;
+            });
+        
+        }
+        
+        const savedCity = localStorage.getItem("city");
+        
+        if (savedCity) {
         
             updateCity(savedCity);
         
-        }else{
+        } else if ("geolocation" in navigator) {
         
-            if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(
         
-                navigator.geolocation.getCurrentPosition(
+                async function (position) {
         
-                    function(position){
+                    try {
         
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
         
-                        fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
+                        const response = await fetch(
+                            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
+                        );
         
-                        .then(response => {
-        
-                            if(!response.ok){
-                                throw new Error("Unable to fetch location.");
-                            }
-        
-                            return response.json();
-        
-                        })
-        
-                        .then(data => {
-        
-                            console.log(data);
-        
-                            const city =
-                                data.address.city ||
-                                data.address.town ||
-                                data.address.village ||
-                                data.address.hamlet ||
-                                data.address.county ||
-                                "";
-        
-                            updateCity(city);
-        
-                        })
-        
-                        .catch(error => {
-        
-                            console.error("Reverse geocoding failed:", error);
-        
-                        });
-        
-                    },
-        
-                    function(error){
-        
-                        switch(error.code){
-        
-                            case error.PERMISSION_DENIED:
-                                console.log("User denied location permission.");
-                                break;
-        
-                            case error.POSITION_UNAVAILABLE:
-                                console.log("Location unavailable.");
-                                break;
-        
-                            case error.TIMEOUT:
-                                console.log("Location request timed out.");
-                                break;
-        
-                            default:
-                                console.log("Unknown location error.");
-                                break;
-        
+                        if (!response.ok) {
+                            throw new Error("Reverse geocoding failed.");
                         }
         
-                    },
+                        const data = await response.json();
         
-                    {
+                        const address = data.address || {};
         
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 60000
+                        // Better priority for Indian addresses
+                        const city =
+                            address.city ||
+                            address.city_district ||
+                            address.state_district ||
+                            address.town ||
+                            address.municipality ||
+                            address.county ||
+                            address.village ||
+                            address.hamlet ||
+                            "";
+        
+                        updateCity(city);
+        
+                    } catch (error) {
+        
+                        console.error(error);
         
                     }
         
-                );
+                },
         
-            }else{
+                function (error) {
         
-                console.log("Geolocation is not supported by this browser.");
+                    console.log(error.message);
         
-            }
+                },
+        
+                {
+        
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 300000
+        
+                }
+        
+            );
         
         }
         

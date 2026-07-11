@@ -2,93 +2,107 @@
 
 @section('content')
 
-<section class="dashboard-section py-5">
+<section class="py-5 bg-light">
 
     <div class="container">
 
-        <div class="search-header">
+        <!-- Header -->
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-5">
 
             <div>
 
-                <span class="section-tag">
-
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">
                     SEARCH RESULTS
-
                 </span>
 
-                <h2 class="section-title">
+                <h2 class="fw-bold mb-2">
 
-                    {{ $workers->count() }} Worker{{ $workers->count() != 1 ? 's' : '' }} Found
+                    {{ $workers->count() }}
+                    Worker{{ $workers->count() != 1 ? 's' : '' }} Found
 
                 </h2>
 
-                <p class="section-subtitle">
+                <p class="text-muted mb-0">
 
-                    Here are the professionals matching your search.
+                    Browse verified professionals matching your search.
 
                 </p>
 
             </div>
 
             <a href="{{ route('home') }}"
-               class="btn-primary-custom">
+               class="btn btn-primary rounded-pill px-4 mt-4 mt-lg-0">
 
-                <i class="fa-solid fa-arrow-left"></i>
+                <i class="fa-solid fa-arrow-left me-2"></i>
 
-                Back Home
+                Back to Home
 
             </a>
 
         </div>
 
-        <div class="row g-4 mt-2">
+        <!-- Workers -->
 
-            @forelse($workers as $worker)
+        @if($workers->count())
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="row g-4">
 
-                    @include('partials.worker-card',[
-                        'worker'=>$worker,
-                        'favorites'=>$favorites ?? []
-                    ])
+                @foreach($workers as $worker)
 
-                </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6">
 
-            @empty
-
-                <div class="col-12">
-
-                    <div class="empty-search">
-
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
-                        <h2>
-
-                            No Workers Found
-
-                        </h2>
-
-                        <p>
-
-                            We couldn't find any professionals matching your search.
-                            Try using another city or profession.
-
-                        </p>
-
-                        <a href="{{ route('home') }}"
-                           class="btn-primary-custom">
-
-                            Browse All Workers
-
-                        </a>
+                        @include('partials.worker-card',[
+                            'worker'=>$worker,
+                            'favorites'=>$favorites ?? []
+                        ])
 
                     </div>
 
+                @endforeach
+
+            </div>
+
+        @else
+
+            <!-- Empty State -->
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body text-center py-5">
+
+                    <div class="display-1 text-secondary mb-3">
+
+                        <i class="fa-solid fa-user-slash"></i>
+
+                    </div>
+
+                    <h3 class="fw-bold">
+
+                        No Workers Found
+
+                    </h3>
+
+                    <p class="text-muted mx-auto mb-4" style="max-width:600px;">
+
+                        We couldn't find any professionals matching your search.
+                        Try changing the profession, city, or search keyword.
+
+                    </p>
+
+                    <a href="{{ route('home') }}"
+                       class="btn btn-primary rounded-pill px-5">
+
+                        <i class="fa-solid fa-house me-2"></i>
+
+                        Browse All Workers
+
+                    </a>
+
                 </div>
 
-            @endforelse
+            </div>
 
-        </div>
+        @endif
 
     </div>
 

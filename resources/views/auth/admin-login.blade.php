@@ -1,41 +1,87 @@
-<x-guest-layout>
+@extends('layouts.app')
 
-    <h1 class="text-2xl font-bold mb-6 text-center">
-        Admin Login
-    </h1>
+@section('content')
 
-    <form method="POST" action="{{ route('login') }}">
+<div class="container py-5">
 
-        @csrf
+    <div class="row justify-content-center">
 
-        <div class="mb-4">
-            <label>Email</label>
+        <div class="col-md-6 col-lg-5">
 
-            <input
-                type="email"
-                name="email"
-                class="w-full rounded border-gray-300"
-                required>
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <div class="text-center mb-4">
+
+                        <i class="fas fa-user-shield fa-3x text-primary mb-3"></i>
+
+                        <h2 class="fw-bold">
+
+                            Admin Login
+
+                        </h2>
+
+                    </div>
+
+                    <form method="POST" action="{{ route('login') }}">
+
+                        @csrf
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Email Address
+
+                            </label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                placeholder="Enter your email"
+                                required>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Password
+
+                            </label>
+
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Enter your password"
+                                required>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100">
+
+                            <i class="fas fa-right-to-bracket me-2"></i>
+
+                            Login
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="mb-4">
-            <label>Password</label>
+    </div>
 
-            <input
-                type="password"
-                name="password"
-                class="w-full rounded border-gray-300"
-                required>
-        </div>
+</div>
 
-        <button
-            type="submit"
-            class="bg-blue-600 text-white px-4 py-2 rounded w-full">
-
-            Login
-
-        </button>
-
-    </form>
-
-</x-guest-layout>
+@endsection

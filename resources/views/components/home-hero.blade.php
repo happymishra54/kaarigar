@@ -82,17 +82,20 @@
 
                 </div>
 
-                <button
-                    type="submit"
-                    class="hero-search-btn">
+                <div class="hero-buttons mt-4">
 
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="#workers" class="btn-primary-custom">
+                        <i class="fa-solid fa-magnifying-glass me-2"></i>
+                        Find Professionals
+                    </a>
+                
+                    
+                
+                </div>
 
-                    Find Workers
-
-                </button>
-
+                
             </form>
+
 
             <!-- Quick Categories -->
 

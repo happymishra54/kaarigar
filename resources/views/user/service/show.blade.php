@@ -2,70 +2,210 @@
 
 @section('content')
 
+
 <div class="container py-5">
 
-    <div class="card shadow">
 
-        <div class="card-body">
+    <div class="row justify-content-center">
 
-            <h2>
 
-                {{ $service->title }}
+        <div class="col-lg-8">
 
-            </h2>
 
-            <hr>
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
 
-            <h4 class="text-success">
 
-                ₹{{ $service->price }}
 
-            </h4>
+                {{-- HEADER IMAGE --}}
 
-            <p>
+                @if($service->image)
 
-                {{ $service->description }}
+                    <img
+                        src="{{ asset('storage/'.$service->image) }}"
+                        class="card-img-top"
+                        style="height:300px;object-fit:cover;">
 
-            </p>
+                @endif
 
-            <p>
 
-                Worker:
 
-                {{ $service->worker->name }}
 
-            </p>
 
-            @auth
+                <div class="card-body p-5">
 
-                <a
-                    href="{{ route(
-                        'booking.create',
-                        $service->id
-                    ) }}"
-                    class="btn-primary-custom">
 
-                    Book Service
 
-                </a>
+                    {{-- SERVICE TITLE --}}
 
-            @else
+                    <h2 class="fw-bold mb-3">
 
-                <a
-                    href="/login"
-                    class="btn-primary-custom">
+                        {{ $service->title }}
 
-                    Login To Book
+                    </h2>
 
-                </a>
 
-            @endauth
+
+                    <hr>
+
+
+
+
+
+                    {{-- PRICE --}}
+
+                    <h3 class="text-success fw-bold mb-4">
+
+                        ₹{{ number_format($service->price) }}
+
+                    </h3>
+
+
+
+
+
+
+
+                    {{-- DESCRIPTION --}}
+
+                    <p class="text-muted fs-5">
+
+                        {{ $service->description }}
+
+                    </p>
+
+
+
+
+
+
+
+                    {{-- WORKER DETAILS --}}
+
+                    @if($service->worker)
+
+
+                    <div class="card bg-light border-0 rounded-4 my-4">
+
+
+                        <div class="card-body">
+
+
+                            <h5 class="fw-bold mb-3">
+
+                                <i class="fas fa-user-check text-primary me-2"></i>
+
+                                Professional
+
+                            </h5>
+
+
+
+                            <p class="mb-2">
+
+                                <strong>Name:</strong>
+
+                                {{ $service->worker->user->name }}
+
+                            </p>
+
+
+
+                            <p class="mb-2">
+
+                                <strong>Location:</strong>
+
+                                {{ $service->worker->city }}
+
+                            </p>
+
+
+
+                            <p class="mb-0">
+
+                                <strong>Experience:</strong>
+
+                                {{ $service->worker->experience }}
+
+                                Years
+
+                            </p>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    @endif
+
+
+
+
+
+
+
+                    {{-- BOOK BUTTON --}}
+
+                    @auth
+
+
+                        <a
+                            href="{{ route(
+                                'booking.create',
+                                [
+                                    'service'=>$service->id,
+                                    'worker'=>$service->worker->id
+                                ]
+                            ) }}"
+                            class="btn btn-primary btn-lg rounded-pill px-5">
+
+
+                            <i class="fas fa-calendar-check me-2"></i>
+
+                            Book Service
+
+
+                        </a>
+
+
+
+                    @else
+
+
+
+                        <a
+                            href="{{ route('login') }}"
+                            class="btn btn-primary btn-lg rounded-pill px-5">
+
+
+                            Login To Book
+
+
+                        </a>
+
+
+
+                    @endauth
+
+
+
+
+                </div>
+
+
+
+            </div>
+
 
         </div>
 
+
     </div>
+
 
 </div>
 
-@endsection
 
+
+@endsection

@@ -4,9 +4,10 @@
 
 <div class="container py-5">
 
+
     @if(session('success'))
 
-        <div class="alert alert-success">
+        <div class="alert alert-success rounded-4 shadow-sm">
 
             {{ session('success') }}
 
@@ -14,148 +15,270 @@
 
     @endif
 
-    <div class="d-flex justify-content-between mb-4">
 
-        <h2>
 
-            My Services
+    <div class="d-flex justify-content-between align-items-center mb-5">
 
-        </h2>
+        <div>
+
+            <h2 class="fw-bold mb-1">
+
+                My Services
+
+            </h2>
+
+            <p class="text-muted mb-0">
+
+                Manage the services you provide.
+
+            </p>
+
+        </div>
+
 
         <a
             href="{{ route('services.create') }}"
             class="btn-success-custom">
 
-            Add Service
+            ➕ Add Service
 
         </a>
 
+
     </div>
 
-    <table class="table table-bordered">
 
-        <thead>
 
-            <tr>
 
-                <th>Title</th>
 
-                <th>Category</th>
+    <div class="row g-4">
 
-                <th>Price</th>
 
-                <th>Status</th>
+    @forelse($services as $service)
 
-                <th>Action</th>
 
-                <th>Image</th>
+        <div class="col-lg-4 col-md-6">
 
-            </tr>
 
-        </thead>
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
 
-        <tbody>
 
-        @forelse($services as $service)
+                {{-- Image --}}
 
-            <tr>
+                <div class="position-relative">
 
-                <td>
 
-                    {{ $service->title }}
+                    @if($service->image)
 
-                </td>
+                        <img
+                            src="{{ asset('storage/'.$service->image) }}"
+                            class="w-100"
+                            style="height:220px;object-fit:cover;">
 
-                <td>
-
-                    {{ $service->category->name }}
-
-                </td>
-
-                <td>
-
-                    ₹{{ $service->price }}
-
-                </td>
-
-                <td>
-
-                    @if($service->status)
-
-                        Active
 
                     @else
 
-                        Inactive
+                        <div
+                            class="bg-light d-flex align-items-center justify-content-center"
+                            style="height:220px;">
+
+                            <i class="fa-solid fa-image fa-4x text-muted"></i>
+
+                        </div>
+
 
                     @endif
 
-                </td>
 
-                <td>
 
-                    <a
-                        href="{{ route('services.edit',$service->id) }}"
-                        class="btn-primary-custom btn-sm">
+                    @if($service->status)
 
-                        Edit
+                        <span
+                            class="badge bg-success position-absolute top-0 end-0 m-3 rounded-pill px-3">
 
-                    </a>
+                            Active
 
-                    <a>
+                        </span>
+
+
+                    @else
+
+
+                        <span
+                            class="badge bg-danger position-absolute top-0 end-0 m-3 rounded-pill px-3">
+
+                            Inactive
+
+                        </span>
+
+
+                    @endif
+
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+                    <h4 class="fw-bold">
+
+                        {{ $service->title }}
+
+                    </h4>
+
+
+
+                    <p class="text-primary fw-semibold">
+
+                        {{ $service->category->name ?? 'No Category' }}
+
+                    </p>
+
+
+
+                    <p class="text-muted">
+
+                        {{ Str::limit($service->description,100) }}
+
+                    </p>
+
+
+
+
+                    <h4 class="text-success fw-bold">
+
+                        ₹{{ number_format($service->price) }}
+
+                    </h4>
+
+
+
+                </div>
+
+
+
+
+                <div class="card-footer bg-white border-0 pb-4 px-4">
+
+
+                    <div class="d-flex gap-2">
+
+
+                        <a
+                            href="{{ route('services.edit',$service->id) }}"
+                            class="btn-primary-custom flex-fill text-center">
+
+                            ✏ Edit
+
+                        </a>
+
+
+
+
                         <form
                             action="{{ route('services.destroy',$service->id) }}"
                             method="POST"
-                            style="display:inline">
+                            class="flex-fill">
+
 
                             @csrf
 
                             @method('DELETE')
 
-                            <button
-                                class="btn-danger-custom btn-sm">
 
-                                Delete
+
+                            <button
+                                class="btn-danger-custom w-100"
+                                onclick="return confirm('Are you sure you want to delete this service?')">
+
+
+                                🗑 Delete
+
 
                             </button>
 
+
+
                         </form>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+    @empty
+
+
+
+        <div class="col-12">
+
+
+            <div class="card shadow border-0 rounded-4 p-5 text-center">
+
+
+                <i class="fa-solid fa-screwdriver-wrench fa-4x text-muted mb-3"></i>
+
+
+                <h4 class="fw-bold">
+
+                    No Services Added
+
+                </h4>
+
+
+                <p class="text-muted">
+
+                    Add your first service so customers can book you.
+
+                </p>
+
+
+
+                <div>
+
+                    <a
+                        href="{{ route('services.create') }}"
+                        class="btn-success-custom">
+
+                        Add First Service
+
                     </a>
 
-                </td>
-                
+                </div>
 
-                <td>
-                    @if($service->image)
 
-                        <img
-                            src="{{ asset('storage/'.$service->image) }}"
-                            width="80">
+            </div>
 
-                    @endif
-                </td>
 
-            </tr>
+        </div>
 
-        @empty
 
-            <tr>
 
-                <td colspan="5">
+    @endforelse
 
-                    No services found.
 
-                </td>
 
-            </tr>
+    </div>
 
-        @endforelse
 
-        </tbody>
-
-    </table>
 
 </div>
 
-@endsection
 
+@endsection

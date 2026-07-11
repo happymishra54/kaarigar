@@ -5,35 +5,46 @@
 <div class="container py-5">
 
 
-    <!-- Header -->
+    {{-- HEADER --}}
 
     <div class="text-center mb-5">
 
 
-        <span class="section-tag">
+        <span class="badge bg-primary rounded-pill px-4 py-2">
 
             UPDATES
 
         </span>
 
 
-        <h2 class="section-title mt-3">
+
+
+        <h2 class="fw-bold mt-3">
+
 
             <i class="fa-solid fa-bell text-warning me-2"></i>
 
+
             Notifications
+
 
         </h2>
 
 
-        <p class="section-subtitle">
+
+
+        <p class="text-muted">
+
 
             Stay updated with your bookings and service activities.
+
 
         </p>
 
 
+
     </div>
+
 
 
 
@@ -46,33 +57,56 @@
 
 
 
+
+
         @forelse($notifications as $notification)
+
+
 
 
 
             <div class="card border-0 shadow-lg rounded-4 mb-4 overflow-hidden">
 
 
+
                 <div class="card-body p-4">
+
+
+
 
 
                     <div class="d-flex justify-content-between align-items-start">
 
 
+
+
+
                         <div class="d-flex">
 
 
-                            <div class="notification-icon me-3">
 
 
-                                <i class="fa-solid fa-bell"></i>
+
+                            <div class="bg-warning bg-opacity-10 text-warning 
+                                        rounded-circle
+                                        d-flex align-items-center justify-content-center
+                                        me-3 p-3">
+
+
+                                <i class="fa-solid fa-bell fs-5"></i>
 
 
                             </div>
 
 
 
+
+
+
+
                             <div>
+
+
 
 
                                 <h5 class="fw-bold mb-2">
@@ -81,7 +115,12 @@
                                     {{ $notification->data['message'] }}
 
 
+
                                 </h5>
+
+
+
+
 
 
 
@@ -90,13 +129,18 @@
 
                                     <i class="fa-solid fa-receipt me-2"></i>
 
+
                                     Booking No:
+
 
                                     <strong>
 
+
                                         {{ $notification->data['booking_number'] }}
 
+
                                     </strong>
+
 
 
                                 </p>
@@ -104,12 +148,21 @@
 
 
 
+
+
+
                                 <p class="mb-0">
+
 
 
                                     <i class="fa-solid fa-circle-info me-2"></i>
 
+
+
                                     Status:
+
+
+
 
 
                                     @if($notification->data['status'] == 'completed')
@@ -117,9 +170,13 @@
 
                                         <span class="badge bg-success rounded-pill">
 
+
                                             Completed
 
+
                                         </span>
+
+
 
 
 
@@ -128,9 +185,13 @@
 
                                         <span class="badge bg-primary rounded-pill">
 
+
                                             Accepted
 
+
                                         </span>
+
+
 
 
 
@@ -139,9 +200,13 @@
 
                                         <span class="badge bg-warning text-dark rounded-pill">
 
+
                                             Pending
 
+
                                         </span>
+
+
 
 
 
@@ -150,40 +215,64 @@
 
                                         <span class="badge bg-danger rounded-pill">
 
+
                                             {{ ucfirst($notification->data['status']) }}
 
+
                                         </span>
+
+
 
 
 
                                     @endif
 
 
+
                                 </p>
 
 
+
+
+
                             </div>
+
+
+
 
 
                         </div>
 
 
 
+
+
+
+
+
                         @if(!$notification->read_at)
+
 
 
                             <span class="badge bg-danger rounded-pill">
 
+
                                 New
 
+
                             </span>
+
 
 
                         @endif
 
 
 
+
+
                     </div>
+
+
 
 
 
@@ -192,12 +281,16 @@
                     @if(!$notification->read_at)
 
 
+
                     <div class="mt-4">
 
 
-                        <form
-                            method="POST"
-                            action="{{ route('notifications.read',$notification->id) }}">
+
+
+
+                        <form method="POST"
+                              action="{{ route('notifications.read',$notification->id) }}">
+
 
 
                             @csrf
@@ -206,25 +299,43 @@
 
 
 
-                            <button
-                                class="btn btn-primary rounded-pill px-4">
+
+
+                            <button class="btn btn-primary rounded-pill px-4">
+
 
 
                                 <i class="fa-solid fa-check me-2"></i>
 
+
+
                                 Mark as Read
+
+
+
 
 
                             </button>
 
 
+
+
+
                         </form>
+
+
+
 
 
                     </div>
 
 
+
+
+
                     @endif
+
+
 
 
 
@@ -237,11 +348,17 @@
 
 
 
+
         @empty
 
 
 
+
+
             <div class="card border-0 shadow-lg rounded-4 p-5 text-center">
+
+
+
 
 
                 <div class="mb-3">
@@ -253,21 +370,36 @@
                 </div>
 
 
+
+
+
                 <h4 class="fw-bold">
 
+
                     No Notifications Yet
+
 
                 </h4>
 
 
+
+
+
                 <p class="text-muted">
 
+
                     Your booking updates and important alerts will appear here.
+
 
                 </p>
 
 
+
+
+
             </div>
+
+
 
 
 
@@ -275,10 +407,14 @@
 
 
 
+
+
+
         </div>
 
 
     </div>
+
 
 
 

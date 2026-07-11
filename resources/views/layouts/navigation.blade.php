@@ -1,152 +1,140 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-    
-            <div class="flex">
-    
-                <div class="shrink-0 flex items-center">
+    <div class="container">
 
-                    @auth
-                        @if(auth()->user()->role === 'customer')
-                            <a href="{{ route('customer.dashboard') }}">
-                        @elseif(auth()->user()->role === 'worker')
-                            <a href="{{ route('worker.dashboard') }}">
-                        @elseif(auth()->user()->role === 'admin')
-                            <a href="{{ route('admin.dashboard') }}">
-                        @else
-                            <a href="{{ url('/') }}">
-                        @endif
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                        </a>
-                    @else
-                        <a href="{{ url('/') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                        </a>
-                    @endauth
-                
-                </div>
-    
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @auth
-                        @if(auth()->user()->role == 'customer')
-                            <x-nav-link :href="route('customer.dashboard')">
-                                Dashboard
-                            </x-nav-link>
-                        @elseif(auth()->user()->role == 'worker')
-                            <x-nav-link :href="route('worker.dashboard')">
-                                Dashboard
-                            </x-nav-link>
-                        @elseif(auth()->user()->role == 'admin')
-                            <x-nav-link :href="route('admin.dashboard')">
-                                Dashboard
-                            </x-nav-link>
-                        @endif
-                    @endauth
-                </div>
-    
-            </div>
-    
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-    
+        {{-- Logo --}}
+        @auth
+            @if(auth()->user()->role === 'customer')
+                <a class="navbar-brand fw-bold" href="{{ route('customer.dashboard') }}">
+            @elseif(auth()->user()->role === 'worker')
+                <a class="navbar-brand fw-bold" href="{{ route('worker.dashboard') }}">
+            @elseif(auth()->user()->role === 'admin')
+                <a class="navbar-brand fw-bold" href="{{ route('admin.dashboard') }}">
+            @else
+                <a class="navbar-brand fw-bold" href="{{ url('/') }}">
+            @endif
+        @else
+            <a class="navbar-brand fw-bold" href="{{ url('/') }}">
+        @endauth
+
+            <i class="fas fa-screwdriver-wrench me-2 text-warning"></i>
+            Kaarigar
+
+        </a>
+
+        {{-- Mobile Toggle --}}
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            {{-- Left --}}
+            <ul class="navbar-nav me-auto">
+
                 @auth
-    
-                    <x-dropdown align="right" width="48">
-    
-                        <x-slot name="trigger">
-    
-                            <button
-                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-    
-                                <div>
-                                    {{ Auth::user()->name }}
-                                </div>
-    
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20">
-    
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-    
-                                    </svg>
-                                </div>
-    
-                            </button>
-    
-                        </x-slot>
-    
-                        <x-slot name="content">
-    
-                            @php
-                                // No global "profile.edit" route in this app.
-                                $profileUrl = match (auth()->user()->role) {
-                                    'worker' => route('worker.profile.edit'),
-                                    default => url('/'),
-                                };
-                            @endphp
-                            <x-dropdown-link :href="$profileUrl">
-                                {{ __('Profile') }}
-                            </x-dropdown-link>
-    
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-    
-                                <x-dropdown-link
-                                    :href="route('logout')"
-                                    onclick="event.preventDefault(); this.closest('form').submit();">
-    
-                                    {{ __('Log Out') }}
-    
-                                </x-dropdown-link>
-                            </form>
-    
-                        </x-slot>
-    
-                    </x-dropdown>
-    
+
+                    @if(auth()->user()->role=='customer')
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customer.dashboard') }}">
+                                Dashboard
+                            </a>
+                        </li>
+
+                    @elseif(auth()->user()->role=='worker')
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('worker.dashboard') }}">
+                                Dashboard
+                            </a>
+                        </li>
+
+                    @elseif(auth()->user()->role=='admin')
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                                Dashboard
+                            </a>
+                        </li>
+
+                    @endif
+
                 @endauth
-    
-            </div>
-    
-            <div class="-me-2 flex items-center sm:hidden">
-    
-                <button
-                    @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
-    
-                    <svg class="h-6 w-6"
-                         stroke="currentColor"
-                         fill="none"
-                         viewBox="0 0 24 24">
-    
-                        <path
-                            :class="{'hidden': open, 'inline-flex': ! open }"
-                            class="inline-flex"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-    
-                        <path
-                            :class="{'hidden': ! open, 'inline-flex': open }"
-                            class="hidden"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-    
-                    </svg>
-    
-                </button>
-    
-            </div>
-    
+
+            </ul>
+
+            {{-- Right --}}
+            @auth
+
+                <div class="dropdown">
+
+                    <button
+                        class="btn btn-outline-light dropdown-toggle"
+                        data-bs-toggle="dropdown">
+
+                        <i class="fas fa-user-circle me-2"></i>
+
+                        {{ auth()->user()->name }}
+
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        @if(auth()->user()->role=='worker')
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   href="{{ route('worker.profile.edit') }}">
+
+                                    <i class="fas fa-user-edit me-2"></i>
+
+                                    Profile
+
+                                </a>
+
+                            </li>
+
+                        @endif
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+
+                            <form method="POST"
+                                  action="{{ route('logout') }}">
+
+                                @csrf
+
+                                <button
+                                    type="submit"
+                                    class="dropdown-item text-danger">
+
+                                    <i class="fas fa-right-from-bracket me-2"></i>
+
+                                    Logout
+
+                                </button>
+
+                            </form>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            @endauth
+
         </div>
+
     </div>
-    
-    </nav>
-    
+
+</nav>

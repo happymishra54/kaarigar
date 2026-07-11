@@ -114,9 +114,10 @@ class="form-control">
 
 <div class="mb-3">
 <label>Aadhaar Number</label>
-<input type="number"
+<input type="text"
 name="aadhaar_number"
-class="form-control">
+class="form-control"
+maxlength="12">
 </div>
 
 <div class="mb-3">
@@ -153,9 +154,36 @@ Save Profile
                 style="object-fit: cover;">
         @endif
     
-        <h3 class="text-center fw-bold mb-4">
+        <h3 class="text-center fw-bold mb-3">
             {{ $user->name }}
         </h3>
+        
+        
+        <div class="text-center mb-4">
+        
+            @if($profile->is_verified)
+        
+                <span class="badge bg-success rounded-pill px-4 py-2">
+        
+                    <i class="fa-solid fa-circle-check me-1"></i>
+        
+                    Verified Worker
+        
+                </span>
+        
+            @else
+        
+                <span class="badge bg-warning text-dark rounded-pill px-4 py-2">
+        
+                    <i class="fa-solid fa-clock me-1"></i>
+        
+                    Pending Verification
+        
+                </span>
+        
+            @endif
+        
+        </div>
     
         <div class="text-start">
     
@@ -233,14 +261,25 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+
 <script>
 
 let map;
 let marker;
 
-function fillAddress(data){
+
+
+function fillAddress(data)
+{
+
+    if(!data.address)
+    {
+        return;
+    }
+
 
     const address = data.address;
+
 
     const city =
         address.city ||
@@ -251,95 +290,236 @@ function fillAddress(data){
         address.hamlet ||
         "";
 
+
     const road =
         address.road ||
         address.residential ||
         address.neighbourhood ||
         "";
 
+
     const house =
         address.house_number || "";
 
-    document.querySelector('textarea[name="address"]').value =
+
+
+    let addressBox = document.querySelector('textarea[name="address"]');
+
+    let cityBox = document.querySelector('input[name="city"]');
+
+    let stateBox = document.querySelector('input[name="state"]');
+
+
+
+    if(addressBox)
+    {
+        addressBox.value =
         `${house} ${road}`.trim();
+    }
 
-    document.querySelector('input[name="city"]').value = city;
 
-    document.querySelector('input[name="state"]').value =
+    if(cityBox)
+    {
+        cityBox.value = city;
+    }
+
+
+    if(stateBox)
+    {
+        stateBox.value =
         address.state || "";
+    }
 
 }
 
-function initMap(lat,lng){
 
-    if(map){
+
+
+
+function initMap(lat,lng)
+{
+
+    let mapElement = document.getElementById('mapPreview');
+
+
+    if(!mapElement)
+    {
+        return;
+    }
+
+
+
+    if(map)
+    {
         map.remove();
     }
 
-    map = L.map('mapPreview').setView([lat,lng],15);
+
+
+    map = L.map('mapPreview')
+    .setView(
+        [lat,lng],
+        15
+    );
+
+
 
     L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
+
             attribution:'© OpenStreetMap'
+
         }
+
     ).addTo(map);
 
-    marker = L.marker([lat,lng],{
-        draggable:true
-    }).addTo(map);
 
-    marker.on('dragend',async function(){
 
-        const pos = marker.getLatLng();
+    marker = L.marker(
+        [lat,lng],
+        {
+            draggable:true
+        }
 
-        document.getElementById('latitude').value = pos.lat;
-        document.getElementById('longitude').value = pos.lng;
+    ).addTo(map);
 
-        const res = await fetch(
+
+
+
+    marker.on('dragend', async function(){
+
+
+        let pos = marker.getLatLng();
+
+
+        document.getElementById('latitude').value =
+        pos.lat;
+
+
+        document.getElementById('longitude').value =
+        pos.lng;
+
+
+
+        let response = await fetch(
+
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.lat}&lon=${pos.lng}`
+
         );
 
-        const data = await res.json();
+
+        let data = await response.json();
+
+
 
         fillAddress(data);
 
+
     });
+
 
 }
 
-async function getLocation(){
 
-    if(!navigator.geolocation){
-        alert("Geolocation not supported.");
+
+
+
+
+
+async function getLocation()
+{
+
+
+    if(!navigator.geolocation)
+    {
+
+        alert(
+            "Geolocation not supported."
+        );
+
         return;
+
     }
 
-    navigator.geolocation.getCurrentPosition(async function(position){
 
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
 
-        document.getElementById('latitude').value = lat;
-        document.getElementById('longitude').value = lng;
 
-        const res = await fetch(
+    navigator.geolocation.getCurrentPosition(
+
+    async function(position){
+
+
+
+        const lat =
+        position.coords.latitude;
+
+
+        const lng =
+        position.coords.longitude;
+
+
+
+
+        document.getElementById('latitude').value =
+        lat;
+
+
+        document.getElementById('longitude').value =
+        lng;
+
+
+
+
+
+        let response = await fetch(
+
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+
         );
 
-        const data = await res.json();
+
+
+        let data = await response.json();
+
+
 
         fillAddress(data);
 
-        initMap(lat,lng);
 
-    },function(){
 
-        alert("Unable to fetch location.");
+        initMap(
+            lat,
+            lng
+        );
+
+
+
+    },
+
+    function()
+    {
+
+        alert(
+            "Unable to fetch location."
+        );
+
+    },
+
+    {
+
+        enableHighAccuracy:true,
+        timeout:10000,
+        maximumAge:300000
 
     });
 
+
 }
+
+
+
+
 
 </script>
 
