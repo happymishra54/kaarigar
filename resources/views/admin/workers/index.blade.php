@@ -5,29 +5,34 @@
 <div class="container py-5">
 
     <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
 
         <div>
+    
             <h2 class="fw-bold mb-1">
                 <i class="fas fa-user-hard-hat text-primary me-2"></i>
                 Manage Workers
             </h2>
-
+    
             <p class="text-muted mb-0">
                 View and manage all registered workers.
             </p>
+    
         </div>
-
+    
         <a href="{{ route('admin.workers.create') }}"
-           class="btn btn-primary rounded-pill px-4">
+           class="btn btn-primary">
+    
             <i class="fas fa-user-plus me-2"></i>
+    
             Add Worker
+    
         </a>
-
+    
     </div>
 
     <!-- Card -->
-    <div class="card border-0 shadow-lg rounded-4">
+    <div class="card shadow-sm">
 
         <div class="card-body">
 
@@ -70,8 +75,8 @@
                                 {{ $worker->phone ?? 'N/A' }}
                             </td>
 
-                            <td>
-                                {{ Str::limit($worker->workerProfile->bio ?? 'N/A', 40) }}
+                            <td style="max-width:220px;">
+                                {{ Str::limit($worker->workerProfile?->bio ?? 'N/A', 40) }}
                             </td>
 
                             <td>
@@ -90,7 +95,7 @@
 
                                     <button
                                         type="submit"
-                                        class="btn btn-outline-danger btn-sm rounded-pill"
+                                        class="btn btn-outline-danger btn-sm"
                                         onclick="return confirm('Delete this worker?')">
 
                                         <i class="fas fa-trash me-1"></i>

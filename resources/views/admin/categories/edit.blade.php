@@ -6,28 +6,36 @@
 
     <div class="row justify-content-center">
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-8">
 
-            <div class="card border-0 shadow-lg rounded-4">
+            <div class="card shadow-sm border-0">
 
-                <div class="card-body p-5">
+                <div class="card-body p-4 p-lg-5">
 
                     <div class="text-center mb-4">
 
-                        <i class="fas fa-pen-to-square fa-3x text-warning mb-3"></i>
+                        <span class="badge bg-warning-subtle text-warning px-3 py-2 rounded-pill">
+                            CATEGORY
+                        </span>
 
-                        <h2 class="fw-bold">
+                        <h2 class="fw-bold mt-3">
+
+                            <i class="fas fa-pen-to-square text-warning me-2"></i>
+
                             Edit Category
+
                         </h2>
 
-                        <p class="text-muted">
-                            Update the category information below.
+                        <p class="text-muted mb-0">
+
+                            Update the category details below.
+
                         </p>
 
                     </div>
 
                     <form
-                        action="{{ route('categories.update',$category) }}"
+                        action="{{ route('categories.update', $category) }}"
                         method="POST">
 
                         @csrf
@@ -36,16 +44,28 @@
                         <div class="mb-4">
 
                             <label class="form-label fw-semibold">
+
                                 Category Name
+
                             </label>
 
                             <input
                                 type="text"
                                 name="name"
                                 value="{{ old('name', $category->name) }}"
-                                class="form-control form-control-lg"
-                                placeholder="Enter category name"
+                                class="form-control"
+                                placeholder="e.g. Electrician"
                                 required>
+
+                            @error('name')
+
+                                <div class="text-danger small mt-2">
+
+                                    {{ $message }}
+
+                                </div>
+
+                            @enderror
 
                         </div>
 
@@ -53,7 +73,7 @@
 
                             <a
                                 href="{{ route('categories.index') }}"
-                                class="btn btn-outline-secondary rounded-pill px-4">
+                                class="btn btn-outline-secondary">
 
                                 <i class="fas fa-arrow-left me-2"></i>
 
@@ -63,9 +83,9 @@
 
                             <button
                                 type="submit"
-                                class="btn btn-warning rounded-pill px-4">
+                                class="btn btn-warning">
 
-                                <i class="fas fa-floppy-disk me-2"></i>
+                                <i class="fas fa-save me-2"></i>
 
                                 Update Category
 

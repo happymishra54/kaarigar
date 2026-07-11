@@ -10,35 +10,28 @@
 
 
             {{-- BOOKING HEADER --}}
-            <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4">
+            <div class="card border-0 shadow rounded-4 overflow-hidden mb-4">
 
                 <div class="card-body p-4">
 
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-
                         <div>
 
-                            <span class="text-muted small">
+                            <small class="text-muted">
                                 Booking ID
-                            </span>
+                            </small>
 
                             <h2 class="fw-bold mb-1">
-
                                 #{{ $booking->booking_number }}
-
                             </h2>
 
                             <p class="text-muted mb-0">
-
                                 <i class="fa-regular fa-clock me-1"></i>
-
                                 {{ $booking->created_at->format('d M Y, h:i A') }}
-
                             </p>
 
                         </div>
-
 
 
                         <div>
@@ -46,65 +39,45 @@
                             @switch($booking->status)
 
                                 @case('pending')
-
-                                    <span class="badge bg-warning text-dark rounded-pill px-4 py-2 fs-6">
-
+                                    <span class="badge bg-warning text-dark rounded-pill px-4 py-2">
                                         <i class="fa-solid fa-hourglass-half me-1"></i>
                                         Pending
-
                                     </span>
-
                                 @break
 
 
                                 @case('accepted')
-
-                                    <span class="badge bg-success rounded-pill px-4 py-2 fs-6">
-
+                                    <span class="badge bg-success rounded-pill px-4 py-2">
                                         <i class="fa-solid fa-check me-1"></i>
                                         Accepted
-
                                     </span>
-
                                 @break
 
 
                                 @case('in_progress')
-
-                                    <span class="badge bg-info text-dark rounded-pill px-4 py-2 fs-6">
-
+                                    <span class="badge bg-info text-dark rounded-pill px-4 py-2">
                                         <i class="fa-solid fa-screwdriver-wrench me-1"></i>
                                         Work Started
-
                                     </span>
-
                                 @break
 
 
                                 @case('completed')
-
-                                    <span class="badge bg-primary rounded-pill px-4 py-2 fs-6">
-
+                                    <span class="badge bg-primary rounded-pill px-4 py-2">
                                         <i class="fa-solid fa-circle-check me-1"></i>
                                         Completed
-
                                     </span>
-
                                 @break
 
 
                                 @default
-
-                                    <span class="badge bg-danger rounded-pill px-4 py-2 fs-6">
-
+                                    <span class="badge bg-danger rounded-pill px-4 py-2">
                                         Cancelled
-
                                     </span>
 
                             @endswitch
 
                         </div>
-
 
                     </div>
 
@@ -115,61 +88,48 @@
 
 
 
-            {{-- WORKER DETAILS --}}
 
+            {{-- WORKER DETAILS --}}
             <div class="card border-0 shadow rounded-4 mb-4">
 
                 <div class="card-body p-4">
 
-
                     <h4 class="fw-bold mb-4">
-
                         <i class="fa-solid fa-user-gear text-primary me-2"></i>
-
                         Worker Details
-
                     </h4>
-
 
 
                     <div class="row align-items-center">
 
-
                         <div class="col-md-8 d-flex align-items-center gap-3">
 
 
-                            <div>
+                            @if($booking->worker->profile_image)
 
-                                @if($booking->worker->profile_image)
+                                <img
+                                src="{{ asset('storage/'.$booking->worker->profile_image) }}"
+                                width="85"
+                                height="85"
+                                class="rounded-circle">
 
-                                    <img
-                                    src="{{ asset('storage/'.$booking->worker->profile_image) }}"
-                                    width="85"
-                                    height="85"
-                                    class="rounded-circle object-fit-cover">
+                            @else
 
-                                @else
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                     style="width:85px;height:85px">
 
-                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                                    style="width:85px;height:85px;font-size:35px">
+                                    <i class="fa-solid fa-user fs-2"></i>
 
-                                        <i class="fa-solid fa-user"></i>
+                                </div>
 
-                                    </div>
-
-                                @endif
-
-
-                            </div>
+                            @endif
 
 
 
                             <div>
 
                                 <h4 class="mb-1">
-
                                     {{ $booking->worker->name }}
-
                                 </h4>
 
 
@@ -197,15 +157,12 @@
                         </div>
 
 
-
                         <div class="col-md-4 text-md-end mt-3 mt-md-0">
-
 
                             @if($booking->worker->phone)
 
-                            <a
-                            href="tel:{{ $booking->worker->phone }}"
-                            class="btn btn-success rounded-pill px-4">
+                            <a href="tel:{{ $booking->worker->phone }}"
+                               class="btn btn-success rounded-pill px-4">
 
                                 <i class="fa-solid fa-phone me-2"></i>
 
@@ -214,7 +171,6 @@
                             </a>
 
                             @endif
-
 
                         </div>
 
@@ -230,14 +186,10 @@
 
 
 
-
             {{-- BOOKING DETAILS --}}
-
             <div class="card border-0 shadow rounded-4 mb-4">
 
-
                 <div class="card-body p-4">
-
 
                     <h4 class="fw-bold mb-4">
 
@@ -252,83 +204,30 @@
                     <div class="row g-3">
 
 
+                        @foreach([
+                            'Service' => $booking->service->title,
+                            'Booking Date' => \Carbon\Carbon::parse($booking->booking_date)->format('d M Y'),
+                            'Time' => \Carbon\Carbon::parse($booking->booking_time)->format('h:i A'),
+                            'Amount' => '₹'.number_format($booking->amount,2)
+                        ] as $label=>$value)
+
                         <div class="col-md-6">
 
                             <div class="p-3 rounded-4 bg-light">
 
                                 <small class="text-muted">
-                                    Service
+                                    {{ $label }}
                                 </small>
 
                                 <h5 class="mb-0 fw-bold">
-
-                                    {{ $booking->service->title }}
-
+                                    {{ $value }}
                                 </h5>
 
                             </div>
 
                         </div>
 
-
-
-                        <div class="col-md-6">
-
-                            <div class="p-3 rounded-4 bg-light">
-
-                                <small class="text-muted">
-                                    Booking Date
-                                </small>
-
-                                <h5 class="mb-0 fw-bold">
-
-                                    {{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}
-
-                                </h5>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="col-md-6">
-
-                            <div class="p-3 rounded-4 bg-light">
-
-                                <small class="text-muted">
-                                    Time
-                                </small>
-
-                                <h5 class="mb-0 fw-bold">
-
-                                    {{ \Carbon\Carbon::parse($booking->booking_time)->format('h:i A') }}
-
-                                </h5>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="col-md-6">
-
-                            <div class="p-3 rounded-4 bg-light">
-
-                                <small class="text-muted">
-                                    Amount
-                                </small>
-
-                                <h4 class="mb-0 text-success fw-bold">
-
-                                    ₹{{ number_format($booking->amount,2) }}
-
-                                </h4>
-
-                            </div>
-
-                        </div>
+                        @endforeach
 
 
 
@@ -358,21 +257,16 @@
 
                 </div>
 
-
             </div>
 
 
 
 
 
-
-            {{-- TIMELINE --}}
-
+            {{-- BOOTSTRAP TIMELINE --}}
             <div class="card border-0 shadow rounded-4 mb-4">
 
-
                 <div class="card-body p-4">
-
 
                     <h4 class="fw-bold mb-4">
 
@@ -384,21 +278,31 @@
 
 
 
-                    <div class="timeline">
+                    <div class="list-group">
 
 
-                        <div class="timeline-item active">
+                        @foreach([
+                            ['Booking Created','Your request has been submitted.',true],
+                            ['Worker Accepted','Worker confirmed your booking.',in_array($booking->status,['accepted','in_progress','completed'])],
+                            ['Work Started','Service is in progress.',in_array($booking->status,['in_progress','completed'])],
+                            ['Completed','Job finished successfully.',$booking->status=='completed']
+                        ] as $step)
 
-                            <i class="fa-solid fa-check"></i>
+
+                        <div class="list-group-item border-0 d-flex gap-3">
+
+                            <i class="fa-solid fa-circle-check 
+                            {{ $step[2] ? 'text-success':'text-muted' }} fs-4"></i>
+
 
                             <div>
 
-                                <h6>
-                                    Booking Created
+                                <h6 class="mb-1 fw-bold">
+                                    {{ $step[0] }}
                                 </h6>
 
-                                <p>
-                                    Your request has been submitted.
+                                <p class="text-muted mb-0">
+                                    {{ $step[1] }}
                                 </p>
 
                             </div>
@@ -406,67 +310,7 @@
                         </div>
 
 
-
-                        <div class="timeline-item 
-                        {{ in_array($booking->status,['accepted','in_progress','completed']) ? 'active':'' }}">
-
-                            <i class="fa-solid fa-user-check"></i>
-
-                            <div>
-
-                                <h6>
-                                    Worker Accepted
-                                </h6>
-
-                                <p>
-                                    Worker confirmed your booking.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="timeline-item 
-                        {{ in_array($booking->status,['in_progress','completed']) ? 'active':'' }}">
-
-                            <i class="fa-solid fa-toolbox"></i>
-
-                            <div>
-
-                                <h6>
-                                    Work Started
-                                </h6>
-
-                                <p>
-                                    Service is in progress.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="timeline-item 
-                        {{ $booking->status=='completed' ? 'active':'' }}">
-
-                            <i class="fa-solid fa-circle-check"></i>
-
-                            <div>
-
-                                <h6>
-                                    Completed
-                                </h6>
-
-                                <p>
-                                    Job finished successfully.
-                                </p>
-
-                            </div>
-
-                        </div>
+                        @endforeach
 
 
                     </div>
@@ -480,25 +324,20 @@
 
 
 
-
             {{-- ACTIONS --}}
-
             <div class="text-center">
 
 
                 @if($booking->status=='pending')
 
-
-                    <form
-                    action="{{ route('booking.cancel',$booking->id) }}"
-                    method="POST">
+                    <form action="{{ route('booking.cancel',$booking->id) }}"
+                          method="POST">
 
                         @csrf
                         @method('PATCH')
 
 
-                        <button
-                        class="btn btn-danger rounded-pill px-5 py-3">
+                        <button class="btn btn-danger rounded-pill px-5 py-3">
 
                             <i class="fa-solid fa-xmark me-2"></i>
 
@@ -510,28 +349,22 @@
                     </form>
 
 
-
                 @elseif($booking->status=='completed' && !$booking->review)
 
 
-                    <a
-                    href="{{ route('review.create',$booking->id) }}"
-                    class="btn btn-primary rounded-pill px-5 py-3">
-
+                    <a href="{{ route('review.create',$booking->id) }}"
+                       class="btn btn-primary rounded-pill px-5 py-3">
 
                         ⭐ Leave Review
 
-
                     </a>
-
 
 
                 @else
 
 
-                    <button
-                    class="btn btn-secondary rounded-pill px-5 py-3"
-                    disabled>
+                    <button class="btn btn-secondary rounded-pill px-5 py-3"
+                            disabled>
 
                         No Action Available
 
@@ -549,6 +382,5 @@
     </div>
 
 </div>
-
 
 @endsection

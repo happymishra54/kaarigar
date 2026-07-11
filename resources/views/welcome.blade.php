@@ -7,135 +7,144 @@
 
 
 
-<section class="py-5 position-relative overflow-hidden">
+<section class="py-5 bg-light">
 
     <div class="container">
 
+        <!-- Heading -->
+
         <div class="text-center mb-5">
 
-            <span class="section-tag">
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">
+
                 WHY CHOOSE KAARIGAR
+
             </span>
 
-            <h2 class="section-title mt-3">
-                Home Services You Can
-                <span class="text-primary">Trust</span>
+            <h2 class="display-5 fw-bold mt-4">
+
+                Trusted Home Services,
+                <span class="text-primary">Delivered Right</span>
+
             </h2>
 
-            <p class="section-subtitle mx-auto" style="max-width:700px;">
+            <p class="lead text-secondary mx-auto" style="max-width:700px;">
 
-                From booking to completion, we make hiring skilled professionals
-                simple, secure and completely hassle-free.
+                Hire verified professionals with confidence.
+                Fast booking, transparent service and reliable support —
+                all in one place.
 
             </p>
 
         </div>
 
+        <!-- Features -->
+
         <div class="row g-4">
 
-            <div class="col-xl-3 col-lg-6 col-md-6">
+            <div class="col-lg-3 col-md-6">
 
-                <div class="feature-card h-100">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
 
-                    <div class="feature-icon blue">
+                    <div class="mx-auto mb-4 rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                         style="width:80px;height:80px;">
 
-                        <i class="fa-solid fa-shield-check"></i>
-
-                    </div>
-
-                    <div class="feature-content">
-
-                        <h4>Verified Professionals</h4>
-
-                        <p>
-
-                            Every worker goes through identity verification
-                            before joining our platform.
-
-                        </p>
+                        <i class="fas fa-shield-check fa-2x"></i>
 
                     </div>
+
+                    <h4 class="fw-bold">
+
+                        Verified Workers
+
+                    </h4>
+
+                    <p class="text-muted mb-0">
+
+                        Every professional is identity verified before joining Kaarigar.
+
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="col-xl-3 col-lg-6 col-md-6">
+            <div class="col-lg-3 col-md-6">
 
-                <div class="feature-card h-100">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
 
-                    <div class="feature-icon green">
+                    <div class="mx-auto mb-4 rounded-circle bg-success text-white d-flex align-items-center justify-content-center"
+                         style="width:80px;height:80px;">
 
-                        <i class="fa-solid fa-bolt"></i>
-
-                    </div>
-
-                    <div class="feature-content">
-
-                        <h4>Instant Booking</h4>
-
-                        <p>
-
-                            Find, compare and book skilled workers in just
-                            a few clicks.
-
-                        </p>
+                        <i class="fas fa-calendar-check fa-2x"></i>
 
                     </div>
+
+                    <h4 class="fw-bold">
+
+                        Easy Booking
+
+                    </h4>
+
+                    <p class="text-muted mb-0">
+
+                        Search, compare and book skilled workers in just a few clicks.
+
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="col-xl-3 col-lg-6 col-md-6">
+            <div class="col-lg-3 col-md-6">
 
-                <div class="feature-card h-100">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
 
-                    <div class="feature-icon yellow">
+                    <div class="mx-auto mb-4 rounded-circle bg-warning text-dark d-flex align-items-center justify-content-center"
+                         style="width:80px;height:80px;">
 
-                        <i class="fa-solid fa-award"></i>
-
-                    </div>
-
-                    <div class="feature-content">
-
-                        <h4>Quality Work</h4>
-
-                        <p>
-
-                            Experienced professionals delivering reliable,
-                            high-quality service every time.
-
-                        </p>
+                        <i class="fas fa-award fa-2x"></i>
 
                     </div>
+
+                    <h4 class="fw-bold">
+
+                        Quality Service
+
+                    </h4>
+
+                    <p class="text-muted mb-0">
+
+                        Skilled professionals committed to delivering excellent work.
+
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="col-xl-3 col-lg-6 col-md-6">
+            <div class="col-lg-3 col-md-6">
 
-                <div class="feature-card h-100">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
 
-                    <div class="feature-icon purple">
+                    <div class="mx-auto mb-4 rounded-circle bg-danger text-white d-flex align-items-center justify-content-center"
+                         style="width:80px;height:80px;">
 
-                        <i class="fa-solid fa-headset"></i>
-
-                    </div>
-
-                    <div class="feature-content">
-
-                        <h4>Always Here to Help</h4>
-
-                        <p>
-
-                            Friendly customer support before, during and after
-                            every booking.
-
-                        </p>
+                        <i class="fas fa-headset fa-2x"></i>
 
                     </div>
+
+                    <h4 class="fw-bold">
+
+                        Dedicated Support
+
+                    </h4>
+
+                    <p class="text-muted mb-0">
+
+                        Our support team is here whenever you need assistance.
+
+                    </p>
 
                 </div>
 
@@ -143,61 +152,75 @@
 
         </div>
 
-        <div class="row mt-5">
+        <!-- Statistics -->
 
-            <div class="col-lg-10 mx-auto">
+        <div class="card border-0 shadow-lg rounded-4 mt-5">
 
-                <div class="bg-white rounded-4 shadow-sm border p-4">
+            <div class="card-body py-5">
 
-                    <div class="row text-center">
+                <div class="row text-center">
 
-                        <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="col-md-3">
 
-                            <h3 class="fw-bold text-primary mb-1">
-                                {{ number_format($verifiedWorkers) }}+
-                            </h3>
+                        <h2 class="fw-bold text-primary">
 
-                            <small class="text-muted">
-                                Verified Workers
-                            </small>
+                            {{ number_format($verifiedWorkers) }}+
 
-                        </div>
+                        </h2>
 
-                        <div class="col-md-3 mb-3 mb-md-0">
+                        <p class="text-muted mb-0">
 
-                            <h3 class="fw-bold text-success mb-1">
-                                {{ number_format($totalBookings) }}+
-                            </h3>
+                            Verified Workers
 
-                            <small class="text-muted">
-                                Completed Bookings
-                            </small>
+                        </p>
 
-                        </div>
+                    </div>
 
-                        <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="col-md-3">
 
-                            <h3 class="fw-bold text-warning mb-1">
-                                {{ $totalCities }}+
-                            </h3>
+                        <h2 class="fw-bold text-success">
 
-                            <small class="text-muted">
-                                Cities Served
-                            </small>
+                            {{ number_format($totalBookings) }}+
 
-                        </div>
+                        </h2>
 
-                        <div class="col-md-3">
+                        <p class="text-muted mb-0">
 
-                            <h3 class="fw-bold text-danger mb-1">
-                                {{ $averageRating }} ★
-                            </h3>
+                            Completed Bookings
 
-                            <small class="text-muted">
-                                Customer Rating
-                            </small>
+                        </p>
 
-                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <h2 class="fw-bold text-warning">
+
+                            {{ $totalCities }}+
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Cities Served
+
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <h2 class="fw-bold text-danger">
+
+                            {{ $averageRating }} ★
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Customer Rating
+
+                        </p>
 
                     </div>
 
@@ -214,28 +237,31 @@
 
 
 
-<section class="stats-section section-blue py-5 position-relative overflow-hidden">
+<section class="py-5 bg-primary text-white">
 
     <div class="container">
 
         <div class="text-center mb-5">
 
-            <span class="section-tag">
+            <span class="badge bg-warning text-dark rounded-pill px-3 py-2">
+
                 OUR IMPACT
+
             </span>
 
-            <h2 class="section-title text-white mt-3">
+            <h2 class="display-5 fw-bold mt-4">
 
                 Trusted by Thousands
                 <br>
+
                 Across India
 
             </h2>
 
-            <p class="section-subtitle text-white-50 mx-auto" style="max-width:650px;">
+            <p class="lead text-white-50 mx-auto" style="max-width:650px;">
 
-                Every booking strengthens our mission of connecting customers
-                with trusted and verified local professionals.
+                Every booking helps us connect customers with trusted,
+                verified local professionals across the country.
 
             </p>
 
@@ -243,108 +269,128 @@
 
         <div class="row g-4">
 
-            <div class="col-xl-3 col-md-6">
+            {{-- Verified Workers --}}
+            <div class="col-lg-3 col-sm-6">
 
-                <div class="stats-card bg-white shadow-lg rounded-4 p-4 text-center h-100">
+                <div class="card h-100 border-0 shadow text-center">
 
-                    <div class="stats-icon mb-3">
+                    <div class="card-body py-4">
 
-                        <i class="fa-solid fa-users"></i>
+                        <div class="display-5 text-primary mb-3">
+
+                            <i class="fas fa-users"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold counter"
+                            data-target="{{ $verifiedWorkers }}">
+
+                            {{ number_format($verifiedWorkers) }}
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Verified Workers
+
+                        </p>
 
                     </div>
-
-                    <h2 class="fw-bold display-6 mb-2 counter"
-                        data-target="{{ $verifiedWorkers }}">
-
-                        {{ number_format($verifiedWorkers) }}
-
-                    </h2>
-
-                    <p class="mb-0 text-secondary">
-
-                        Verified Workers
-
-                    </p>
 
                 </div>
 
             </div>
 
-            <div class="col-xl-3 col-md-6">
+            {{-- Bookings --}}
+            <div class="col-lg-3 col-sm-6">
 
-                <div class="stats-card bg-white shadow-lg rounded-4 p-4 text-center h-100">
+                <div class="card h-100 border-0 shadow text-center">
 
-                    <div class="stats-icon mb-3">
+                    <div class="card-body py-4">
 
-                        <i class="fa-solid fa-calendar-check"></i>
+                        <div class="display-5 text-success mb-3">
+
+                            <i class="fas fa-calendar-check"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold counter"
+                            data-target="{{ $totalBookings }}">
+
+                            {{ number_format($totalBookings) }}
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Completed Bookings
+
+                        </p>
 
                     </div>
-
-                    <h2 class="fw-bold display-6 mb-2 counter"
-                        data-target="{{ $totalBookings }}">
-
-                        {{ number_format($totalBookings) }}
-
-                    </h2>
-
-                    <p class="mb-0 text-secondary">
-
-                        Bookings Completed
-
-                    </p>
 
                 </div>
 
             </div>
 
-            <div class="col-xl-3 col-md-6">
+            {{-- Cities --}}
+            <div class="col-lg-3 col-sm-6">
 
-                <div class="stats-card bg-white shadow-lg rounded-4 p-4 text-center h-100">
+                <div class="card h-100 border-0 shadow text-center">
 
-                    <div class="stats-icon mb-3">
+                    <div class="card-body py-4">
 
-                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="display-5 text-warning mb-3">
+
+                            <i class="fas fa-location-dot"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold counter"
+                            data-target="{{ $totalCities }}">
+
+                            {{ number_format($totalCities) }}
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Cities Covered
+
+                        </p>
 
                     </div>
-
-                    <h2 class="fw-bold display-6 mb-2 counter"
-                        data-target="{{ $totalCities }}">
-
-                        {{ $totalCities }}
-
-                    </h2>
-
-                    <p class="mb-0 text-secondary">
-
-                        Cities Covered
-
-                    </p>
 
                 </div>
 
             </div>
 
-            <div class="col-xl-3 col-md-6">
+            {{-- Rating --}}
+            <div class="col-lg-3 col-sm-6">
 
-                <div class="stats-card bg-white shadow-lg rounded-4 p-4 text-center h-100">
+                <div class="card h-100 border-0 shadow text-center">
 
-                    <div class="stats-icon mb-3">
+                    <div class="card-body py-4">
 
-                        <i class="fa-solid fa-star"></i>
+                        <div class="display-5 text-danger mb-3">
+
+                            <i class="fas fa-star"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold">
+
+                            {{ $averageRating }}★
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Customer Rating
+
+                        </p>
 
                     </div>
-
-                    <h2 class="fw-bold display-6 mb-2">
-
-                        {{ $averageRating }}★
-
-                    </h2>
-
-                    <p class="mb-0 text-secondary">
-
-                        Customer Rating
-
-                    </p>
 
                 </div>
 
@@ -361,102 +407,91 @@
 
 
 
-<section class="py-5 position-relative overflow-hidden">
+<section class="py-5 bg-light" id="categories">
 
     <div class="container">
 
         <div class="text-center mb-5">
 
-            <span class="section-tag">
+            <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
+
                 POPULAR CATEGORIES
+
             </span>
 
-            <h2 class="section-title mt-3">
+            <h2 class="display-5 fw-bold mt-4">
 
                 Find Skilled Professionals
                 <br>
-                For Every Service
+
+                <span class="text-primary">
+                    For Every Service
+                </span>
 
             </h2>
 
-            <p class="section-subtitle mx-auto" style="max-width:680px;">
+            <p class="lead text-secondary mx-auto" style="max-width:680px;">
 
-                Whether you need an electrician, plumber, carpenter or cleaner,
-                discover trusted professionals ready to help.
+                Hire trusted and verified professionals for all your
+                home maintenance and repair needs.
 
             </p>
 
         </div>
 
-        <div class="row g-4">
+        @php
+            $icons = [
+                'Plumber'      => 'fa-faucet',
+                'Electrician'  => 'fa-bolt',
+                'Carpenter'    => 'fa-hammer',
+                'Painter'      => 'fa-paint-roller',
+                'Cleaner'      => 'fa-broom',
+                'Mechanic'     => 'fa-screwdriver-wrench',
+                'RO'           => 'fa-droplet',
+                'AC Repair'    => 'fa-fan',
+            ];
+        @endphp
 
-            @php
-                $icons = [
-                    'Plumber'      => 'fa-faucet',
-                    'Electrician'  => 'fa-bolt',
-                    'Carpenter'    => 'fa-hammer',
-                    'Painter'      => 'fa-paint-roller',
-                    'Cleaner'      => 'fa-broom',
-                    'Mechanic'     => 'fa-screwdriver-wrench',
-                    'RO'           => 'fa-droplet',
-                    'AC Repair'    => 'fa-fan',
-                ];
-            @endphp
+        <div class="row g-4">
 
             @foreach($categories as $category)
 
                 <div class="col-xl-3 col-lg-4 col-md-6">
 
-                    <a
-                        href="{{ route('home',['search'=>$category->name]) }}"
-                        class="text-decoration-none">
+                    <a href="{{ route('home',['search'=>$category->name]) }}"
+                       class="text-decoration-none">
 
-                        <div class="premium-category-card h-100">
+                        <div class="card border-0 shadow-sm h-100 text-center">
 
-                            <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="card-body p-4">
 
-                                <div class="category-icon">
+                                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-4"
+                                     style="width:75px;height:75px;">
 
-                                    <i class="fa-solid {{ $icons[$category->name] ?? 'fa-screwdriver-wrench' }}"></i>
-
-                                </div>
-
-                                <span class="badge rounded-pill bg-success-subtle text-success px-3 py-2">
-
-                                    Available
-
-                                </span>
-
-                            </div>
-
-                            <h4 class="fw-bold mb-3">
-
-                                {{ $category->name }}
-
-                            </h4>
-
-                            <p class="text-muted mb-4">
-
-                                Connect with experienced and verified
-                                professionals for all your
-                                {{ strtolower($category->name) }} needs.
-
-                            </p>
-
-                            <div class="d-flex justify-content-between align-items-center">
-
-                                <span class="fw-semibold text-primary">
-
-                                    View Workers
-
-                                </span>
-
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                                     style="width:42px;height:42px;">
-
-                                    <i class="fa-solid fa-arrow-right"></i>
+                                    <i class="fa-solid {{ $icons[$category->name] ?? 'fa-screwdriver-wrench' }} fa-2x"></i>
 
                                 </div>
+
+                                <h4 class="fw-bold">
+
+                                    {{ $category->name }}
+
+                                </h4>
+
+                                <p class="text-muted my-3">
+
+                                    Verified professionals available for all your
+                                    {{ strtolower($category->name) }} requirements.
+
+                                </p>
+
+                                <button class="btn btn-outline-primary rounded-pill px-4">
+
+                                    Explore Services
+
+                                    <i class="fas fa-arrow-right ms-2"></i>
+
+                                </button>
 
                             </div>
 
@@ -483,30 +518,35 @@
 
 
 
-<section class="services-section py-5">
+<section class="py-5 bg-white" id="services">
 
     <div class="container">
 
         <div class="text-center mb-5">
 
-            <span class="section-tag">
+            <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
 
                 POPULAR SERVICES
 
             </span>
 
-            <h2 class="section-title">
+            <h2 class="display-5 fw-bold mt-4">
 
                 Professional Services
                 <br>
-                For Every Home
+
+                <span class="text-primary">
+
+                    For Every Home
+
+                </span>
 
             </h2>
 
-            <p class="section-subtitle">
+            <p class="lead text-secondary mx-auto" style="max-width:700px;">
 
-                Discover trusted professionals for your everyday home service
-                needs with transparent pricing and reliable quality.
+                Book trusted professionals with transparent pricing,
+                verified quality and reliable service.
 
             </p>
 
@@ -518,27 +558,31 @@
 
                 <div class="col-lg-4 col-md-6">
 
-                    <div class="premium-service-card reveal">
+                    <div class="card border-0 shadow-sm h-100">
 
-                        <div class="service-image">
+                        <div class="position-relative">
 
                             @if($service->image)
 
                                 <img
                                     src="{{ asset('storage/'.$service->image) }}"
+                                    class="card-img-top"
+                                    style="height:230px;object-fit:cover;"
                                     alt="{{ $service->title }}">
 
                             @else
 
                                 <img
                                     src="{{ asset('images/default-service.jpg') }}"
+                                    class="card-img-top"
+                                    style="height:230px;object-fit:cover;"
                                     alt="{{ $service->title }}">
 
                             @endif
 
-                            <span class="service-badge">
+                            <span class="badge bg-danger position-absolute top-0 end-0 m-3 px-3 py-2">
 
-                                <i class="fa-solid fa-fire me-1"></i>
+                                <i class="fas fa-fire me-1"></i>
 
                                 Popular
 
@@ -546,49 +590,49 @@
 
                         </div>
 
-                        <div class="service-body">
+                        <div class="card-body d-flex flex-column">
 
-                            <small class="text-primary fw-semibold mb-2 d-block">
+                            <span class="badge bg-success-subtle text-success align-self-start mb-3">
 
                                 Verified Service
 
-                            </small>
+                            </span>
 
-                            <h4>
+                            <h4 class="fw-bold">
 
                                 {{ $service->title }}
 
                             </h4>
 
-                            <p>
+                            <p class="text-secondary flex-grow-1">
 
-                                {{ Str::limit($service->description,95) }}
+                                {{ Str::limit($service->description,100) }}
 
                             </p>
 
-                            <div class="service-footer">
+                            <div class="d-flex justify-content-between align-items-center mt-3">
 
                                 <div>
 
-                                    <small class="text-muted d-block">
+                                    <small class="text-muted">
 
                                         Starting From
 
                                     </small>
 
-                                    <h5 class="text-primary">
+                                    <h4 class="fw-bold text-primary mb-0">
 
                                         ₹{{ number_format($service->price) }}
 
-                                    </h5>
+                                    </h4>
 
                                 </div>
 
                                 <a
                                     href="{{ route('home',['search'=>$service->title]) }}"
-                                    class="btn-primary-custom">
+                                    class="btn btn-primary rounded-pill px-4">
 
-                                    Book Now
+                                    Book
 
                                 </a>
 
@@ -608,11 +652,11 @@
 
             <a
                 href="{{ route('home') }}"
-                class="btn-outline-custom">
+                class="btn btn-outline-primary btn-lg rounded-pill px-5">
 
                 View All Services
 
-                <i class="fa-solid fa-arrow-right ms-2"></i>
+                <i class="fas fa-arrow-right ms-2"></i>
 
             </a>
 
@@ -624,146 +668,159 @@
 
 <x-wave-divider />
 
-<section class="how-it-works section-gradient py-5">
+<section class="py-5 bg-light" id="how-it-works">
 
     <div class="container">
 
         <div class="text-center mb-5">
 
-            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-semibold">
-        
-                HOW IT WORKS
-        
-            </span>
-        
-            <h2 class="fw-bold text-dark display-5 lh-sm mb-3">
+            <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
 
-                Book Trusted Professionals
+                HOW IT WORKS
+
+            </span>
+
+            <h2 class="display-5 fw-bold mt-4">
+
+                Get Your Work Done
                 <br>
-            
-                <span class="border-bottom border-4 border-warning pb-1">
-            
-                    In 3 Simple Steps
-            
+
+                <span class="text-primary">
+
+                    In Just 3 Simple Steps
+
                 </span>
-            
+
             </h2>
-            
-            <p class="fs-5 text-muted mx-auto" style="max-width:650px;">
-            
-                Search verified workers, book your preferred professional,
-                and enjoy reliable home services with complete peace of mind.
-            
+
+            <p class="lead text-secondary mx-auto" style="max-width:700px;">
+
+                Finding trusted professionals is quick and easy.
+                Search, book and relax while experienced workers
+                complete your job.
+
             </p>
-        
+
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 text-center">
 
-            <!-- Step 1 -->
+            <!-- STEP 1 -->
 
             <div class="col-lg-4">
 
-                <div class="card border-0 shadow-lg rounded-4 h-100 text-center p-4">
+                <div class="card border-0 shadow-sm h-100">
 
-                    <div class="mx-auto mb-4 rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                         style="width:90px;height:90px;">
+                    <div class="card-body p-5">
 
-                        <i class="fas fa-magnifying-glass fs-2"></i>
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-4"
+                             style="width:90px;height:90px;">
+
+                            <i class="fas fa-search fa-2x"></i>
+
+                        </div>
+
+                        <span class="badge bg-primary mb-3">
+
+                            STEP 1
+
+                        </span>
+
+                        <h4 class="fw-bold">
+
+                            Search
+
+                        </h4>
+
+                        <p class="text-muted mb-0">
+
+                            Search verified electricians, plumbers,
+                            carpenters, painters and other skilled
+                            professionals near your location.
+
+                        </p>
 
                     </div>
-
-                    <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
-
-                        STEP 01
-
-                    </span>
-
-                    <h4 class="fw-bold">
-
-                        Search Workers
-
-                    </h4>
-
-                    <p class="text-muted mb-0">
-
-                        Search verified electricians, plumbers,
-                        painters, carpenters and many more
-                        professionals near you.
-
-                    </p>
 
                 </div>
 
             </div>
 
-            <!-- Step 2 -->
+            <!-- STEP 2 -->
 
             <div class="col-lg-4">
 
-                <div class="card border-0 shadow-lg rounded-4 h-100 text-center p-4">
+                <div class="card border-0 shadow-sm h-100">
 
-                    <div class="mx-auto mb-4 rounded-circle bg-success text-white d-flex align-items-center justify-content-center"
-                         style="width:90px;height:90px;">
+                    <div class="card-body p-5">
 
-                        <i class="fas fa-calendar-check fs-2"></i>
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto mb-4"
+                             style="width:90px;height:90px;">
+
+                            <i class="fas fa-calendar-check fa-2x"></i>
+
+                        </div>
+
+                        <span class="badge bg-success mb-3">
+
+                            STEP 2
+
+                        </span>
+
+                        <h4 class="fw-bold">
+
+                            Book
+
+                        </h4>
+
+                        <p class="text-muted mb-0">
+
+                            Compare profiles, ratings and prices,
+                            then confirm your booking within minutes.
+
+                        </p>
 
                     </div>
-
-                    <span class="badge bg-success rounded-pill px-3 py-2 mb-3">
-
-                        STEP 02
-
-                    </span>
-
-                    <h4 class="fw-bold">
-
-                        Book Instantly
-
-                    </h4>
-
-                    <p class="text-muted mb-0">
-
-                        Compare ratings, reviews and pricing,
-                        then confirm your booking in minutes.
-
-                    </p>
 
                 </div>
 
             </div>
 
-            <!-- Step 3 -->
+            <!-- STEP 3 -->
 
             <div class="col-lg-4">
 
-                <div class="card border-0 shadow-lg rounded-4 h-100 text-center p-4">
+                <div class="card border-0 shadow-sm h-100">
 
-                    <div class="mx-auto mb-4 rounded-circle bg-warning text-white d-flex align-items-center justify-content-center"
-                         style="width:90px;height:90px;">
+                    <div class="card-body p-5">
 
-                        <i class="fas fa-house-circle-check fs-2"></i>
+                        <div class="rounded-circle bg-warning text-dark d-flex align-items-center justify-content-center mx-auto mb-4"
+                             style="width:90px;height:90px;">
+
+                            <i class="fas fa-house-circle-check fa-2x"></i>
+
+                        </div>
+
+                        <span class="badge bg-warning text-dark mb-3">
+
+                            STEP 3
+
+                        </span>
+
+                        <h4 class="fw-bold">
+
+                            Relax
+
+                        </h4>
+
+                        <p class="text-muted mb-0">
+
+                            Your chosen professional arrives on time
+                            and completes the work efficiently.
+
+                        </p>
 
                     </div>
-
-                    <span class="badge bg-warning text-dark rounded-pill px-3 py-2 mb-3">
-
-                        STEP 03
-
-                    </span>
-
-                    <h4 class="fw-bold">
-
-                        Enjoy the Service
-
-                    </h4>
-
-                    <p class="text-muted mb-0">
-
-                        Sit back while skilled professionals
-                        complete your work safely and efficiently.
-
-                    </p>
 
                 </div>
 
@@ -773,11 +830,12 @@
 
         <div class="text-center mt-5">
 
-            <a href="#workers" class="btn btn-light btn-lg rounded-pill px-5">
-
-                <i class="fas fa-arrow-right me-2"></i>
+            <a href="#workers"
+               class="btn btn-primary btn-lg rounded-pill px-5">
 
                 Find Workers
+
+                <i class="fas fa-arrow-right ms-2"></i>
 
             </a>
 
@@ -791,28 +849,31 @@
 <x-wave-divider />
 
 {{-- // testimonials section --}}
-<section class="testimonials-section section-light py-5">
+<section class="py-5 bg-light" id="reviews">
 
     <div class="container">
 
         <div class="text-center mb-5">
 
-            <span class="section-tag">
+            <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
 
                 CUSTOMER REVIEWS
 
             </span>
 
-            <h2 class="fw-bold mt-3">
+            <h2 class="display-5 fw-bold mt-4">
 
-                Loved by Homeowners Across India
+                Trusted by Families
+                <br>
+
+                Across India
 
             </h2>
 
-            <p class="text-secondary fs-5 mx-auto" style="max-width:700px;">
+            <p class="lead text-secondary mx-auto" style="max-width:700px;">
 
-                Thousands of customers rely on Kaarigar for trusted,
-                verified professionals and a smooth booking experience.
+                Real experiences shared by customers who booked verified
+                professionals through Kaarigar.
 
             </p>
 
@@ -824,66 +885,68 @@
 
             <div class="col-lg-4">
 
-                <div class="testimonial-card h-100 shadow-sm border rounded-4 p-4">
+                <div class="card border-0 shadow-sm h-100">
 
-                    <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="card-body p-4 d-flex flex-column">
 
-                        <span class="badge bg-success">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
 
-                            <i class="fas fa-circle-check me-1"></i>
+                            <span class="text-warning fs-5">
 
-                            Verified Booking
+                                ★★★★★
+
+                            </span>
+
+                            <span class="badge bg-success">
+
+                                Verified Booking
+
+                            </span>
+
+                        </div>
+
+                        <span class="badge bg-primary-subtle text-primary align-self-start mb-3">
+
+                            Electrician
 
                         </span>
 
-                        <small class="text-muted">
+                        <p class="text-muted flex-grow-1">
 
-                            2 days ago
+                            "Booked an electrician for a wiring issue. He arrived
+                            on time, explained the problem clearly and completed
+                            the repair professionally. Excellent service and fair pricing."
 
-                        </small>
+                        </p>
 
-                    </div>
+                        <hr>
 
-                    <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center">
 
-                        <img
-                            src="https://ui-avatars.com/api/?name=Rahul+Sharma&background=2563eb&color=fff"
-                            class="rounded-circle me-3"
-                            width="60"
-                            height="60">
+                            <img src="https://ui-avatars.com/api/?name=Rahul+Sharma&background=2563eb&color=fff"
+                                 class="rounded-circle me-3"
+                                 width="55"
+                                 height="55">
 
-                        <div>
+                            <div>
 
-                            <h5 class="mb-0">
+                                <h6 class="fw-bold mb-0">
 
-                                Rahul Sharma
+                                    Rahul Sharma
 
-                            </h5>
+                                </h6>
 
-                            <small class="text-muted">
+                                <small class="text-muted">
 
-                                Electrician • Ludhiana
+                                    Ludhiana, Punjab
 
-                            </small>
+                                </small>
+
+                            </div>
 
                         </div>
 
                     </div>
-
-                    <div class="text-warning fs-5 mb-3">
-
-                        ★★★★★
-
-                    </div>
-
-                    <p class="text-muted mb-0">
-
-                        The electrician arrived exactly on time and fixed
-                        the wiring issue within an hour. The booking process
-                        was simple, pricing was transparent, and the service
-                        exceeded my expectations.
-
-                    </p>
 
                 </div>
 
@@ -893,65 +956,68 @@
 
             <div class="col-lg-4">
 
-                <div class="testimonial-card h-100 shadow-sm border rounded-4 p-4">
+                <div class="card border-0 shadow-sm h-100">
 
-                    <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="card-body p-4 d-flex flex-column">
 
-                        <span class="badge bg-success">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
 
-                            <i class="fas fa-circle-check me-1"></i>
+                            <span class="text-warning fs-5">
 
-                            Verified Booking
+                                ★★★★★
+
+                            </span>
+
+                            <span class="badge bg-success">
+
+                                Verified Booking
+
+                            </span>
+
+                        </div>
+
+                        <span class="badge bg-info-subtle text-info align-self-start mb-3">
+
+                            Plumber
 
                         </span>
 
-                        <small class="text-muted">
+                        <p class="text-muted flex-grow-1">
 
-                            1 week ago
+                            "Had an emergency kitchen pipe leak. The plumber
+                            reached quickly, fixed everything neatly and even
+                            checked the remaining fittings before leaving."
 
-                        </small>
+                        </p>
 
-                    </div>
+                        <hr>
 
-                    <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center">
 
-                        <img
-                            src="https://ui-avatars.com/api/?name=Priya+Verma&background=7C3AED&color=fff"
-                            class="rounded-circle me-3"
-                            width="60"
-                            height="60">
+                            <img src="https://ui-avatars.com/api/?name=Priya+Verma&background=7C3AED&color=fff"
+                                 class="rounded-circle me-3"
+                                 width="55"
+                                 height="55">
 
-                        <div>
+                            <div>
 
-                            <h5 class="mb-0">
+                                <h6 class="fw-bold mb-0">
 
-                                Priya Verma
+                                    Priya Verma
 
-                            </h5>
+                                </h6>
 
-                            <small class="text-muted">
+                                <small class="text-muted">
 
-                                Plumber • New Delhi
+                                    New Delhi
 
-                            </small>
+                                </small>
+
+                            </div>
 
                         </div>
 
                     </div>
-
-                    <div class="text-warning fs-5 mb-3">
-
-                        ★★★★★
-
-                    </div>
-
-                    <p class="text-muted mb-0">
-
-                        We had an urgent kitchen pipe leak. The plumber reached
-                        quickly, explained everything clearly, and completed the
-                        repair professionally. I will definitely use Kaarigar again.
-
-                    </p>
 
                 </div>
 
@@ -961,65 +1027,68 @@
 
             <div class="col-lg-4">
 
-                <div class="testimonial-card h-100 shadow-sm border rounded-4 p-4">
+                <div class="card border-0 shadow-sm h-100">
 
-                    <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="card-body p-4 d-flex flex-column">
 
-                        <span class="badge bg-success">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
 
-                            <i class="fas fa-circle-check me-1"></i>
+                            <span class="text-warning fs-5">
 
-                            Verified Booking
+                                ★★★★★
+
+                            </span>
+
+                            <span class="badge bg-success">
+
+                                Verified Booking
+
+                            </span>
+
+                        </div>
+
+                        <span class="badge bg-warning-subtle text-warning align-self-start mb-3">
+
+                            Carpenter
 
                         </span>
 
-                        <small class="text-muted">
+                        <p class="text-muted flex-grow-1">
 
-                            3 weeks ago
+                            "The carpenter assembled all my furniture perfectly.
+                            He was punctual, polite and completed the work much
+                            faster than expected. Highly recommended."
 
-                        </small>
+                        </p>
 
-                    </div>
+                        <hr>
 
-                    <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center">
 
-                        <img
-                            src="https://ui-avatars.com/api/?name=Amit+Singh&background=16A34A&color=fff"
-                            class="rounded-circle me-3"
-                            width="60"
-                            height="60">
+                            <img src="https://ui-avatars.com/api/?name=Amit+Singh&background=16A34A&color=fff"
+                                 class="rounded-circle me-3"
+                                 width="55"
+                                 height="55">
 
-                        <div>
+                            <div>
 
-                            <h5 class="mb-0">
+                                <h6 class="fw-bold mb-0">
 
-                                Amit Singh
+                                    Amit Singh
 
-                            </h5>
+                                </h6>
 
-                            <small class="text-muted">
+                                <small class="text-muted">
 
-                                Carpenter • Chandigarh
+                                    Chandigarh
 
-                            </small>
+                                </small>
+
+                            </div>
 
                         </div>
 
                     </div>
-
-                    <div class="text-warning fs-5 mb-3">
-
-                        ★★★★★
-
-                    </div>
-
-                    <p class="text-muted mb-0">
-
-                        I booked a carpenter to assemble furniture for my new
-                        apartment. The work was neat, completed on time, and
-                        the professional was polite and highly skilled.
-
-                    </p>
 
                 </div>
 

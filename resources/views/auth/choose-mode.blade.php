@@ -1,54 +1,97 @@
-<x-guest-layout>
-<div class="max-w-4xl mx-auto py-12">
+@extends('layouts.app')
 
-    <h1 class="text-3xl font-bold text-center mb-10">
-        Welcome to Kaarigar
-    </h1>
+@section('content')
 
-    <div class="grid md:grid-cols-2 gap-8">
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+
+            Welcome to Kaarigar
+
+        </h1>
+
+        <p class="text-muted">
+
+            Choose how you'd like to continue.
+
+        </p>
+
+    </div>
+
+    <div class="row justify-content-center g-4">
 
         <!-- Customer -->
-        <form method="POST" action="{{ route('become.customer') }}">
-            @csrf
 
-            <button
-                type="submit"
-                class="bg-white shadow rounded-xl p-8 hover:shadow-lg w-full text-left">
+        <div class="col-md-6 col-lg-5">
 
-                <h2 class="text-2xl font-bold mb-3">
-                    🏠 Need a Service
-                </h2>
+            <form method="POST" action="{{ route('become.customer') }}">
 
-                <p class="text-gray-600">
-                    Book electricians, plumbers, carpenters and other professionals.
-                </p>
+                @csrf
 
-            </button>
+                <button
+                    type="submit"
+                    class="card shadow-sm w-100 border-0 h-100 text-start">
 
-        </form>
+                    <div class="card-body p-4">
+
+                        <h3 class="fw-bold mb-3">
+
+                            🏠 Need a Service
+
+                        </h3>
+
+                        <p class="text-muted mb-0">
+
+                            Book electricians, plumbers, carpenters and other trusted professionals.
+
+                        </p>
+
+                    </div>
+
+                </button>
+
+            </form>
+
+        </div>
 
         <!-- Worker -->
-        <form method="POST" action="{{ route('become.worker') }}">
-            @csrf
 
-            <button
-                type="submit"
-                class="bg-white shadow rounded-xl p-8 hover:shadow-lg w-full text-left">
+        <div class="col-md-6 col-lg-5">
 
-                <h2 class="text-2xl font-bold mb-3">
-                    🔧 Work as a Kaarigar
-                </h2>
+            <form method="POST" action="{{ route('become.worker') }}">
 
-                <p class="text-gray-600">
-                    Manage services and customer bookings.
-                </p>
+                @csrf
 
-            </button>
+                <button
+                    type="submit"
+                    class="card shadow-sm w-100 border-0 h-100 text-start">
 
-        </form>
+                    <div class="card-body p-4">
+
+                        <h3 class="fw-bold mb-3">
+
+                            🔧 Work as a Kaarigar
+
+                        </h3>
+
+                        <p class="text-muted mb-0">
+
+                            Join Kaarigar, offer your services, and manage customer bookings.
+
+                        </p>
+
+                    </div>
+
+                </button>
+
+            </form>
+
+        </div>
 
     </div>
 
 </div>
 
-</x-guest-layout>
+@endsection

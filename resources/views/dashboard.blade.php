@@ -4,51 +4,151 @@
 
 <div class="container py-5">
 
-<h2 class="mb-4">
+    <!-- Header -->
 
-Worker Dashboard
+    <div class="text-center mb-5">
 
-</h2>
+        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">
+            WORKER DASHBOARD
+        </span>
 
-<div class="row">
+        <h2 class="fw-bold mt-3">
 
-<div class="col-md-4 mb-3">
+            Welcome Back 👋
 
-<a
-href="{{ route('services.index') }}"
-class="btn-primary-custom w-100">
+        </h2>
 
-My Services
+        <p class="text-secondary">
 
-</a>
+            Manage your services, bookings and profile from one place.
 
-</div>
+        </p>
 
-<div class="col-md-4 mb-3">
+    </div>
 
-<a
-href="{{ route('worker.bookings') }}"
-class="btn-success-custom w-100">
+    <div class="row g-4">
 
-My Bookings
+        <!-- Services -->
 
-</a>
+        <div class="col-lg-4">
 
-</div>
+            <div class="card border-0 shadow-sm rounded-4 h-100">
 
-<div class="col-md-4 mb-3">
+                <div class="card-body text-center p-5">
 
-<a
-href="{{ route('worker.profile.create') }}"
-class="btn-primary-custom w-100">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-4"
+                         style="width:80px;height:80px;">
 
-Profile Verification
+                        <i class="fa-solid fa-toolbox fs-2"></i>
 
-</a>
+                    </div>
 
-</div>
+                    <h4 class="fw-bold">
 
-</div>
+                        My Services
+
+                    </h4>
+
+                    <p class="text-muted mb-4">
+
+                        Create, edit and manage all the services you offer.
+
+                    </p>
+
+                    <a href="{{ route('services.index') }}"
+                       class="btn btn-primary rounded-pill px-4">
+
+                        Manage Services
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bookings -->
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+
+                <div class="card-body text-center p-5">
+
+                    <div class="bg-success text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-4"
+                         style="width:80px;height:80px;">
+
+                        <i class="fa-solid fa-calendar-check fs-2"></i>
+
+                    </div>
+
+                    <h4 class="fw-bold">
+
+                        My Bookings
+
+                    </h4>
+
+                    <p class="text-muted mb-4">
+
+                        View upcoming jobs and manage customer bookings.
+
+                    </p>
+
+                    <a href="{{ route('worker.bookings') }}"
+                       class="btn btn-success rounded-pill px-4">
+
+                        View Bookings
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Profile -->
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+
+                <div class="card-body text-center p-5">
+
+                    <div class="bg-warning text-dark rounded-circle d-inline-flex justify-content-center align-items-center mb-4"
+                         style="width:80px;height:80px;">
+
+                        <i class="fa-solid fa-id-card fs-2"></i>
+
+                    </div>
+
+                    <h4 class="fw-bold">
+
+                        Profile Verification
+
+                    </h4>
+
+                    <p class="text-muted mb-4">
+
+                        Complete or update your profile to gain customer trust.
+
+                    </p>
+
+                    <a href="{{ route('worker.profile.create') }}"
+                       class="btn btn-warning rounded-pill px-4">
+
+                        Update Profile
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

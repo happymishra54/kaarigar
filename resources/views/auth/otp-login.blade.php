@@ -1,104 +1,114 @@
-<x-guest-layout>
+@extends('layouts.app')
 
-<div class="min-h-screen bg-gradient-to-br from-blue-700 via-indigo-700 to-purple-800 flex items-center justify-center px-4">
+@section('content')
 
-    <!-- Background Effects -->
-    <div class="absolute inset-0 overflow-hidden">
+<div class="container py-5">
 
-        <div class="absolute top-10 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+    <div class="row justify-content-center">
 
-        <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
+        <div class="col-md-6 col-lg-5">
 
-    </div>
+            <div class="card shadow-lg border-0">
 
-    <!-- Login Card -->
-    <div class="relative w-full max-w-md">
+                <div class="card-body p-4">
 
-        <div class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-8">
+                    <div class="text-center mb-4">
 
-            <!-- Logo -->
-            <div class="text-center mb-8">
+                        <div class="display-3 mb-3">
 
-                <div class="w-20 h-20 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                            🛠️
 
-                    <span class="text-4xl">🛠️</span>
+                        </div>
 
-                </div>
+                        <h2 class="fw-bold">
 
-                <h1 class="text-4xl font-extrabold text-white">
-                    Kaarigar
-                </h1>
+                            Kaarigar
 
-                <p class="text-white/80 mt-2">
-                    Trusted Local Service Professionals
-                </p>
+                        </h2>
 
-            </div>
+                        <p class="text-muted">
 
-            <!-- Mobile Number -->
-            <div class="mb-5">
+                            Trusted Local Service Professionals
 
-                <label class="block text-white mb-2 text-sm">
-                    Mobile Number
-                </label>
+                        </p>
 
-                <div class="flex items-center bg-white rounded-xl overflow-hidden shadow-lg">
-
-                    <div class="px-4 py-4 bg-gray-100 font-bold text-gray-700">
-                        +91
                     </div>
 
-                    <input
-                        id="phone"
-                        type="text"
-                        maxlength="10"
-                        pattern="[0-9]{10}"
-                        inputmode="numeric"
-                        placeholder="9876543210"
-                        class="w-full px-4 py-4 outline-none text-gray-700"
-                        required>
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Mobile Number
+
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                +91
+
+                            </span>
+
+                            <input
+                                id="phone"
+                                type="text"
+                                maxlength="10"
+                                pattern="[0-9]{10}"
+                                inputmode="numeric"
+                                class="form-control"
+                                placeholder="9876543210"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        id="sendBtn"
+                        type="button"
+                        onclick="sendOTP()"
+                        class="btn btn-primary w-100 mb-3">
+
+                        Send OTP
+
+                    </button>
+
+                    <div id="recaptcha-container" class="mb-3"></div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            OTP
+
+                        </label>
+
+                        <input
+                            id="otp"
+                            type="text"
+                            maxlength="6"
+                            class="form-control"
+                            placeholder="Enter OTP">
+
+                    </div>
+
+                    <button
+                        type="button"
+                        onclick="verifyOTP()"
+                        class="btn btn-success w-100">
+
+                        Verify OTP
+
+                    </button>
+
+                    <div class="text-center mt-4 text-muted">
+
+                        🔒 Secure OTP Authentication
+
+                    </div>
 
                 </div>
-
-            </div>
-
-            <!-- Send OTP -->
-            <button
-                id="sendBtn"
-                onclick="sendOTP()"
-                class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-green font-bold text-lg shadow-lg hover:scale-105 transition duration-300">
-
-                Send OTP
-
-            </button>
-
-            <div id="recaptcha-container"></div>
-
-            <!-- OTP Field -->
-            <div class="mt-6">
-
-                <input
-                    type="text"
-                    id="otp"
-                    maxlength="6"
-                    placeholder="Enter OTP"
-                    class="w-full px-4 py-4 rounded-xl border-0 shadow-lg focus:ring-2 focus:ring-blue-500">
-
-            </div>
-
-            <!-- Verify OTP -->
-            <button
-                onclick="verifyOTP()"
-                class="w-full mt-4 py-4 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-green font-bold text-lg shadow-lg hover:scale-105 transition duration-300">
-
-                Verify OTP
-
-            </button>
-
-            <!-- Footer -->
-            <div class="mt-6 text-center text-white/80 text-sm">
-
-                🔒 Secure OTP Authentication
 
             </div>
 
@@ -107,6 +117,8 @@
     </div>
 
 </div>
+
+<!-- Firebase -->
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -143,37 +155,36 @@ window.sendOTP = function () {
         alert('Please enter a valid 10-digit mobile number');
 
         return;
+
     }
 
     const phone = '+91' + mobile;
 
     document.getElementById('sendBtn').innerHTML = 'Sending OTP...';
 
-    firebase.auth()
-        .signInWithPhoneNumber(
-            phone,
-            window.recaptchaVerifier
-        )
-        .then(function (confirmationResult) {
+    firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
 
-            window.confirmationResult = confirmationResult;
+    .then(function (confirmationResult) {
 
-            document.getElementById('sendBtn').innerHTML = 'OTP Sent ✓';
+        window.confirmationResult = confirmationResult;
 
-            alert('OTP Sent Successfully');
+        document.getElementById('sendBtn').innerHTML = 'OTP Sent ✓';
 
-            document.getElementById('otp').focus();
+        alert('OTP Sent Successfully');
 
-        })
-        .catch(function (error) {
+        document.getElementById('otp').focus();
 
-            console.error(error);
+    })
 
-            document.getElementById('sendBtn').innerHTML = 'Send OTP';
+    .catch(function (error) {
 
-            alert(error.message);
+        console.error(error);
 
-        });
+        document.getElementById('sendBtn').innerHTML = 'Send OTP';
+
+        alert(error.message);
+
+    });
 
 };
 
@@ -223,9 +234,7 @@ window.verifyOTP = function () {
 
     })
 
-    .catch(function (error) {
-
-        console.error(error);
+    .catch(function () {
 
         alert('Invalid OTP');
 
@@ -235,5 +244,4 @@ window.verifyOTP = function () {
 
 </script>
 
-</x-guest-layout>
-
+@endsection

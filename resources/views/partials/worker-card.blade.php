@@ -2,11 +2,27 @@
 
     <div class="position-relative">
 
-        <img
-            src="{{ asset('storage/' . $worker->profile_image) }}"
-            alt="{{ $worker->user->name }}"
+        @if($worker->profile_image)
+
+        <a href="{{ route('worker.show',$worker->id) }}">
+
+            <img
+            src="{{ asset('storage/'.$worker->profile_image) }}"
             class="card-img-top"
             style="height:260px;object-fit:cover;">
+            
+            </a>
+
+@else
+
+<div class="d-flex align-items-center justify-content-center bg-light"
+style="height:260px;">
+
+    <i class="fas fa-user fa-5x text-secondary"></i>
+
+</div>
+
+@endif
 
         @if($worker->is_verified)
 
@@ -65,23 +81,35 @@
 
             <h5 class="fw-bold mb-0">
 
-                {{ $worker->user->name }}
+                {{ $worker->user->name ?? 'Unknown Worker' }}
 
             </h5>
 
-            <span class="badge bg-warning text-dark rounded-pill">
+            @if($worker->user->reviewsReceived->count())
 
-                ⭐ {{ number_format($worker->user->reviewsReceived->avg('rating') ?? 0,1) }}
+<span class="badge bg-warning text-dark rounded-pill">
 
-            </span>
+⭐ {{ number_format($worker->user->reviewsReceived->avg('rating'),1) }}
+
+</span>
+
+@else
+
+<span class="badge bg-secondary rounded-pill">
+
+New
+
+</span>
+
+@endif
 
         </div>
 
         <p class="text-primary fw-semibold mb-3">
 
-            {{ $worker->bio }}
-
-        </p>
+            {{ Str::limit($worker->bio,70) }}
+            
+            </p>
 
         <div class="small text-muted mb-2">
 
@@ -103,7 +131,8 @@
 
             <i class="fas fa-star text-warning me-2"></i>
 
-            {{ $worker->user->reviewsReceived->count() }} Reviews
+            {{ $worker->user?->reviewsReceived?->count() ?? 0 }}
+            Reviews
 
         </div>
 
@@ -139,13 +168,24 @@
 
             </div>
 
-            <a
-                href="{{ route('worker.show',$worker->id) }}"
-                class="btn btn-primary rounded-pill px-4">
+            <div class="d-flex gap-2">
 
-                View Profile
-
-            </a>
+                <a href="{{ route('worker.show',$worker->id) }}"
+                class="btn btn-outline-primary rounded-pill">
+                
+                Profile
+                
+                </a>
+                
+                
+                <a href="{{ route('booking.create',$worker->id) }}"
+                class="btn btn-primary rounded-pill">
+                
+                Book Now
+                
+                </a>
+                
+                </div>
 
         </div>
 
