@@ -19,9 +19,7 @@
     <meta name="twitter:title" content="Kaarigar">
     <meta name="twitter:description" content="Book trusted electricians, plumbers, carpenters and more.">
     <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="csrf-token"
