@@ -84,10 +84,10 @@
 
                 <div class="hero-buttons mt-4">
 
-                    <a href="#workers" class="btn-primary-custom">
+                    <button type="submit" class="btn-primary-custom">
                         <i class="fa-solid fa-magnifying-glass me-2"></i>
                         Find Professionals
-                    </a>
+                    </button>
                 
                     
                 
@@ -102,27 +102,27 @@
             <div class="hero-tags">
 
                 <a href="{{ route('home',['search'=>'Electrician']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;backdrop-filter:blur(10px);transition:.3s;">
+                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
                     ⚡ Electrician
                 </a>
             
                 <a href="{{ route('home',['search'=>'Plumber']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;backdrop-filter:blur(10px);transition:.3s;">
+                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
                     🚰 Plumber
                 </a>
             
                 <a href="{{ route('home',['search'=>'Carpenter']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;backdrop-filter:blur(10px);transition:.3s;">
+                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
                     🪚 Carpenter
                 </a>
             
                 <a href="{{ route('home',['search'=>'Painter']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;backdrop-filter:blur(10px);transition:.3s;">
+                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
                     🎨 Painter
                 </a>
             
                 <a href="{{ route('home',['search'=>'Cleaner']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;backdrop-filter:blur(10px);transition:.3s;">
+                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
                     🧹 Cleaner
                 </a>
             
