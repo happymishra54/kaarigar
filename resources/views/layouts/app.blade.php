@@ -550,10 +550,10 @@
                         }
         
                         const data = await response.json();
-        
                         const address = data.address || {};
         
                         // Better priority for Indian addresses
+
                         const city =
                             address.city ||
                             address.city_district ||
@@ -564,7 +564,6 @@
                             address.village ||
                             address.hamlet ||
                             "";
-        
                         updateCity(city);
         
                     } catch (error) {
@@ -593,7 +592,7 @@
         
         }
         
-        </script>
+    </script>
 
 
 

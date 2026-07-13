@@ -1,192 +1,109 @@
-<section class="hero-section">
+<section class="py-5 bg-primary text-white">
 
-    <!-- Background Decorations -->
+    <div class="container py-5">
 
-    <div class="hero-bg-circle hero-bg-circle-1"></div>
-    <div class="hero-bg-circle hero-bg-circle-2"></div>
+        <div class="text-center">
 
-    <div class="hero-decoration dot dot-1"></div>
-    <div class="hero-decoration dot dot-2"></div>
-    <div class="hero-decoration dot dot-3"></div>
-
-    <div class="hero-ring ring-1"></div>
-    <div class="hero-ring ring-2"></div>
-
-    <div class="container">
-
-        <div class="hero-content text-center">
-
-            <!-- Badge -->
-
-            <div class="hero-badge mx-auto">
-
-                <i class="fa-solid fa-shield-check"></i>
-
+            <span class="badge bg-warning text-dark fs-6 px-3 py-2 mb-4">
+                <i class="fa-solid fa-shield-check me-2"></i>
                 India's Trusted Home Service Platform
+            </span>
 
-            </div>
-
-            <!-- Heading -->
-
-            <h1 class="hero-title">
-
-                Book <span>Verified Professionals</span>
-
-                <br>
-
+            <h1 class="display-4 fw-bold mb-3">
+                Book <span class="text-warning">Verified Professionals</span><br>
                 Near You in Minutes
-
             </h1>
 
-            <!-- Subtitle -->
-
-            <p class="hero-description">
-
+            <p class="lead mb-5 mx-auto" style="max-width:700px;">
                 Find trusted electricians, plumbers, carpenters, painters,
-
                 cleaners and hundreds of skilled professionals for your
-
-                home and office. Safe, verified and affordable.
-
+                home and office.
             </p>
-
-            <!-- Search -->
-
-            <form
-                action="{{ route('home') }}"
-                method="GET"
-                class="hero-search">
-
-                <div class="search-input">
-
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
-
-                    <input
-                        type="text"
-                        name="search"
-                        placeholder="Search Electrician, Plumber, Painter..."
-                        value="{{ request('search') }}">
-
-                </div>
-
-                <div class="search-input">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        placeholder="Your City"
-                        value="{{ request('city') }}">
-
-                </div>
-
-                <div class="hero-buttons mt-4">
-
-                    <button type="submit" class="btn-primary-custom">
-                        <i class="fa-solid fa-magnifying-glass me-2"></i>
-                        Find Professionals
-                    </button>
-                
-                    
-                
-                </div>
-
-                
-            </form>
-
-
-            <!-- Quick Categories -->
-
-            <div class="hero-tags">
-
-                <a href="{{ route('home',['search'=>'Electrician']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
-                    ⚡ Electrician
-                </a>
-            
-                <a href="{{ route('home',['search'=>'Plumber']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
-                    🚰 Plumber
-                </a>
-            
-                <a href="{{ route('home',['search'=>'Carpenter']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
-                    🪚 Carpenter
-                </a>
-            
-                <a href="{{ route('home',['search'=>'Painter']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
-                    🎨 Painter
-                </a>
-            
-                <a href="{{ route('home',['search'=>'Cleaner']) }}"
-                   style="display:inline-flex;align-items:center;padding:12px 22px;border-radius:50px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;transition:.3s;">
-                    🧹 Cleaner
-                </a>
-            
-            </div>
-
-            <!-- Stats -->
-
-            <div class="hero-stats">
-
-                <div class="hero-stat-card">
-
-                    <i class="fa-solid fa-users"></i>
-
-                    <h3>5,000+</h3>
-
-                    <span>Verified Workers</span>
-
-                </div>
-
-                <div class="hero-stat-card">
-
-                    <i class="fa-solid fa-star"></i>
-
-                    <h3>4.9</h3>
-
-                    <span>Average Rating</span>
-
-                </div>
-
-                <div class="hero-stat-card">
-
-                    <i class="fa-solid fa-city"></i>
-
-                    <h3>100+</h3>
-
-                    <span>Cities Covered</span>
-
-                </div>
-
-                <div class="hero-stat-card">
-
-                    <i class="fa-solid fa-circle-check"></i>
-
-                    <h3>10K+</h3>
-
-                    <span>Completed Bookings</span>
-
-                </div>
-
-            </div>
 
         </div>
 
-    </div>
+        <form action="{{ route('home') }}" method="GET">
 
-    <div class="hero-wave">
+            <div class="row g-3 justify-content-center">
 
-        <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+                <div class="col-lg-5">
 
-            <path
-                fill="#F8FAFC"
-                d="M0,64L80,80C160,96,320,128,480,128C640,128,800,96,960,80C1120,64,1280,64,1360,64L1440,64L1440,181L0,181Z"/>
+                    <div class="input-group input-group-lg">
 
-        </svg>
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="search"
+                            placeholder="Search Electrician, Plumber, Painter..."
+                            value="{{ request('search') }}">
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="input-group input-group-lg">
+
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="city"
+                            name="city"
+                            placeholder="Your City"
+                            value="{{ request('city') }}">
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-2 d-grid">
+
+                    <button type="submit" class="btn btn-warning btn-lg fw-bold">
+
+                        <i class="fa-solid fa-magnifying-glass me-2"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="text-center mt-5">
+
+            <a href="{{ route('home',['search'=>'Electrician']) }}" class="btn btn-outline-light rounded-pill m-2">
+                ⚡ Electrician
+            </a>
+
+            <a href="{{ route('home',['search'=>'Plumber']) }}" class="btn btn-outline-light rounded-pill m-2">
+                🚰 Plumber
+            </a>
+
+            <a href="{{ route('home',['search'=>'Carpenter']) }}" class="btn btn-outline-light rounded-pill m-2">
+                🪚 Carpenter
+            </a>
+
+            <a href="{{ route('home',['search'=>'Painter']) }}" class="btn btn-outline-light rounded-pill m-2">
+                🎨 Painter
+            </a>
+
+            <a href="{{ route('home',['search'=>'Cleaner']) }}" class="btn btn-outline-light rounded-pill m-2">
+                🧹 Cleaner
+            </a>
+
+        </div>
 
     </div>
 

@@ -154,81 +154,7 @@
 
         <!-- Statistics -->
 
-        <div class="card border-0 shadow-lg rounded-4 mt-5">
-
-            <div class="card-body py-5">
-
-                <div class="row text-center">
-
-                    <div class="col-md-3">
-
-                        <h2 class="fw-bold text-primary">
-
-                            {{ number_format($verifiedWorkers) }}+
-
-                        </h2>
-
-                        <p class="text-muted mb-0">
-
-                            Verified Workers
-
-                        </p>
-
-                    </div>
-
-                    <div class="col-md-3">
-
-                        <h2 class="fw-bold text-success">
-
-                            {{ number_format($totalBookings) }}+
-
-                        </h2>
-
-                        <p class="text-muted mb-0">
-
-                            Completed Bookings
-
-                        </p>
-
-                    </div>
-
-                    <div class="col-md-3">
-
-                        <h2 class="fw-bold text-warning">
-
-                            {{ $totalCities }}+
-
-                        </h2>
-
-                        <p class="text-muted mb-0">
-
-                            Cities Served
-
-                        </p>
-
-                    </div>
-
-                    <div class="col-md-3">
-
-                        <h2 class="fw-bold text-danger">
-
-                            {{ $averageRating }} ★
-
-                        </h2>
-
-                        <p class="text-muted mb-0">
-
-                            Customer Rating
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+        
 
     </div>
 
@@ -1101,23 +1027,7 @@
 </section>
 
 {{-- // javascript for state-city scrolldown  --}}
-<script>
 
-    document.addEventListener(
-    'DOMContentLoaded',
-    function(){
-    
-    initCitySelector(
-    
-    'city',
-    
-    "{{ request('city', auth()->user()->city ?? '') }}"
-    
-    );
-    
-    });
-    
-    </script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -1134,9 +1044,9 @@
 
 <script>
 
-    const counters=document.querySelectorAll(".counter");
+    const counterItems = document.querySelectorAll(".counter");
     
-    counters.forEach(counter=>{
+    counterItems.forEach(counter=>{
     
     const update=()=>{
     
@@ -1168,7 +1078,7 @@
 
 <script>
 
-    const counters = document.querySelectorAll('.stats-number');
+    const statsCounters = document.querySelectorAll(".stats-number");
     
     const observer = new IntersectionObserver(entries=>{
     
@@ -1210,7 +1120,7 @@
     
     });
     
-    counters.forEach(counter=>observer.observe(counter));
+    statsCounters.forEach(counter=>observer.observe(counter));
     
     </script>
 
