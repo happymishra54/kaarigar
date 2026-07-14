@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Auth;
-
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -40,50 +40,77 @@ class LoginRequest extends FormRequest
      * @throws ValidationException
      */
 
-    public function authenticate(): void
-    {
-        $this->ensureIsNotRateLimited();
+     public function authenticate(): void
+{
+    $this->ensureIsNotRateLimited();
 
+    $login = $this->input('login');
+    $role = $this->input('role');
 
-        $login = $this->login;
+    // Find user by email or phone and role
+    $user = User::where(function ($query) use ($login) {
+        $query->where('email', $login)
+              ->orWhere('phone', $login);
+    })
+    ->where(function ($query) use ($role) {
 
-$field = filter_var($login, FILTER_VALIDATE_EMAIL)
-    ? 'email'
-    : 'phone';
+        $query->where('role', $role)
+              ->orWhere('role', 'admin');
 
-$credentials = [
-    $field => $login,
-    'password' => $this->password,
-];
+    })
+    ->first();
 
+    // User not found
+    if (!$user) {
 
-
-        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
-
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'login' => trans('auth.failed'),
-            ]);
-        }
-
-        $user = Auth::user();
-
-        // Allow admin login regardless of selected role
-        if (
-            $user->role !== 'admin' &&
-            $user->role !== $this->role
-        ) {
-
-            Auth::logout();
-
-            throw ValidationException::withMessages([
-                'login' => 'Invalid role selected.',
-            ]);
-        }
-
-        RateLimiter::clear($this->throttleKey());
+        throw ValidationException::withMessages([
+            'login' => $role == 'worker'
+                ? 'Worker account not found.'
+                : 'Customer account not found.',
+        ]);
     }
+
+    // Account is deactivated
+if (!$user->status) {
+
+    session([
+        'reactivate_email' => $user->email,
+    ]);
+
+    throw ValidationException::withMessages([
+        'login' => 'Your account has been deactivated.',
+    ]);
+}
+
+// Try login
+if (!Auth::attempt([
+    'email' => $user->email,
+    'password' => $this->password,
+], $this->boolean('remember'))) {
+
+    RateLimiter::hit($this->throttleKey());
+
+    throw ValidationException::withMessages([
+        'password' => 'Incorrect password.',
+    ]);
+}
+
+    // Inactive account
+    if (!$user->status) {
+
+        Auth::logout();
+
+        session([
+            'reactivate_email' => $user->email,
+        ]);
+
+        throw ValidationException::withMessages([
+            'login' => 'Your account has been deactivated.',
+        ]);
+    }
+
+    RateLimiter::clear($this->throttleKey());
+}
 
 
     public function ensureIsNotRateLimited(): void

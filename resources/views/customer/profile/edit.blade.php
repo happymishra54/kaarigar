@@ -2,6 +2,21 @@
 
 @section('content')
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+
+        <i class="fa-solid fa-circle-check me-2"></i>
+
+        {{ session('success') }}
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"></button>
+
+    </div>
+@endif
+
 <div class="container py-5">
 
 
@@ -133,10 +148,16 @@
 
 
                                 <input
-                                type="text"
-                                name="name"
-                                class="form-control form-control-lg"
-                                value="{{ old('name',$user->name) }}">
+                                    type="text"
+                                    name="name"
+                                    class="form-control form-control-lg @error('name') is-invalid @enderror"
+                                    value="{{ old('name',$user->name) }}">
+
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
 
 
                             </div>
@@ -155,10 +176,16 @@
 
 
                                 <input
-                                type="email"
-                                name="email"
-                                class="form-control form-control-lg"
-                                value="{{ old('email',$user->email) }}">
+                                    type="email"
+                                    name="email"
+                                    class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                    value="{{ old('email',$user->email) }}">
+
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
 
 
                             </div>
@@ -179,8 +206,14 @@
                                 <input
                                 type="text"
                                 name="phone"
-                                class="form-control form-control-lg"
+                                class="form-control form-control-lg @error('phone') is-invalid @enderror"
                                 value="{{ old('phone',$user->phone) }}">
+
+                            @error('phone')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
 
 
                             </div>
@@ -250,7 +283,7 @@
 
 
 
-                        <div class="ratio ratio-21x9 rounded-4 shadow-sm mb-4">
+                        <div class="ratio ratio-16x9">
 
 
                             <div id="mapPreview"></div>
@@ -278,10 +311,16 @@
 
 
                                 <input
-                                type="text"
-                                name="city"
-                                class="form-control form-control-lg"
-                                value="{{ old('city',$user->city) }}">
+                                    type="text"
+                                    name="city"
+                                    class="form-control form-control-lg @error('city') is-invalid @enderror"
+                                    value="{{ old('city',$user->city) }}">
+
+                                @error('city')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
 
 
                             </div>
@@ -291,22 +330,22 @@
 
                             <div class="col-md-6">
 
-
                                 <label class="form-label fw-semibold">
-
                                     State
-
                                 </label>
-
-
-
+                            
                                 <input
-                                type="text"
-                                name="state"
-                                class="form-control form-control-lg"
-                                value="{{ old('state',$user->state) }}">
-
-
+                                    type="text"
+                                    name="state"
+                                    class="form-control form-control-lg @error('state') is-invalid @enderror"
+                                    value="{{ old('state', $user->state) }}">
+                            
+                                @error('state')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            
                             </div>
 
 
@@ -315,22 +354,22 @@
 
                             <div class="col-12">
 
+    <label class="form-label fw-semibold">
+        Address
+    </label>
 
-                                <label class="form-label fw-semibold">
+    <textarea
+        name="address"
+        rows="3"
+        class="form-control form-control-lg @error('address') is-invalid @enderror">{{ old('address', $user->address) }}</textarea>
 
-                                    Address
+    @error('address')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 
-                                </label>
-
-
-
-                                <textarea
-                                name="address"
-                                rows="3"
-                                class="form-control form-control-lg">{{ old('address',$user->address) }}</textarea>
-
-
-                            </div>
+</div>
 
 
                         </div>
@@ -340,7 +379,7 @@
 
 
 
-                        <div class="text-center mt-5">
+                        <div class="d-flex justify-content-end mt-5">
 
 
                             <button class="btn btn-primary btn-lg rounded-pill px-5">
