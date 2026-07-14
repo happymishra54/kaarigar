@@ -151,9 +151,7 @@
                     </li>
     
                     <li class="nav-item">
-                        <a class="nav-link"
-                           href="{{ url('/#about') }}">
-                            <i class="fas fa-circle-info me-1"></i>
+                        <a class="nav-link" href="{{ route('about') }}">
                             About
                         </a>
                     </li>

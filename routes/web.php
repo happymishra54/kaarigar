@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+// controler for about page
+use App\Http\Controllers\AboutController;
 
 // Account Reactivation Controller
 use App\Http\Controllers\Auth\AccountReactivationController;
@@ -357,7 +359,11 @@ Route::middleware([
 
 });
 
+// route for about page
 
+
+Route::get('/about', [AboutController::class, 'index'])
+    ->name('about');
 
 //location search route//
 
