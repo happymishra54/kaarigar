@@ -616,7 +616,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-// javascript for handling the change password modal
+{{-- // javascript for handling the change password modal --}}
 
 @if ($errors->updatePassword->isNotEmpty() || session('status') === 'password-updated')
 <script>
