@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\WorkerProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class WorkerController extends Controller
 {
@@ -111,5 +112,25 @@ class WorkerController extends Controller
             'Worker deleted successfully.'
         );
     }
+
+    public function generatePassword($id)
+{
+    $worker = User::findOrFail($id);
+
+    $password = 'Kaarigar@'.rand(1000,9999);
+
+    $worker->update([
+        'password' => Hash::make($password),
+    ]);
+
+
+    return back()->with(
+        'generated_password',
+        [
+            'name' => $worker->name,
+            'password' => $password
+        ]
+    );
+}
 }
 

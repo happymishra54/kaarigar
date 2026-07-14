@@ -225,6 +225,22 @@
     
                                 <li>
     
+
+                                    <li>
+                                        <button
+                                            type="button"
+                                            class="dropdown-item"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#changePasswordModal">
+                                    
+                                            <i class="fas fa-key me-2"></i>
+                                            Change Password
+                                    
+                                        </button>
+                                    </li>
+                                    
+                                    <li><hr class="dropdown-divider"></li>
+
                                     <form method="POST"
                                           action="{{ route('logout') }}">
     
@@ -599,6 +615,147 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+// javascript for handling the change password modal
+
+@if ($errors->updatePassword->isNotEmpty() || session('status') === 'password-updated')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const modalElement = document.getElementById('changePasswordModal');
+    const modal = new bootstrap.Modal(modalElement);
+
+    modal.show();
+
+    @if(session('status') === 'password-updated')
+        setTimeout(function () {
+            modal.hide();
+        }, 2000);
+    @endif
+
+});
+</script>
+@endif
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content rounded-4">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    <i class="fas fa-lock me-2 text-primary"></i>
+                    Change Password
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <form method="POST" action="{{ route('password.update') }}">
+
+                @csrf
+                @method('PUT')
+
+                <div class="modal-body">
+
+                    @if (session('status') === 'password-updated')
+                        <div class="alert alert-success">
+                            Password updated successfully.
+                        </div>
+                    @endif
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Current Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="current_password"
+                            class="form-control"
+                            required>
+
+                        @error('current_password', 'updatePassword')
+                            <div class="text-danger mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            New Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            required>
+
+                        @error('password', 'updatePassword')
+                            <div class="text-danger mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password_confirmation"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+
+                        <i class="fas fa-key me-2"></i>
+
+                        Update Password
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -28,6 +28,65 @@
 
                     </div>
 
+                    @if(session('reactivate_email'))
+
+                    <div class="alert alert-warning">
+                    
+                        <strong>Your account has been deactivated.</strong>
+                    
+                        <p class="mb-3 mt-2">
+                            Click below to reactivate your account.
+                        </p>
+                    
+                        <form method="POST"
+                              action="{{ route('account.reactivate.send') }}">
+                    
+                            @csrf
+                    
+                            <input
+                                type="hidden"
+                                name="email"
+                                value="{{ session('reactivate_email') }}">
+                    
+                            <button class="btn btn-warning">
+                    
+                                <i class="fa-solid fa-envelope me-2"></i>
+                    
+                                Reactivate My Account
+                    
+                            </button>
+                    
+                        </form>
+                    
+                    </div>
+                    
+                    @endif
+
+                    @if($errors->has('login'))
+
+<div class="alert alert-danger">
+
+    {{ $errors->first('login') }}
+
+    @if(Str::contains($errors->first('login'), 'not found'))
+
+        <div class="mt-3">
+
+            <a href="{{ route('register.role') }}"
+               class="btn btn-primary">
+
+                Register Now
+
+            </a>
+
+        </div>
+
+    @endif
+
+</div>
+
+@endif
+
                     <form method="POST" action="{{ route('login') }}">
 
                         @csrf
@@ -120,33 +179,44 @@
 
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-3">
 
                             <label class="form-label">
-
+                        
                                 Password
-
+                        
                             </label>
-
+                        
                             <input
                                 type="password"
                                 name="password"
                                 class="form-control @error('password') is-invalid @enderror"
                                 placeholder="Enter Password"
                                 required>
-
+                        
                             @error('password')
-
+                        
                                 <div class="invalid-feedback">
-
+                        
                                     {{ $message }}
-
+                        
                                 </div>
-
+                        
                             @enderror
-
+                        
                         </div>
-
+                        
+                        <div class="d-flex justify-content-end mb-4">
+                        
+                            <a href="{{ route('password.request') }}"
+                               class="text-decoration-none small fw-semibold">
+                        
+                                Forgot Password?
+                        
+                            </a>
+                        
+                        </div>
+                        
                         <button
                             type="submit"
                             class="btn btn-primary w-100">

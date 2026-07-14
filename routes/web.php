@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+// Account Reactivation Controller
+use App\Http\Controllers\Auth\AccountReactivationController;
+
 // Main Controller
 use App\Http\Controllers\DashboardController;
 // Auth Controllers
@@ -147,6 +150,11 @@ Route::middleware([
         '/profile/update',
         [App\Http\Controllers\User\ProfileController::class, 'update']
     )->name('customer.profile.update');
+
+    Route::delete(
+        '/customer/profile/delete',
+        [CustomerProfileController::class, 'deactivate']
+    )->name('customer.profile.deactivate');
 
     Route::get(
         '/nearby-workers',
@@ -341,6 +349,12 @@ Route::middleware([
         [WorkerController::class,'index']
     )->name('admin.workers.index');
 
+    Route::post(
+        '/admin/workers/{worker}/generate-password',
+        [AdminWorkerController::class,'generatePassword']
+    )
+    ->name('admin.workers.generate.password');
+
 });
 
 
@@ -451,5 +465,17 @@ Route::get(
     '/worker/{worker}',
     [HomeController::class, 'workerProfile']
 )->name('worker.show');
+
+// Account Reactivation Routes
+Route::post(
+    '/account/reactivate/send',
+    [AccountReactivationController::class, 'send'])
+    ->name('account.reactivate.send');
+
+Route::get(
+    '/account/reactivate/{user}',
+    [AccountReactivationController::class, 'verify'])
+    ->middleware('signed')
+    ->name('account.reactivate.verify');
 
 require __DIR__.'/auth.php';

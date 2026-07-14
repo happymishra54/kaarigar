@@ -370,23 +370,31 @@
 
                     <div class="text-center mt-5">
 
-
-
-                        <a href="{{ route('customer.profile.edit') }}"
-                           class="btn btn-primary rounded-pill px-5 py-3">
-
-
-                            <i class="fa-solid fa-pen-to-square me-2"></i>
-
-
-                            Edit Profile
-
-
-
-                        </a>
-
-
-
+                        <div class="d-inline-flex gap-3">
+                    
+                            <a href="{{ route('customer.profile.edit') }}"
+                               class="btn btn-primary rounded-pill px-5 py-3">
+                    
+                                <i class="fa-solid fa-pen-to-square me-2"></i>
+                    
+                                Edit Profile
+                    
+                            </a>
+                    
+                            <button
+                                type="button"
+                                class="btn btn-danger rounded-pill px-5 py-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteAccountModal">
+                    
+                                <i class="fa-solid fa-trash me-2"></i>
+                    
+                                Delete My Account
+                    
+                            </button>
+                    
+                        </div>
+                    
                     </div>
 
 
@@ -409,3 +417,92 @@
 
 
 @endsection
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content rounded-4">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title text-danger">
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                    Delete My Account
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <form method="POST" action="{{ route('customer.profile.deactivate') }}">
+
+                @csrf
+                @method('DELETE')
+
+                <div class="modal-body">
+
+                    <div class="alert alert-warning">
+
+                        <strong>Warning!</strong><br>
+
+                            You Can Recover Your Account In Future.
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Enter your password to continue
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            required>
+
+                        @error('password', 'userDeletion')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger">
+
+                        <i class="fa-solid fa-trash me-2"></i>
+
+                        Deactivate My Account
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

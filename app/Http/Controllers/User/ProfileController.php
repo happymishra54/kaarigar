@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -52,4 +54,27 @@ public function edit()
             'Profile Updated Successfully'
     );
     }
+
+    public function deactivate(Request $request): RedirectResponse
+{
+    $request->validate([
+        'password' => ['required', 'current_password'],
+    ]);
+
+    $user = $request->user();
+
+    // Deactivate instead of deleting
+    $user->update([
+        'status' => 0,
+        'email_verified_at' => null,
+    ]);
+
+    Auth::logout();
+
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect('/')
+        ->with('success', 'Your account has been deactivated successfully.');
+}
 }
