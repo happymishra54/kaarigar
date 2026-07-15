@@ -133,12 +133,15 @@
                             @if($worker->aadhaar_image)
 
                             <button
-                            class="btn btn-outline-primary btn-sm"
-                            title="View Aadhaar">
-                            
-                            <i class="fas fa-image"></i>
-                            
-                            </button>
+    type="button"
+    class="btn btn-outline-primary btn-sm"
+    title="View Aadhaar"
+    data-bs-toggle="modal"
+    data-bs-target="#aadhaar{{ $worker->id }}">
+
+    <i class="fas fa-image"></i>
+
+</button>
 
                             @else
 
