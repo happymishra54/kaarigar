@@ -27,17 +27,17 @@ class ServiceResource extends JsonResource
 
             'worker' => [
 
-                'id' => $this->worker->id,
+    'id' => $this->worker?->id,
 
-                'name' => $this->worker->name,
+    'name' => $this->worker?->name,
 
-                'phone' => $this->worker->phone,
+    'phone' => $this->worker?->phone,
 
-                'city' => $this->worker->city,
+    'city' => $this->worker?->workerProfile?->city,
 
-                'profile_image' => $this->worker->profile_image,
+    'profile_image' => $this->worker?->profile_image,
 
-            ]
+]
 
         ];
     }

@@ -12,11 +12,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-
             'login' => 'required',
-
-            'password' => 'required'
-
+            'password' => 'required',
+            'role' => 'required|in:customer,worker',
         ]);
 
         $field = filter_var(
@@ -47,16 +45,35 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
+        if ($user->status == 0) {
+
+            Auth::logout();
+        
+            return response()->json([
+                'success' => false,
+                'message' => 'Your account has been deactivated.'
+            ], 403);
+        
+        }
+        
+        if ($user->role != $request->role) {
+        
+            Auth::logout();
+        
+            return response()->json([
+                'success' => false,
+                'message' => 'Please login as '.$user->role.'.'
+            ], 403);
+        
+        }
+
         $token = $user->createToken('flutter')->plainTextToken;
 
         return response()->json([
-
             'success' => true,
-
             'token' => $token,
-
+            'role' => $user->role,
             'user' => $user
-
         ]);
     }
 

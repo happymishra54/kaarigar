@@ -34,8 +34,10 @@
             
             </div>
 
-            <form>
-                @csrf
+            <form action="{{ route('admin.workers.store') }}"
+      method="POST"
+      enctype="multipart/form-data">
+    @csrf
 
                 <div class="row">
                 

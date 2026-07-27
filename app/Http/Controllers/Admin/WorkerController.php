@@ -113,16 +113,13 @@ class WorkerController extends Controller
         );
     }
 
-    public function generatePassword($id)
+    public function generatePassword(User $worker)
 {
-    $worker = User::findOrFail($id);
-
     $password = 'Kaarigar@'.rand(1000,9999);
 
     $worker->update([
         'password' => Hash::make($password),
     ]);
-
 
     return back()->with(
         'generated_password',

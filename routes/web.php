@@ -353,7 +353,7 @@ Route::middleware([
 
     Route::post(
         '/admin/workers/{worker}/generate-password',
-        [AdminWorkerController::class,'generatePassword']
+        [WorkerController::class,'generatePassword']
     )
     ->name('admin.workers.generate.password');
 
