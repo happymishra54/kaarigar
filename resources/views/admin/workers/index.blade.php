@@ -136,45 +136,54 @@
                             <td class="text-center">
 
                                 <div class="d-flex justify-content-center gap-2 flex-wrap">
-                            
+
+                                    <a href="{{ route('admin.workers.edit', $worker->id) }}"
+                                       class="btn btn-primary btn-sm">
+                                
+                                        <i class="fas fa-pen-to-square me-1"></i>
+                                
+                                        Edit
+                                
+                                    </a>
+                                
                                     <form
                                         action="{{ route('admin.workers.generate.password',$worker->id) }}"
                                         method="POST">
-                            
+                                
                                         @csrf
-                            
+                                
                                         <button
                                             type="submit"
                                             class="btn btn-warning btn-sm">
-                            
+                                
                                             <i class="fas fa-key me-1"></i>
-                            
+                                
                                             Generate Password
-                            
+                                
                                         </button>
-                            
+                                
                                     </form>
-                            
+                                
                                     <form
                                         action="{{ route('admin.workers.destroy',$worker->id) }}"
                                         method="POST">
-                            
+                                
                                         @csrf
                                         @method('DELETE')
-                            
+                                
                                         <button
                                             type="submit"
                                             class="btn btn-outline-danger btn-sm"
                                             onclick="return confirm('Delete this worker?')">
-                            
+                                
                                             <i class="fas fa-trash me-1"></i>
-                            
+                                
                                             Delete
-                            
+                                
                                         </button>
-                            
+                                
                                     </form>
-                            
+                                
                                 </div>
                             
                             </td>

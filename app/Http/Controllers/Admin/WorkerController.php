@@ -129,5 +129,37 @@ class WorkerController extends Controller
         ]
     );
 }
+
+public function edit(User $worker)
+{
+    $worker->load('workerProfile');
+
+    return view('admin.workers.edit', compact('worker'));
+}
+
+public function update(Request $request, User $worker)
+{
+    // Update user table
+    $worker->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => trim($request->std_code . $request->mobile),
+    ]);
+
+    // Update worker profile
+    $worker->workerProfile()->update([
+        'bio' => $request->bio,
+        'experience' => $request->experience,
+        'address' => $request->address,
+        'city' => $request->city,
+        'state' => $request->state,
+        'daily_wage' => $request->daily_wage,
+        'aadhaar_number' => $request->aadhaar_number,
+    ]);
+
+    return redirect()
+        ->route('admin.workers.index')
+        ->with('success', 'Worker updated successfully.');
+}
 }
 
