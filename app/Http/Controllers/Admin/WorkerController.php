@@ -20,6 +20,7 @@ class WorkerController extends Controller
     {
         $aadhaarImage = null;
         $profileImage = null;
+        $aadhaar_number = null;
 
         if ($request->hasFile('aadhaar_image')) {
 
