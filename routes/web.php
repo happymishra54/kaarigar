@@ -346,6 +346,12 @@ Route::middleware([
         [WorkerController::class,'destroy']
     )->name('admin.workers.destroy');
 
+    Route::get('/workers/{worker}/edit', [WorkerController::class, 'edit'])
+    ->name('admin.workers.edit');
+
+    Route::put('/workers/{worker}', [WorkerController::class, 'update'])
+    ->name('admin.workers.update');
+
     Route::get(
         '/workers',
         [WorkerController::class,'index']

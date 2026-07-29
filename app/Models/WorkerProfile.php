@@ -20,6 +20,8 @@ class WorkerProfile extends Model
 
         'experience',
 
+        'mobile',
+
         'address',
 
         'city',
