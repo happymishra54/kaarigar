@@ -2,252 +2,242 @@
 
 @section('content')
 
-<div class="container py-5">
+<div class="auth-page">
 
-    <div class="row justify-content-center">
+    <div class="auth-card">
 
-        <div class="col-md-6 col-lg-5">
-
-            <div class="card shadow-sm">
-
-                <div class="card-body p-4">
-
-                    <div class="text-center mb-4">
-
-                        <h2 class="fw-bold">
-
-                            Welcome Back 👋
-
-                        </h2>
-
-                        <p class="text-muted">
-
-                            Login to continue
-
-                        </p>
-
-                    </div>
-
-                    @if(session('reactivate_email'))
-
-                    <div class="alert alert-warning">
-                    
-                        <strong>Your account has been deactivated.</strong>
-                    
-                        <p class="mb-3 mt-2">
-                            Click below to reactivate your account.
-                        </p>
-                    
-                        <form method="POST"
-                              action="{{ route('account.reactivate.send') }}">
-                    
-                            @csrf
-                    
-                            <input
-                                type="hidden"
-                                name="email"
-                                value="{{ session('reactivate_email') }}">
-                    
-                            <button class="btn btn-warning">
-                    
-                                <i class="fa-solid fa-envelope me-2"></i>
-                    
-                                Reactivate My Account
-                    
-                            </button>
-                    
-                        </form>
-                    
-                    </div>
-                    
-                    @endif
-
-                    @if($errors->has('login'))
-
-<div class="alert alert-danger">
-
-    {{ $errors->first('login') }}
-
-    @if(Str::contains($errors->first('login'), 'not found'))
-
-        <div class="mt-3">
-
-            <a href="{{ route('register.role') }}"
-               class="btn btn-primary">
-
-                Register Now
-
-            </a>
-
+        <div class="auth-logo">
+            <i class="fas fa-screwdriver-wrench"></i>
         </div>
 
-    @endif
+        <h1 class="auth-title">
+            Welcome Back 👋
+        </h1>
 
-</div>
+        <p class="auth-subtitle">
+            Login to continue to Kaarigar
+        </p>
 
-@endif
+        @if(session('reactivate_email'))
 
-                    <form method="POST" action="{{ route('login') }}">
+            <div class="alert alert-warning">
 
-                        @csrf
+                <strong>Your account has been deactivated.</strong>
 
-                        <div class="mb-3">
+                <p class="mb-3 mt-2">
+                    Click below to reactivate your account.
+                </p>
 
-                            <label class="form-label fw-semibold">
+                <form method="POST"
+                      action="{{ route('account.reactivate.send') }}">
 
-                                Login As
+                    @csrf
 
-                            </label>
+                    <input
+                        type="hidden"
+                        name="email"
+                        value="{{ session('reactivate_email') }}">
 
-                            <div class="form-check">
+                    <button class="btn btn-warning">
 
-                                <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="role"
-                                    id="customer"
-                                    value="customer"
-                                    {{ old('role','customer') == 'customer' ? 'checked' : '' }}>
+                        <i class="fa-solid fa-envelope me-2"></i>
 
-                                <label class="form-check-label" for="customer">
+                        Reactivate My Account
 
-                                    <i class="fa-solid fa-user me-2"></i>
+                    </button>
 
-                                    Customer
+                </form>
 
-                                </label>
+            </div>
 
-                            </div>
+        @endif
 
-                            <div class="form-check">
+        @if($errors->has('login'))
 
-                                <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="role"
-                                    id="worker"
-                                    value="worker"
-                                    {{ old('role') == 'worker' ? 'checked' : '' }}>
+            <div class="alert alert-danger">
 
-                                <label class="form-check-label" for="worker">
+                {{ $errors->first('login') }}
 
-                                    <i class="fa-solid fa-screwdriver-wrench me-2"></i>
+                @if(Str::contains($errors->first('login'), 'not found'))
 
-                                    Worker
+                    <div class="mt-3">
 
-                                </label>
+                        <a href="{{ route('register.role') }}"
+                           class="btn btn-primary">
 
-                            </div>
+                            Register Now
 
-                            @error('role')
-
-                                <div class="text-danger small">
-
-                                    {{ $message }}
-
-                                </div>
-
-                            @enderror
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-
-                                Email or Mobile Number
-
-                            </label>
-
-                            <input
-                                type="text"
-                                name="login"
-                                value="{{ old('login') }}"
-                                class="form-control @error('login') is-invalid @enderror"
-                                placeholder="Enter Email or Mobile Number"
-                                required>
-
-                            @error('login')
-
-                                <div class="invalid-feedback">
-
-                                    {{ $message }}
-
-                                </div>
-
-                            @enderror
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                        
-                                Password
-                        
-                            </label>
-                        
-                            <input
-                                type="password"
-                                name="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="Enter Password"
-                                required>
-                        
-                            @error('password')
-                        
-                                <div class="invalid-feedback">
-                        
-                                    {{ $message }}
-                        
-                                </div>
-                        
-                            @enderror
-                        
-                        </div>
-                        
-                        <div class="d-flex justify-content-end mb-4">
-                        
-                            <a href="{{ route('password.request') }}"
-                               class="text-decoration-none small fw-semibold">
-                        
-                                Forgot Password?
-                        
-                            </a>
-                        
-                        </div>
-                        
-                        <button
-                            type="submit"
-                            class="btn btn-primary w-100">
-
-                            <i class="fa-solid fa-right-to-bracket me-2"></i>
-
-                            Login
-
-                        </button>
-
-                    </form>
-
-                    <div class="text-center mt-4">
-
-                        <p class="mb-0">
-
-                            Don't have an account?
-
-                            <a href="{{ route('register.role') }}">
-
-                                Create Account
-
-                            </a>
-
-                        </p>
+                        </a>
 
                     </div>
+
+                @endif
+
+            </div>
+
+        @endif
+
+        <form method="POST" action="{{ route('login') }}">
+
+            @csrf
+
+            <div class="mb-3">
+
+                <label class="form-label fw-semibold">
+
+                    Login As
+
+                </label>
+
+                <div class="role-selector">
+
+                    <label class="role-option">
+
+                        <input
+                            type="radio"
+                            name="role"
+                            id="customer"
+                            value="customer"
+                            {{ old('role','customer') == 'customer' ? 'checked' : '' }}>
+
+                        <span>
+                            <i class="fa-solid fa-user"></i>
+                            Customer
+                        </span>
+
+                    </label>
+
+                    <label class="role-option">
+
+                        <input
+                            type="radio"
+                            name="role"
+                            id="worker"
+                            value="worker"
+                            {{ old('role') == 'worker' ? 'checked' : '' }}>
+
+                        <span>
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            Worker
+                        </span>
+
+                    </label>
 
                 </div>
 
+                @error('role')
+
+                    <div class="text-danger small">
+
+                        {{ $message }}
+
+                    </div>
+
+                @enderror
+
             </div>
+
+            <div class="mb-3 input-icon-wrap">
+
+                <label class="form-label">
+
+                    Email or Mobile Number
+
+                </label>
+
+                <div class="input-icon">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="text"
+                        name="login"
+                        value="{{ old('login') }}"
+                        class="form-control @error('login') is-invalid @enderror"
+                        placeholder="Enter Email or Mobile Number"
+                        required>
+
+                </div>
+
+                @error('login')
+
+                    <div class="invalid-feedback">
+
+                        {{ $message }}
+
+                    </div>
+
+                @enderror
+
+            </div>
+
+            <div class="mb-3 input-icon-wrap">
+
+                <label class="form-label">
+
+                    Password
+
+                </label>
+
+                <div class="input-icon">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="Enter Password"
+                        required>
+
+                </div>
+
+                @error('password')
+
+                    <div class="invalid-feedback">
+
+                        {{ $message }}
+
+                    </div>
+
+                @enderror
+
+            </div>
+
+            <div class="d-flex justify-content-end mb-4">
+
+                <a href="{{ route('password.request') }}"
+                   class="text-decoration-none small fw-semibold">
+
+                    Forgot Password?
+                </a>
+
+            </div>
+
+            <button
+                type="submit"
+                class="auth-btn">
+
+                <i class="fa-solid fa-right-to-bracket me-2"></i>
+                Login
+
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+
+            <p class="mb-0">
+
+                Don't have an account?
+
+                <a href="{{ route('register.role') }}">
+
+                    Create Account
+
+                </a>
+
+            </p>
 
         </div>
 

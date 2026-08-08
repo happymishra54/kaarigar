@@ -37,9 +37,15 @@ class Category extends Model
 
     ];
 
-    return asset(
+    $url = asset(
         'images/categories/' .
         ($icons[strtolower($this->name)] ?? 'default.png')
+    );
+    
+    return str_replace(
+        '127.0.0.1',
+        '10.0.2.2',
+        $url
     );
 }
 }

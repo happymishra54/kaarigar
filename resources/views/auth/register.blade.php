@@ -2,205 +2,212 @@
 
 @section('content')
 
-<div class="container py-5">
+<div class="auth-page">
 
-    <div class="row justify-content-center">
+    <div class="auth-card">
 
-        <div class="col-md-6 col-lg-5">
+        <div class="auth-logo">
+            <i class="fas fa-screwdriver-wrench"></i>
+        </div>
 
-            <div class="card shadow-lg border-0">
+        <h1 class="auth-title">
+            Create Account 🛠️
+        </h1>
 
-                <div class="card-body p-4">
+        <p class="auth-subtitle">
+            Join India's trusted worker platform
+        </p>
 
-                    <div class="text-center mb-4">
+        <form method="POST" action="{{ route('register') }}">
 
-                        <div class="display-3 mb-3">
+            @csrf
 
-                            🛠️
+            <div class="mb-3 input-icon-wrap">
 
-                        </div>
+                <label class="form-label">
 
-                        <h2 class="fw-bold">
+                    Full Name
 
-                            Create Account
+                </label>
 
-                        </h2>
+                <div class="input-icon">
 
-                        <p class="text-muted">
+                    <i class="fa-solid fa-user"></i>
 
-                            Join India's trusted worker platform
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ old('name') }}"
+                        class="form-control @error('name') is-invalid @enderror"
+                        placeholder="Enter your full name"
+                        required>
 
-                        </p>
+                </div>
+
+                @error('name')
+
+                    <div class="invalid-feedback">
+
+                        {{ $message }}
 
                     </div>
 
-                    <form method="POST" action="{{ route('register') }}">
+                @enderror
 
-                        @csrf
+            </div>
 
-                        <div class="mb-3">
+            <div class="mb-3 input-icon-wrap">
 
-                            <label class="form-label">
+                <label class="form-label">
 
-                                Full Name
+                    Email Address
 
-                            </label>
+                </label>
 
-                            <input
-                                type="text"
-                                name="name"
-                                value="{{ old('name') }}"
-                                class="form-control @error('name') is-invalid @enderror"
-                                placeholder="Enter your full name"
-                                required>
+                <div class="input-icon">
 
-                            @error('name')
+                    <i class="fa-solid fa-envelope"></i>
 
-                                <div class="invalid-feedback">
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        class="form-control @error('email') is-invalid @enderror"
+                        placeholder="Enter your email"
+                        required>
 
-                                    {{ $message }}
+                </div>
 
-                                </div>
+                @error('email')
 
-                            @enderror
+                    <div class="invalid-feedback">
 
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-
-                                Email Address
-
-                            </label>
-
-                            <input
-                                type="email"
-                                name="email"
-                                value="{{ old('email') }}"
-                                class="form-control @error('email') is-invalid @enderror"
-                                placeholder="Enter your email"
-                                required>
-
-                            @error('email')
-
-                                <div class="invalid-feedback">
-
-                                    {{ $message }}
-
-                                </div>
-
-                            @enderror
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-
-                                Mobile Number
-
-                            </label>
-
-                            <input
-                                type="text"
-                                name="phone"
-                                value="{{ old('phone') }}"
-                                class="form-control @error('phone') is-invalid @enderror"
-                                placeholder="Enter your mobile number">
-
-                            @error('phone')
-
-                                <div class="invalid-feedback">
-
-                                    {{ $message }}
-
-                                </div>
-
-                            @enderror
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-
-                                Password
-
-                            </label>
-
-                            <input
-                                type="password"
-                                name="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="Enter password"
-                                required>
-
-                            @error('password')
-
-                                <div class="invalid-feedback">
-
-                                    {{ $message }}
-
-                                </div>
-
-                            @enderror
-
-                        </div>
-
-                        <div class="mb-4">
-
-                            <label class="form-label">
-
-                                Confirm Password
-
-                            </label>
-
-                            <input
-                                type="password"
-                                name="password_confirmation"
-                                class="form-control"
-                                placeholder="Confirm password"
-                                required>
-
-                        </div>
-
-                        <input
-                            type="hidden"
-                            name="role"
-                            value="{{ request('role', 'customer') }}">
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary w-100">
-
-                            <i class="fas fa-user-plus me-2"></i>
-
-                            Create Account
-
-                        </button>
-
-                    </form>
-
-                    <div class="text-center mt-4">
-
-                        <p class="mb-0">
-
-                            Already have an account?
-
-                            <a href="{{ route('login') }}">
-
-                                Login
-
-                            </a>
-
-                        </p>
+                        {{ $message }}
 
                     </div>
+
+                @enderror
+
+            </div>
+
+            <div class="mb-3 input-icon-wrap">
+
+                <label class="form-label">
+
+                    Mobile Number
+
+                </label>
+
+                <div class="input-icon">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <input
+                        type="text"
+                        name="phone"
+                        value="{{ old('phone') }}"
+                        class="form-control @error('phone') is-invalid @enderror"
+                        placeholder="Enter your mobile number">
+
+                </div>
+
+                @error('phone')
+
+                    <div class="invalid-feedback">
+
+                        {{ $message }}
+
+                    </div>
+
+                @enderror
+
+            </div>
+
+            <div class="mb-3 input-icon-wrap">
+
+                <label class="form-label">
+
+                    Password
+
+                </label>
+
+                <div class="input-icon">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="Enter password"
+                        required>
+
+                </div>
+
+                @error('password')
+
+                    <div class="invalid-feedback">
+
+                        {{ $message }}
+
+                    </div>
+
+                @enderror
+
+            </div>
+
+            <div class="mb-4 input-icon-wrap">
+
+                <label class="form-label">
+
+                    Confirm Password
+
+                </label>
+
+                <div class="input-icon">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password_confirmation"
+                        class="form-control"
+                        placeholder="Confirm password"
+                        required>
 
                 </div>
 
             </div>
+
+            <input
+                type="hidden"
+                name="role"
+                value="{{ request('role', 'customer') }}">
+
+            <button
+                type="submit"
+                class="auth-btn">
+
+                <i class="fas fa-user-plus me-2"></i>
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+
+            <p class="mb-0">
+
+                Already have an account?
+
+                <a href="{{ route('login') }}">
+
+                    Login
+
+                </a>
+
+            </p>
 
         </div>
 

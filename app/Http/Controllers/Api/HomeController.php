@@ -67,6 +67,35 @@ class HomeController extends Controller
         ]);
     }
 
+/*
+    |--------------------------------------------------------------------------
+    | Top Rated Workers
+    |--------------------------------------------------------------------------
+    */
+
+    public function topWorkers()
+    {
+        $workers = User::with([
+            'workerProfile',
+            'reviewsReceived'
+        ])
+        ->where('role', 'worker')
+        ->where('status', 1)
+        ->whereHas('workerProfile', function ($q) {
+            $q->where('is_verified', 1);
+        })
+        ->withCount('reviewsReceived')
+        ->withAvg('reviewsReceived', 'rating')
+        ->orderByDesc('reviews_avg_rating')
+        ->limit(10)
+        ->get();
+
+        return response()->json([
+            'success' => true,
+            'workers' => $workers
+        ]);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Nearby Workers

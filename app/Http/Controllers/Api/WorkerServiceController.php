@@ -11,16 +11,17 @@ class WorkerServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::where(
-            'worker_id',
-            auth()->id()
-        )->latest()->get();
+        $services = Service::with('category')
+            ->where('worker_id', auth()->id())
+            ->latest()
+            ->get();
 
         return response()->json([
             'success' => true,
             'services' => $services,
+            'message' => 'Services loaded successfully.',
         ]);
-    }
+}
 
     public function store(Request $request)
     {
@@ -29,16 +30,26 @@ class WorkerServiceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        $imageName = null;
+
+        if ($request->hasFile('image')) {
+            $imageName = $request
+                ->file('image')
+                ->store('services', 'public');
+        }
 
         $service = Service::create([
             'worker_id' => auth()->id(),
             'category_id' => $request->category_id,
             'title' => $request->title,
-            'slug' => Str::slug($request->title),
+            'slug' => Str::slug($request->title) . '-' . time(),
             'description' => $request->description,
             'price' => $request->price,
-            'status' => 'active',
+            'image' => $imageName,
+            'status' => true,
         ]);
 
         return response()->json([
@@ -56,20 +67,29 @@ class WorkerServiceController extends Controller
             ], 403);
         }
 
-        $request->validate([
+$request->validate([
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $service->update([
+        $data = [
             'category_id' => $request->category_id,
             'title' => $request->title,
-            'slug' => Str::slug($request->title),
+            'slug' => Str::slug($request->title) . '-' . time(),
             'description' => $request->description,
             'price' => $request->price,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request
+                ->file('image')
+                ->store('services', 'public');
+        }
+
+        $service->update($data);
 
         return response()->json([
             'success' => true,

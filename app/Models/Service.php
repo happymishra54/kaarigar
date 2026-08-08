@@ -41,33 +41,14 @@ class Service extends Model
         );
     }
 
-    public function getImageAttribute()
-{
-    $images = [
-
-        'electrician' => 'electrician.jpg',
-
-        'plumber' => 'plumber.jpg',
-
-        'carpenter' => 'carpenter.jpg',
-
-        'painter' => 'painter.jpg',
-
-        'cleaner' => 'cleaning.jpg',
-
-    ];
-
-    foreach($images as $keyword => $image){
-
-        if(str_contains(strtolower($this->title), $keyword)){
-
-            return asset("images/services/".$image);
-
+    public function getImageAttribute($value)
+    {
+        // Only return an image if the worker actually uploaded one.
+        if ($value) {
+            return asset('storage/' . $value);
         }
 
+        return null;
     }
-
-    return asset("images/services/default.jpg");
-}
 
 }

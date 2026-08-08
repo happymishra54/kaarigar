@@ -28,7 +28,7 @@ class AuthController extends Controller
 
             'password' => 'required|min:6|confirmed',
 
-            'role' => 'required|in:customer,worker',
+            'role' => 'required|in:customer,worker,admin',
 
         ]);
 
@@ -70,101 +70,66 @@ class AuthController extends Controller
     */
 
     public function login(Request $request)
-    {
-        $request->validate([
+{
+    $request->validate([
+        'login' => 'required',
+        'password' => 'required',
+        'role' => 'required|in:customer,worker,admin',
+    ]);
 
-            'login' => 'required',
+    $field = filter_var(
+        $request->login,
+        FILTER_VALIDATE_EMAIL
+    ) ? 'email' : 'phone';
 
-            'password' => 'required',
-
-        ]);
-
-        $field = filter_var(
-            $request->login,
-            FILTER_VALIDATE_EMAIL
-        )
-            ? 'email'
-            : 'phone';
-
-        if (!Auth::attempt([
-
-            $field => $request->login,
-
-            'password' => $request->password,
-
-        ])) {
-
-            throw ValidationException::withMessages([
-
-                'login' => ['Invalid Credentials.']
-
-            ]);
-        }
-
-        $user = Auth::user();
-
-        /*
-        Don't allow admin login
-        */
-
-        if ($user->role == 'admin') {
-
-            Auth::logout();
-
-            return response()->json([
-
-                'success' => false,
-
-                'message' => 'Admin login is not allowed.'
-
-            ],403);
-
-        }
-
-        /*
-        Block inactive users
-        */
-
-        if (!$user->status) {
-
-            Auth::logout();
-
-            return response()->json([
-
-                'success' => false,
-
-                'message' => 'Account Disabled.'
-
-            ],403);
-
-        }
-
-        /*
-        Delete old tokens
-        */
-
-        $user->tokens()->delete();
-
-        /*
-        Create new token
-        */
-
-        $token = $user
-            ->createToken('kaarigar')
-            ->plainTextToken;
+    if (!Auth::attempt([
+        $field => $request->login,
+        'password' => $request->password,
+    ])) {
 
         return response()->json([
-
-            'success'=>true,
-
-            'message'=>'Login Successful.',
-
-            'token'=>$token,
-
-            'user'=>$user
-
-        ]);
+            'success' => false,
+            'message' => 'Invalid Credentials.'
+        ], 401);
     }
+
+    $user = Auth::user();
+
+    if (!$user->status) {
+
+        Auth::logout();
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Account Disabled.'
+        ], 403);
+    }
+
+    // Role must match selected role
+    // Allow admin to login from any role selection
+if ($user->role != 'admin' && $user->role != $request->role) {
+
+    Auth::logout();
+
+    return response()->json([
+        'success' => false,
+        'message' => 'Please login as '.$user->role.'.'
+    ], 403);
+
+}
+
+    $user->tokens()->delete();
+
+    $token = $user->createToken('kaarigar')->plainTextToken;
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Login Successful.',
+        'token' => $token,
+        'role' => $user->role,
+        'user' => $user,
+    ]);
+}
 
     /*
     |--------------------------------------------------------------------------

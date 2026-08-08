@@ -150,9 +150,17 @@
                         </a>
                     </li>
     
-                    <li class="nav-item">
+<li class="nav-item">
                         <a class="nav-link" href="{{ route('about') }}">
                             About
+                        </a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ route('contact') }}">
+                            <i class="fas fa-headset me-1"></i>
+                            Contact
                         </a>
                     </li>
     
@@ -294,229 +302,7 @@
 
     </main>
 
-    <footer class="bg-dark text-light pt-5 pb-3 mt-5">
-
-        <div class="container">
-    
-            <div class="row gy-4">
-    
-                {{-- Brand --}}
-                <div class="col-lg-4">
-    
-                    <h3 class="fw-bold mb-3">
-                        <i class="fas fa-screwdriver-wrench text-warning me-2"></i>
-                        Kaarigar
-                    </h3>
-    
-                    <p class="text-light-emphasis">
-    
-                        India's trusted platform for connecting customers with
-                        verified electricians, plumbers, carpenters, painters,
-                        cleaners and other skilled professionals.
-    
-                    </p>
-    
-                    <div class="d-flex gap-3 mt-4">
-    
-                        <a href="#" class="text-light fs-5">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-    
-                        <a href="#" class="text-light fs-5">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-    
-                        <a href="#" class="text-light fs-5">
-                            <i class="fab fa-x-twitter"></i>
-                        </a>
-    
-                        <a href="#" class="text-light fs-5">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-    
-                    </div>
-    
-                </div>
-    
-                {{-- Quick Links --}}
-                <div class="col-lg-2 col-md-6">
-    
-                    <h5 class="fw-semibold mb-3">
-    
-                        Company
-    
-                    </h5>
-    
-                    <ul class="nav flex-column">
-    
-                        <li class="nav-item mb-2">
-    
-                            <a href="#about"
-                               class="nav-link p-0 text-light-emphasis">
-    
-                                About Us
-    
-                            </a>
-    
-                        </li>
-    
-                        <li class="nav-item mb-2">
-    
-                            <a href="#contact"
-                               class="nav-link p-0 text-light-emphasis">
-    
-                                Contact
-    
-                            </a>
-    
-                        </li>
-    
-                        <li class="nav-item mb-2">
-    
-                            <a href="#"
-                               class="nav-link p-0 text-light-emphasis">
-    
-                                Privacy Policy
-    
-                            </a>
-    
-                        </li>
-    
-                        <li class="nav-item">
-    
-                            <a href="#"
-                               class="nav-link p-0 text-light-emphasis">
-    
-                                Terms & Conditions
-    
-                            </a>
-    
-                        </li>
-    
-                    </ul>
-    
-                </div>
-    
-                {{-- Popular Services --}}
-                <div class="col-lg-3 col-md-6">
-    
-                    <h5 class="fw-semibold mb-3">
-    
-                        Popular Services
-    
-                    </h5>
-    
-                    <ul class="list-unstyled">
-    
-                        <li class="mb-2">
-    
-                            <i class="fas fa-bolt text-warning me-2"></i>
-    
-                            Electrician
-    
-                        </li>
-    
-                        <li class="mb-2">
-    
-                            <i class="fas fa-faucet text-info me-2"></i>
-    
-                            Plumber
-    
-                        </li>
-    
-                        <li class="mb-2">
-    
-                            <i class="fas fa-hammer text-success me-2"></i>
-    
-                            Carpenter
-    
-                        </li>
-    
-                        <li class="mb-2">
-    
-                            <i class="fas fa-paint-roller text-danger me-2"></i>
-    
-                            Painter
-    
-                        </li>
-    
-                        <li>
-    
-                            <i class="fas fa-broom text-primary me-2"></i>
-    
-                            Cleaner
-    
-                        </li>
-    
-                    </ul>
-    
-                </div>
-    
-                {{-- Newsletter --}}
-                <div class="col-lg-3">
-    
-                    <h5 class="fw-semibold mb-3">
-    
-                        Newsletter
-    
-                    </h5>
-    
-                    <p class="text-light-emphasis">
-    
-                        Subscribe to receive updates and special offers.
-    
-                    </p>
-    
-                    <form>
-    
-                        <div class="input-group">
-    
-                            <input
-                                type="email"
-                                class="form-control"
-                                placeholder="Enter your email">
-    
-                            <button
-                                class="btn btn-warning"
-                                type="submit">
-    
-                                Subscribe
-    
-                            </button>
-    
-                        </div>
-    
-                    </form>
-    
-                </div>
-    
-            </div>
-    
-            <hr class="border-secondary my-4">
-    
-            <div class="row">
-    
-                <div class="col-md-6 text-center text-md-start">
-    
-                    © {{ date('Y') }}
-    
-                    <strong>Kaarigar</strong>
-    
-                    • All Rights Reserved.
-    
-                </div>
-    
-                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
-    
-                    Made with ❤️ in India
-    
-                </div>
-    
-            </div>
-    
-        </div>
-    
-    </footer>
+    @include('partials.footer')
 
     <script>
 
