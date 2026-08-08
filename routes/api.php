@@ -10,7 +10,12 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\WorkerDashboardController;
 use App\Http\Controllers\Api\WorkerBookingController;
 use App\Http\Controllers\Api\WorkerServiceController;
-
+use App\Http\Controllers\Api\Admin\AdminDashboardController;
+use App\Http\Controllers\Api\Admin\AdminUserController;
+use App\Http\Controllers\Api\Admin\AdminWorkerController;
+use App\Http\Controllers\Api\Admin\AdminCategoryController;
+use App\Http\Controllers\Api\Admin\AdminBookingController;
+use App\Http\Controllers\Api\FavoriteWorkerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +60,145 @@ Route::prefix('auth')->group(function () {
 
 
 
+/*
+|--------------------------------------------------------------------------
+| Admin APIs
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware([
+    'auth:sanctum',
+    'admin'
+])->prefix('admin')->group(function () {
+
+    Route::get(
+        '/dashboard',
+        [AdminDashboardController::class, 'index']
+    );
+
+    /*
+|--------------------------------------------------------------------------
+| Bookings
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/bookings',
+    [AdminBookingController::class, 'index']
+);
+
+Route::get(
+    '/bookings/{booking}',
+    [AdminBookingController::class, 'show']
+);
+
+Route::patch(
+    '/bookings/{booking}/status',
+    [AdminBookingController::class, 'updateStatus']
+);
+
+Route::delete(
+    '/bookings/{booking}',
+    [AdminBookingController::class, 'destroy']
+);
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Categories
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/categories', [AdminCategoryController::class, 'index']);
+
+    Route::post('/categories', [AdminCategoryController::class, 'store']);
+
+    Route::get('/categories/{category}', [AdminCategoryController::class, 'show']);
+
+    Route::put('/categories/{category}', [AdminCategoryController::class, 'update']);
+
+    Route::delete('/categories/{category}', [AdminCategoryController::class, 'destroy']);
+
+    Route::patch('/categories/{category}/status', [AdminCategoryController::class, 'status']);
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+*/
+
+
+Route::patch(
+    'workers/{user}/generate-password',
+    [AdminWorkerController::class, 'generatePassword']
+);
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/users',
+    [AdminUserController::class, 'index']
+);
+
+Route::get(
+    '/users/{user}',
+    [AdminUserController::class, 'show']
+);
+
+Route::put(
+    '/users/{user}',
+    [AdminUserController::class, 'update']
+);
+
+Route::delete(
+    '/users/{user}',
+    [AdminUserController::class, 'destroy']
+);
+
+Route::patch(
+    '/users/{user}/status',
+    [AdminUserController::class, 'status']
+);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Admin worker contoller APIs
+|--------------------------------------------------------------------------
+*/
+
+
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+
+    Route::get('/workers', [AdminWorkerController::class, 'index']);
+
+    Route::get('/workers/{user}', [AdminWorkerController::class, 'show']);
+
+    Route::put('/workers/{user}', [AdminWorkerController::class, 'update']);
+
+    Route::delete('/workers/{user}', [AdminWorkerController::class, 'destroy']);
+
+    Route::patch('/workers/{user}/status', [AdminWorkerController::class, 'status']);
+
+    Route::patch('/workers/{user}/verify', [AdminWorkerController::class, 'verify']);
+
+    Route::get('/workers/pending-verification',[AdminWorkerController::class, 'pendingVerification']);
+
+    Route::post('/workers',[AdminWorkerController::class, 'store']);    
+
+});
+
+Route::patch(
+    '/admin/workers/{user}/status',
+    [AdminWorkerController::class, 'status']
+);
 
 
 /*
@@ -84,6 +228,11 @@ Route::get(
 Route::get(
     '/nearby-workers',
     [HomeController::class, 'nearbyWorkers']
+);
+
+Route::get(
+    '/top-workers',
+    [HomeController::class, 'topWorkers']
 );
 
 
@@ -143,10 +292,6 @@ Route::middleware('auth:sanctum')->group(function () {
     |--------------------------------------------------------------------------
     | Worker Profile Status
     |--------------------------------------------------------------------------
-    |
-    | IMPORTANT:
-    | This must be BEFORE /worker/{worker}
-    |
     */
 
 
@@ -159,15 +304,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Worker Public Profile
+    | Favourite Workers APIs
     |--------------------------------------------------------------------------
     */
 
+    Route::get('/favorites', [FavoriteWorkerController::class, 'index']);
 
-    Route::get(
-        '/worker/{worker}',
-        [HomeController::class, 'worker']
-    );
+    Route::post('/favorites/{worker}', [FavoriteWorkerController::class, 'toggle']);
+
+    Route::delete('/favorites/{worker}', [FavoriteWorkerController::class, 'destroy']);
+
+    Route::get('/favorites/check/{worker}', [FavoriteWorkerController::class, 'check']);
 
 
 });
@@ -255,8 +402,6 @@ Route::middleware([
         [WorkerServiceController::class, 'destroy']
     );
 
-
-
     /*
     |--------------------------------------------------------------------------
     | Worker Bookings
@@ -288,4 +433,18 @@ Route::middleware([
     );
 
 
+
+
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Worker Public Profile
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth:sanctum')->get(
+    '/worker/{worker}',
+    [HomeController::class, 'worker']
+);

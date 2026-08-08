@@ -490,4 +490,17 @@ Route::get(
     ->middleware('signed')
     ->name('account.reactivate.verify');
 
+
+// contact us route
+
+Route::view('/contact', 'contact')->name('contact');
+
+// privacy policy route
+
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
+
+// terms & conditions route
+
+Route::view('/terms', 'terms')->name('terms');
+
 require __DIR__.'/auth.php';
