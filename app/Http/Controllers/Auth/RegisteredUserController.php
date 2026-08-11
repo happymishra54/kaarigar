@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -50,6 +51,8 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
         ]);
 
+        event(new Registered($user));
+
 
 
         // event(new Registered($user));
@@ -66,4 +69,6 @@ class RegisteredUserController extends Controller
 
         return redirect()->route('customer.dashboard');
     }
+
+
 }
