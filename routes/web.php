@@ -43,6 +43,11 @@ use App\Http\Controllers\User\ReviewController;
 
 use App\Http\Controllers\NotificationController;
 
+// verification routes 
+
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes
@@ -80,8 +85,9 @@ Route::get(
 
 Route::middleware([
     'auth',
+    'verified',
     'role:customer'
-])->prefix('customer')->group(function () {
+])->prefix('customer')->group(function () { 
 
 
     Route::post(
@@ -174,6 +180,7 @@ Route::middleware([
 
 Route::middleware([
     'auth',
+    'verified',
     'role:worker'
 ])->prefix('worker')->group(function () {
 
@@ -502,5 +509,29 @@ Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
 // terms & conditions route
 
 Route::view('/terms', 'terms')->name('terms');
+
+// email verification notice route
+
+// Email verification notice
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+
+// Email verification link
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect()->route('dashboard')
+        ->with('success', 'Your email has been successfully verified!');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+// Resend verification email
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'A new verification link has been sent to your email address.');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 require __DIR__.'/auth.php';
