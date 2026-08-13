@@ -189,12 +189,35 @@
                 </a>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            {{-- <div class="col-lg-4 col-md-6">
                 <a href="{{ route('admin.workers.index') }}" class="btn btn-outline-primary w-100 py-3">
                     <i class="fas fa-user-hard-hat me-2"></i>
                     Manage Workers
                 </a>
+            </div> --}}
+
+            <div class="col-lg-4 col-md-6">
+                <a href="{{ route('admin.workers.index') }}"
+                   class="btn btn-outline-primary w-100 py-3 manage-workers-btn">
+                    <i class="fas fa-user-hard-hat me-2"></i>
+                    Manage Workers
+                </a>
             </div>
+            
+            <style>
+                .manage-workers-btn {
+                    position: relative;
+                    z-index: 1;
+                    pointer-events: auto;
+                    display: block;
+                }
+            
+                .manage-workers-btn:hover,
+                .manage-workers-btn:focus {
+                    position: relative;
+                    z-index: 1;
+                }
+            </style>
 
             <div class="col-lg-4 col-md-6">
                 <a href="{{ route('categories.index') }}" class="btn btn-success w-100 py-3">
